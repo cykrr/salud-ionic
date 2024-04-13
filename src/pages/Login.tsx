@@ -1,7 +1,7 @@
 import Input from '../components/Input';
 import Button from '../components/Button';
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRouterLink } from '@ionic/react';
 export default function Login() {
     return (
         <IonPage>
@@ -15,13 +15,17 @@ export default function Login() {
                     <div id="login" className="text-center  h-full flex flex-col justify-center items-center">
                         <h1 className="text-xl text-bold">Bienvenido</h1>
                         <div className="h-16"></div>
-                            <Input inputType={"text"} placeholder={"Usuario"} />
-                            <Input inputType={"password"} placeholder={"Contraseña"} />
+                            <form id="login">
+                                <Input id="user" inputType={"text"} placeholder={"Usuario"} />
+                                <Input id="password" inputType={"password"} placeholder={"Contraseña"} />
+                            </form>
                             <div className="h-6"></div>
                             <div className="flex justify-center">
                                 <div className="w-full flex flex-col mx-20 gap-3">
                                     <Button>Iniciar Sesión</Button>
-                                    <Button>Registrarse</Button>
+                                    <IonRouterLink href="/signup">
+                                        <Button>Registrarse</Button>
+                                    </IonRouterLink>
                                 </div>
                             </div>
                     </div>
