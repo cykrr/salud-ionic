@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useState, useEffect } from 'react'
 
 type Props = {
-    children?: React.Element<Child>
+    children?: React.ReactNode
     className?: string
 }
 
@@ -27,7 +27,6 @@ function get_regions(data: RegionData) {
 }
 
 function get_comunas(data: RegionData|null, region: number) {
-    console.log(region)
     let options = []
     if (data == null ) 
         return (<option>Cargando</option>)

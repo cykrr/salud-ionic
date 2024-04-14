@@ -1,5 +1,4 @@
-'use client'
-import {Input, InputProp}  from './Input'
+import Input from '../components/Input'
 import {useState} from 'react'
 import React from 'react'
 

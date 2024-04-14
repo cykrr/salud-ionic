@@ -42,7 +42,6 @@ export default function Register() {
                                 <div className="flex justify-center">
                                     <div className="flex flex-col mx-20 gap-3">
                                         <Button>Registrarse</Button>
-
                                     </div>
 
                                 </div>
