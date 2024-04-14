@@ -15,7 +15,7 @@ export default function Register() {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <div className="flex  h-full justify-center align-center">
+                <div className="mt-10 flex  h-full justify-center align-center">
                     <div className='flex justify-center items-center flex-col px-10'>
                         <label className="text-xl bold">Registro</label>
                         <form>
@@ -24,28 +24,23 @@ export default function Register() {
                                 <RutInput className="w-1/2"></RutInput>
                             </div>
                             <SelectRegionComuna></SelectRegionComuna>
+                            <div className="flex flex-col space-y-1.5">
+                                <Input className="w-full" inputType="number" placeholder="Edad"></Input>
+                                <Select className="w-full">
+                                    <option value="male">Masculino</option>
+                                    <option value="female">Femenino</option>
+                                    <option value="other">Otro</option>
+                                </Select>
+                                <Input placeholder="Correo" className="w-full"></Input>
+                                <Input inputType="password" placeholder="Contraseña" className="w-full"></Input>
+                                <Input inputType="password" placeholder="Confirmar contraseña" className="w-full"></Input>
+                                <Button btnType='submit'>
+                                    Registrarse
+                                </Button>
+                            </div>
                         </form>
                     </div>
                     {/* <div className="flex justify-center items-center h-full flex-col">
-                        <div id="register" className="text-center max-w-50 h-full flex flex-col justify-center items-center">
-                            <label className='text-xl bold'>Registro</label>
-                            <div className="h-6"></div>
-                            <div className="px-10">
-                                <div className="flex flex-row space-x-2.5">
-                                    <Input className="w-1/2" placeholder={"Usuario"} inputType={"text"}></Input>
-                                    <RutInput className="w-1/2"></RutInput>
-                                </div>
-                                <div className="flex flex-row min-w-0">
-                                    <SelectRegionComuna/>
-                                </div>
-                                <div className="flex flex-row space-x-2.5">
-                                    <Input className="w-full" inputType="number" placeholder="Edad"></Input>
-                                    <Select className="w-full">
-                                        <option value="male">Masculino</option>
-                                        <option value="female">Femenino</option>
-                                        <option value="other">Otro</option>
-                                    </Select>
-                                </div>
                                 <Input placeholder="Correo" className="w-full"></Input>
                                 <Input inputType="password" placeholder="Contraseña" className="w-full"></Input>
                                 <Input inputType="password" placeholder="Confirmar contraseña" className="w-full"></Input>

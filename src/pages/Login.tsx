@@ -18,7 +18,7 @@ export default function Login() {
         let warnings = []
         if (user === "") warnings.push(<p key="user_empty" className="text-red-500">Por favor ingrese su Usuario</p>)
         if (password === "") warnings.push(<p key="pass_empty" className="text-red-500">Por favor ingrese su Contraseña</p>)
-        if (password.length < 8) warnings.push(<p key="pass_empty" className="text-red-500">Su contraseña debe tener al menos 8 caracteres.</p>)
+        else if (password.length < 8 && password !== "") warnings.push(<p key="pass_empty" className="text-red-500">Su contraseña debe tener al menos 8 caracteres.</p>)
         else {
             // Redirect to href="/home" with React Router
             console.log("Redirecting to /menu")
@@ -47,12 +47,8 @@ export default function Login() {
                                 <Input id="user" inputType={"text"} placeholder={"Usuario"}/>
                                 <Input id="password" inputType={"password"} placeholder={"Contraseña"} />
                                 <div className="h-6"></div>
-                                <Button>
-                                    <Input
-                                        inputType="submit"
-                                        value="Iniciar Sesión"
-                                    >Iniciar Sesión
-                                    </Input>
+                                <Button btnType="submit">
+                                   Iniciar Sesión
                                 </Button>
                             </form>
                             <div className="h-2"></div>

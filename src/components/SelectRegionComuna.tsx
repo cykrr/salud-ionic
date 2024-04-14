@@ -15,6 +15,25 @@ interface RegionData {
     regiones: Array<Region>
 }
 
+function get_regions(data: RegionData) {
+    if (data == null) 
+        return (<option>Cargando</option>)
+    
+    return data.regiones.map((region: Region, index: number) => {
+        return <option key={index+1} value={index+1}>{region.region}</option>
+    })
+}
+
+function get_comunas(data: RegionData|null, region: number) {
+    if (data == null ) 
+        return (<option>Cargando</option>)
+    else if (region == null) return (<option>Comuna</option>)
+
+    else return data.regiones[region-1].comunas.sort().map((comuna: string, index: number) => {
+        return <option key={index} value={index}>{comuna}</option>
+    })
+
+}
 
 export const SelectRegionComuna = () =>{
  
@@ -29,35 +48,13 @@ export const SelectRegionComuna = () =>{
             })
     }, [])
 
-    // Selección depende de que data sea cargado
     useEffect(setSelection, [data])
-
-    function get_regions(data: RegionData) {
-        if (data == null) 
-            return (<option>Cargando</option>)
-        
-        else return data.regiones.map((region: Region, index: number) => {
-            return <option key={index} value={index}>{region.region}</option>
-        })
-    }
-
-    function get_comunas(region: number) {
-
-        if (data == null ) 
-            return (<option>Cargando</option>)
-        else if (region == null) return (<option></option>)
-
-        else return data.regiones[region+1].comunas.map((comuna: string, index: number) => {
-            return <option key={index} value={index}>{comuna}</option>
-        })
-
-    }
 
     return(
         <div className="flex flex-col">
             <Select className="truncate"
                     onChange={(e) => {
-                        setSelection(e.target.value)
+                        setSelection(parseInt(e.target.value))
                         console.log(data.regiones)
                     }}> 
                 <option key = "0" value = "0">Seleccione una región</option>
@@ -65,7 +62,6 @@ export const SelectRegionComuna = () =>{
             </Select>
 
             <Select className="truncate">
-                <option key = "0" value = "0">Seleccione una comuna</option>
                 {get_comunas(data, selection)}
             </Select>
         </div>
