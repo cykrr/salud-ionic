@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useState, useEffect } from 'react'
 
 type Props = {
-    children?: React.ReactNode
+    children?: React.Element<Child>
     className?: string
 }
 
@@ -15,29 +15,6 @@ interface RegionData {
     regiones: Array<Region>
 }
 
-function get_regions(data: RegionData) {
-    let options = []
-    if (data == null) 
-        return (<option>Cargando</option>)
-    
-    for (let i = 0; i < data.regiones.length; i++) {
-        options.push(<option key={i} value={i}>{data.regiones[i].region}</option>)
-    }
-    return options
-}
-
-function get_comunas(data: RegionData|null, region: number) {
-    let options = []
-    if (data == null ) 
-        return (<option>Cargando</option>)
-
-    else if (region == null) return (<option>Seleccione una región</option>)
-    for (let i = 0; i < data.regiones[region].comunas.length; i++) {
-      options.push(<option key={i} value={i}>{data.regiones[region].comunas[i]}</option>)
-    }
-    return options
-
-}
 
 export const SelectRegionComuna = () =>{
  
@@ -52,12 +29,45 @@ export const SelectRegionComuna = () =>{
             })
     }, [])
 
+    // Selección depende de que data sea cargado
     useEffect(setSelection, [data])
 
+    function get_regions(data: RegionData) {
+        if (data == null) 
+            return (<option>Cargando</option>)
+        
+        else return data.regiones.map((region: Region, index: number) => {
+            return <option key={index} value={index}>{region.region}</option>
+        })
+    }
+
+    function get_comunas(region: number) {
+
+        if (data == null ) 
+            return (<option>Cargando</option>)
+        else if (region == null) return (<option></option>)
+
+        else return data.regiones[region+1].comunas.map((comuna: string, index: number) => {
+            return <option key={index} value={index}>{comuna}</option>
+        })
+
+    }
+
     return(
-        <div className="h-full flex flex-row space-x-2.5 min-w-0">
-            <Select className="max-w-1/2" onChange={(e) => {setSelection(e.target.value)}}> {get_regions(data)}</Select>
-            <Select className="w-48">{get_comunas(data, selection)}</Select>
+        <div className="flex flex-col">
+            <Select className="truncate"
+                    onChange={(e) => {
+                        setSelection(e.target.value)
+                        console.log(data.regiones)
+                    }}> 
+                <option key = "0" value = "0">Seleccione una región</option>
+                {get_regions(data)}
+            </Select>
+
+            <Select className="truncate">
+                <option key = "0" value = "0">Seleccione una comuna</option>
+                {get_comunas(data, selection)}
+            </Select>
         </div>
     )
 }

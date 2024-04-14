@@ -11,12 +11,22 @@ export default function Register() {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Iniciar Sesión</IonTitle>
+                    <IonTitle>Registro</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
                 <div className="flex  h-full justify-center align-center">
-                    <div className="flex justify-center items-center h-full flex-col">
+                    <div className='flex justify-center items-center flex-col px-10'>
+                        <label className="text-xl bold">Registro</label>
+                        <form>
+                            <div className="flex flex-row space-x-1.5">
+                                <Input className="w-1/2" placeholder="Usuario" inputType="text"></Input>
+                                <RutInput className="w-1/2"></RutInput>
+                            </div>
+                            <SelectRegionComuna></SelectRegionComuna>
+                        </form>
+                    </div>
+                    {/* <div className="flex justify-center items-center h-full flex-col">
                         <div id="register" className="text-center max-w-50 h-full flex flex-col justify-center items-center">
                             <label className='text-xl bold'>Registro</label>
                             <div className="h-6"></div>
@@ -47,8 +57,8 @@ export default function Register() {
                                 </div>
 
                             </div>
-                        </div>
-                    </div>
+                        </div> 
+                    </div> */}
                 </div>
             </IonContent>
         </IonPage>

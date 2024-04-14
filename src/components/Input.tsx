@@ -9,10 +9,10 @@ export default function Input(args: InputProp) {
         type={args.inputType}
         placeholder={args.placeholder}
         className={
-            args.className ? args.className : "" + 
+            (args.className ? args.className : "") + 
                 ((args.inputType != "submit") ? 
                 " block rounded-full border-0 py-2.5 pl-7 my-1.5 pr-5 \
-                 text-gray-900 ring-1 ring-inset ring-gray-300 \
+                 text-gray-900 dark:bg-grey-200 ring-1 ring-inset ring-gray-300 \
                   focus:ring-2 focus:outline-none focus:ring-inset"
                 : " ")
         }
@@ -24,7 +24,7 @@ export default function Input(args: InputProp) {
 
 export interface InputProp {
     id?: string
-    inputType?: "submit" | "text" | "password" | undefined
+    inputType?: "submit" | "text" | "password" | "number" | undefined
     placeholder?: string
     className?: string
     onChange?: React.ChangeEventHandler<HTMLInputElement>
