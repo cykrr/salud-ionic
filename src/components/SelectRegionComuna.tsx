@@ -55,7 +55,6 @@ export const SelectRegionComuna = () =>{
             <Select className="truncate"
                     onChange={(e) => {
                         setSelection(parseInt(e.target.value))
-                        console.log(data.regiones)
                     }}> 
                 <option key = "0" value = "0">Seleccione una región</option>
                 {get_regions(data)}

@@ -1,7 +1,7 @@
 import Input from '../components/Input'
 import {useState} from 'react'
 import React from 'react'
-
+import {InputProp} from '../components/Input'
 const formatearRUT = (rut: String)=>{
     // XX.XXX.XXX-X
     const newRut = rut.replace(/\./g,'').replace(/\-/g, '').trim().toLowerCase();
@@ -18,16 +18,15 @@ const formatearRUT = (rut: String)=>{
     return format.concat('-').concat(lastDigit);
     }
 
-export const RutInput: React.FC<InputProp> = ({inputType, placeholder, className = "", onChange}) => {
+export default function RutInput(args: InputProp) {
     const [rut,setRut] = useState("")
     const [rutValido,setRutValido] = useState(false)
 
     return(
         <Input 
-            className={className}
+            {...args}
             onChange={(e)=>{e.target.value = formatearRUT(e.target.value)}}
             placeholder='RUT'>
         </Input>
     )
 }
-export default RutInput
