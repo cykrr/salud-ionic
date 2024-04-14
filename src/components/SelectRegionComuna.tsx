@@ -52,7 +52,7 @@ export const SelectRegionComuna = () =>{
 
     return(
         <div className="flex flex-col">
-            <Select className="truncate"
+            <Select id ="region" className="truncate"
                     onChange={(e) => {
                         setSelection(parseInt(e.target.value))
                     }}> 
@@ -60,7 +60,7 @@ export const SelectRegionComuna = () =>{
                 {get_regions(data)}
             </Select>
 
-            <Select className="truncate">
+            <Select id="comuna" className="truncate">
                 {get_comunas(data, selection)}
             </Select>
         </div>

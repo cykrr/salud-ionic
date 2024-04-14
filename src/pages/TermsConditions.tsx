@@ -1,5 +1,6 @@
 import { IonPage, IonToolbar, IonTitle, IonHeader, IonContent } from '@ionic/react';
 import Button from '../components/Button';
+import LinkButton from '../components/LinkButton';
 
 
 export default function TermsConditions() {
@@ -26,8 +27,8 @@ export default function TermsConditions() {
                         <p>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Cualquier modificación entrará en vigor inmediatamente después de su publicación en la aplicación. Se te notificará sobre cualquier cambio significativo en los términos y condiciones.</p>
                     </div>
                     <div className="flex w-full flex-row justify-center space-x-5">
-                        <Button>Aceptar</Button>
-                        <Button>Rechazar</Button>
+                        <LinkButton href="/menu">Aceptar</LinkButton>
+                        <LinkButton href="/signin">Rechazar</LinkButton>
                     </div>
                 </div>
             </IonContent>

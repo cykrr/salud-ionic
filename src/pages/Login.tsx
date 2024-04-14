@@ -18,8 +18,8 @@ export default function Login() {
         let warnings = []
         if (user === "") warnings.push(<p key="user_empty" className="text-red-500">Por favor ingrese su Usuario</p>)
         if (password === "") warnings.push(<p key="pass_empty" className="text-red-500">Por favor ingrese su Contraseña</p>)
-        else if (password.length < 8 && password !== "") warnings.push(<p key="pass_empty" className="text-red-500">Su contraseña debe tener al menos 8 caracteres.</p>)
-        else {
+        if (password.length < 8 && password !== "") warnings.push(<p key="pass_empty" className="text-red-500">Su contraseña debe tener al menos 8 caracteres.</p>)
+        else if (password.length > 8 && user.length > 0) {
             // Redirect to href="/home" with React Router
             console.log("Redirecting to /menu")
             history.push("/menu") 
