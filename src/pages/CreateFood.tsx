@@ -2,6 +2,7 @@ import { IonPage, IonToolbar, IonTitle, IonHeader, IonContent, IonRouterLink } f
 import Input from '../components/Input';
 import Select from '../components/Select';
 import Button from '../components/Button';
+import CloseButton from '../components/CloseButton';
 
 
 export default function CreateFood() {
@@ -17,7 +18,7 @@ export default function CreateFood() {
                     <div className="flex h-full flex-col p-20 gap-8">
                         <div className="flex justify-between items-center">
                             <h1>Nuevo alimento</h1>
-                            { /*<CloseButton/>*/ }
+                            <CloseButton/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <Input inputType="text" placeholder="Nombre"></Input>
@@ -33,7 +34,6 @@ export default function CreateFood() {
                         </div>
                         <Button>Agregar</Button>
                     </div>
-                    {/*<NavBar/>*/}
                 </div>
             </IonContent>
         </IonPage>

@@ -22,6 +22,7 @@ import TermsConditions from './pages/TermsConditions';
 import Menu from './pages/Menu'
 import CreateFood from './pages/CreateFood';
 import AddFood from './pages/AddFood';
+import AddExercise from './pages/AddExercise';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -55,7 +56,7 @@ const App: React.FC = () => (
         <Route path="/terms_and_conditions" component={TermsConditions}></Route>
         <Route path="/menu" component={Menu}></Route>
         <Route path="/add_food" component={AddFood}></Route>
-        <Route path="/add_excercise" component={Tab1}></Route>
+        <Route path="/add_exercise" component={AddExercise}></Route>
         <Route path="/create_food" component={CreateFood}></Route>
       </IonRouterOutlet>
       {/* <IonTabs>
