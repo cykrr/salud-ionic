@@ -29,7 +29,7 @@ function get_comunas(data: RegionData|null, region: number) {
         return (<option>Cargando</option>)
     else if (region == null) return (<option>Comuna</option>)
 
-    else return data.regiones[region-1].comunas.sort().map((comuna: string, index: number) => {
+    else if (region != 0) return data.regiones[region-1].comunas.sort().map((comuna: string, index: number) => {
         return <option key={index} value={index}>{comuna}</option>
     })
 
