@@ -26,7 +26,7 @@ export default function CreateFood() {
                             <div className="flex flex-row gap-2">
                                 <Input className="w-full" inputType="number" placeholder="Tamaño porción"></Input>
                                 <Select>
-                                    <option value={0} selected>Seleccione unidad</option>
+                                    <option value={0} selected>Unidad</option>
                                     <option value={1}>g.</option>
                                     <option value={2}>mL.</option>
                                 </Select>
