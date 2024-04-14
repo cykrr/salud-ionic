@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar';
 
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRouterLink } from '@ionic/react';
 
-export default function Login() {
+export default function Menu() {
     return (
         <IonPage>
             <IonHeader>
