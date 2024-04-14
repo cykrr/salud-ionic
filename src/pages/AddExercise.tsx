@@ -21,7 +21,9 @@ export default function AddExercise() {
                             <CloseButton />
                         </div>
                         <div className="flex flex-col gap-2">
-                            <Select></Select>
+                            <Select>
+                                <option value={0} selected>Seleccione ejercicio</option>
+                            </Select>
                             <InputUnit className="" inputType="number" placeholder="Tiempo/Repeticiones" unit="min/rep." />
                         </div>
                         <Button>Agregar</Button>

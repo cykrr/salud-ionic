@@ -21,7 +21,9 @@ export default function AddFood() {
                             <CloseButton />
                         </div>
                         <div className="flex flex-col gap-2">
-                            <Select></Select>
+                            <Select>
+                                <option value={0} selected>Seleccione alimento</option>
+                            </Select>
                             <InputUnit className="" inputType="number" placeholder="Tamaño porción" unit="g/mL." />
                         </div>
                         <Button>Agregar</Button>
