@@ -20,7 +20,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import TermsConditions from './pages/TermsConditions';
 import Menu from './pages/Menu'
-
+import CreateFood from './pages/CreateFood';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -55,6 +55,7 @@ const App: React.FC = () => (
         <Route path="/menu" component={Menu}></Route>
         <Route path="/add_food" component={Tab1}></Route>
         <Route path="/add_excercise" component={Tab1}></Route>
+        <Route path="/create_food" component={CreateFood}></Route>
       </IonRouterOutlet>
       {/* <IonTabs>
         <IonRouterOutlet>

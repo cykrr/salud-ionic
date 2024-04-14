@@ -23,6 +23,7 @@ export default function Main() {
                 <IonButton routerLink="/terms_and_conditions">Terms and Conditions</IonButton>
                 <IonButton routerLink="/add_food">Add Food</IonButton>
                 <IonButton routerLink="/add_excercise">Add Excercise</IonButton>
+                <IonButton routerLink="/create_food">Create Food</IonButton>
             </IonContent>
         </IonPage>
     );
