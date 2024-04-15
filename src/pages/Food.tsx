@@ -6,7 +6,7 @@ export default function Food() {
         <IonPage>
             <IonContent>
                 <div className="flex flex-col w-full h-full">
-                    <div className="grow m-5 overflow-y-scroll">
+                    <div className="grow m-5 overflow-y-auto">
                         <h1>Tu alimentación diaria</h1>
                         <div className='h-8'></div>
                             <div className="rounded-lg  space-y-2.5 p-5 ">
