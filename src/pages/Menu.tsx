@@ -9,7 +9,7 @@ export default function Menu() {
             <IonContent>
                 <div className="flex flex-col  \
                                 w-full h-full">
-                    <div className='grow m-5 overflow-scroll'>
+                    <div className='grow m-5 overflow-y-scroll'>
                         <h1>Menú Principal</h1>
                         <div className="flex grow flex-col">
                             <div className="flex h-full flex-col p-20 gap-5">

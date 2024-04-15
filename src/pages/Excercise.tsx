@@ -5,7 +5,7 @@ export default function Excercise() {
         <IonPage>
             <IonContent>
                 <div className="flex flex-col w-full h-full">
-                    <div className="grow m-5 overflow-scroll">
+                    <div className="grow m-5 overflow-y-scroll">
                         <h1>Tus ejercicios diarios</h1>
                         <div className='h-8'></div>
                             <div className="rounded-lg  space-y-2.5 p-5 ">
