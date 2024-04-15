@@ -20,6 +20,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import TermsConditions from './pages/TermsConditions';
 import Menu from './pages/Menu'
+import Food from './pages/Food'
 import CreateFood from './pages/CreateFood';
 import AddFood from './pages/AddFood';
 import AddExercise from './pages/AddExercise';
@@ -58,6 +59,7 @@ const App: React.FC = () => (
         <Route path="/add_food" component={AddFood}></Route>
         <Route path="/add_exercise" component={AddExercise}></Route>
         <Route path="/create_food" component={CreateFood}></Route>
+        <Route path="/food" component={Food}></Route>
       </IonRouterOutlet>
       {/* <IonTabs>
         <IonRouterOutlet>

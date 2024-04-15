@@ -1,7 +1,7 @@
 export default function NavBar() {
     function BarItem({ title, img } : { title: string; img: string }) {
         return (
-            <div className="flex flex-col w-full h-full text-center bg-[#97ffb5] cursor-pointer py-2 gap-2">
+            <div className="flex flex-col w-full h-full text-center bg-[rgb(151,255,181)] cursor-pointer py-2 gap-2">
                 <img src={img} alt="" className="object-contain w-full min-h-0"/>
                 {title}
             </div>
