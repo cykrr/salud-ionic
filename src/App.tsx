@@ -1,20 +1,18 @@
-import { Redirect, Route } from 'react-router-dom';
 import {
     IonApp,
-    IonButton,
-    IonIcon,
-    IonLabel,
-    IonRouterOutlet,
-    IonTabBar,
-    IonTabButton,
-    IonTabs,
-    setupIonicReact,
-} from '@ionic/react';
+    setupIonicReact, } from '@ionic/react';
+
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import {Main, Login, Register, TermsConditions, Menu, Food, CreateFood, AddFood, AddExercise, Exercise} from './pages';
-import {NavBar} from './components';
-import { Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
+
+
+import {
+  Main,
+  Login,
+  Register, 
+  TermsConditions, 
+  } from './pages';
+
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -41,7 +39,6 @@ import MainTabRoot from './pages/MainTabRoot';
 setupIonicReact();
 
 const App: React.FC = () => (
-
   <IonApp>
     <IonReactRouter>
         <Switch>
@@ -55,11 +52,8 @@ const App: React.FC = () => (
             component={TermsConditions} />
           <Route path="/tabs"
             render={() => <MainTabRoot />}/>
-
         </Switch>
     </IonReactRouter>
   </IonApp>
-
 );
-
 export default App;
