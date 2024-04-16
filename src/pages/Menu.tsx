@@ -7,11 +7,6 @@ import GraphMenu from '../components/GraphMenu';
 export default function Menu() {
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Menu</IonTitle>
-                </IonToolbar>
-            </IonHeader>
             <IonContent>
                 <div className="flex w-full h-full flex-col">
                     <div className="flex h-full flex-col p-20 gap-16 overflow-y-auto">
@@ -31,6 +26,7 @@ export default function Menu() {
                             <GraphMenu/>
                         </div>
                     </div>
+
                     <NavBar/>
                 </div>
             </IonContent>

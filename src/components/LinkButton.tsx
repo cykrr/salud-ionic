@@ -2,7 +2,7 @@ import { IonRouterLink } from '@ionic/react'
 import Button from '../components/Button'
 type LinkButtonArgs = {
     href: string
-    children: React.ReactNode
+    children?: React.ReactNode
     className?: string
 }
 export default function LinkButton(args: LinkButtonArgs) {
