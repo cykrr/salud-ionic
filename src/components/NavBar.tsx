@@ -36,7 +36,7 @@ export default function NavBar() {
                 title="Alimentación"
                 img="src/assets/alimentacion.png"/>
             <BarItem 
-                href="/excercise"
+                href="/exercise"
                 title="Ejercicios"
                 img='src/assets/ejercicios.png'/>
         </div>

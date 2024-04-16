@@ -1,6 +1,6 @@
 import { NavBar, LinkButton } from '../components';
 import { IonContent, IonPage } from '@ionic/react';
-export default function Excercise() {
+export default function Exercise() {
     return (
         <IonPage>
             <IonContent>

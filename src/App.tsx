@@ -21,7 +21,7 @@ import Food from './pages/Food'
 import CreateFood from './pages/CreateFood';
 import AddFood from './pages/AddFood';
 import AddExercise from './pages/AddExercise';
-import Excercise from './pages/Excercise';
+import Exercise from './pages/Exercise';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -61,14 +61,14 @@ const App: React.FC = () => (
                component={Menu}/>
         <Route path="/add_food" 
                component={AddFood}/>
-        <Route path="/add_excercise" 
+        <Route path="/add_exercise" 
                component={AddExercise}/>
         <Route path="/create_food" 
                component={CreateFood}/>
         <Route path="/food" 
                component={Food}/>
-        <Route path="/excercise" 
-               component={Excercise}/>
+        <Route path="/exercise" 
+               component={Exercise}/>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
