@@ -7,13 +7,11 @@ export default function AddFood() {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Seleccionar alimento</IonTitle>
-                </IonToolbar>
+
             </IonHeader>
             <IonContent>
-                <div className="flex w-full h-full flex-col">
-                    <div className="flex h-full flex-col p-20 gap-8">
+                <div className="flex w-full h-full flex-col p-20">
+                    <div className="flex h-full flex-col gap-8">
                         <div className="flex justify-between items-center">
                             <h1>Selecionar alimento</h1>
                             <CloseButton />
@@ -27,7 +25,7 @@ export default function AddFood() {
                         <Button>Agregar</Button>
                         <div className="flex flex-col gap-1 text-center">
                             <p>¿No encuentras tu alimento en la lista?</p>
-                            <IonRouterLink routerLink="/tabs/food/create">
+                            <IonRouterLink routerLink="/tabs/food/create" routerDirection='forward' >
                                 <a className="text-pink-500 text-lg font-semibold underline" href="">Añádelo aquí</a>
                             </IonRouterLink>
                         </div>
