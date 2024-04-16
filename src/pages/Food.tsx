@@ -1,12 +1,14 @@
-import { IonHeader, IonPage, IonContent, IonTitle } from "@ionic/react";
-import {NavBar, LinkButton} from "../components";
+import { IonHeader, IonPage, IonContent, IonRouterOutlet } from "@ionic/react";
+import {NavBar, LinkButton, Button} from "../components";
+import AddFood from "./AddFood";
+import { Route } from "react-router-dom";
 
 export default function Food() {
     return (
         <IonPage>
             <IonContent>
                 <div className="flex flex-col w-full h-full">
-                    <div className="grow m-5 overflow-y-auto">
+                    <div className="p-5 overflow-y-auto">
                         <h1>Tu alimentación diaria</h1>
                         <div className='h-8'></div>
                             <div className="rounded-lg  space-y-2.5 p-5 ">
@@ -53,7 +55,6 @@ export default function Food() {
                                 </table>
                                 <p>Consumo recomendado 1200 cal.</p>
                                 <p className="italic">No has alcanzado el consumo mínimo recomendado.</p>
-                                <div className="h-4"></div>
                                 <center>
                                     <LinkButton href="/tabs/food/add">Añadir alimento</LinkButton>
                                 </center>

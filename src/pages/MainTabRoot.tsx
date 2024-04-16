@@ -3,8 +3,8 @@ import MainTabs from "./MainTabs";
 import { AddFood, AddExercise, CreateFood } from "./";
 
 import { IonContent, IonHeader, IonPage } from '@ionic/react';
-import { IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, IonIcon, IonLabel } from '@ionic/react';
-import { Redirect, Route } from 'react-router-dom';
+import { IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, IonIcon, IonLabel, IonNav } from '@ionic/react';
+import { NavLink, Redirect, Route } from 'react-router-dom';
 import { triangle, ellipse, square } from 'ionicons/icons';
 
 import { Menu, Food, Exercise } from '.'
@@ -34,7 +34,7 @@ export default function MainTabRoot() {
                     <Food />
                 </Route>
                 <Route exact path="/tabs/food/add">
-                    <AddFood></AddFood>
+                    <AddFood/>
                 </Route>
                 <Route exact path="/tabs/food/create">
                     <CreateFood/>
