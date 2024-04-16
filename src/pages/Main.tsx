@@ -20,7 +20,7 @@ export default function Main() {
                 <IonButton routerLink="/login">Login</IonButton>
                 <IonButton routerLink="/signup">Signup</IonButton>
                 <IonButton routerLink="/terms_and_conditions">Terms and Conditions</IonButton>
-                <IonButton routerLink="/menu">Menu</IonButton>
+                <IonButton routerLink="/tabs">Menu</IonButton>
                 <IonButton routerLink="/food">Food</IonButton>
                 <IonButton routerLink="/exercise">Food</IonButton>
                 <IonButton routerLink="/add_food">Add Food</IonButton>

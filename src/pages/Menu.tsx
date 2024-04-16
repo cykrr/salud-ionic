@@ -26,8 +26,6 @@ export default function Menu() {
                             <GraphMenu/>
                         </div>
                     </div>
-
-                    <NavBar/>
                 </div>
             </IonContent>
         </IonPage>

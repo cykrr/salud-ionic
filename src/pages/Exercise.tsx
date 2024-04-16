@@ -48,7 +48,6 @@ export default function Exercise() {
                                 </center>
                             </div>
                     </div>
-                    <NavBar></NavBar>
                 </div>
             </IonContent>
 

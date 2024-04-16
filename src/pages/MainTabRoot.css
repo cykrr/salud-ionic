@@ -1,0 +1,13 @@
+ion-tab-bar, ion-tab-button {
+    background-color: #97ffb5;
+    color: black;
+}
+
+ion-tab-bar:hover, ion-tab-button:hover ion-label {
+    color: black;
+}
+
+img {
+    width: 25px;
+    height: 25px;
+}

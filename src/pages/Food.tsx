@@ -59,7 +59,6 @@ export default function Food() {
                                 </center>
                             </div>
                     </div>
-                    <NavBar></NavBar>
                 </div>
             </IonContent>
 

@@ -1,27 +1,20 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
-  IonApp,
-  IonButton,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-  setupIonicReact
+    IonApp,
+    IonButton,
+    IonIcon,
+    IonLabel,
+    IonRouterOutlet,
+    IonTabBar,
+    IonTabButton,
+    IonTabs,
+    setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
-import Main from './pages/Main'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import TermsConditions from './pages/TermsConditions';
-import Menu from './pages/Menu'
-import Food from './pages/Food'
-import CreateFood from './pages/CreateFood';
-import AddFood from './pages/AddFood';
-import AddExercise from './pages/AddExercise';
-import Exercise from './pages/Exercise';
+import {Main, Login, Register, TermsConditions, Menu, Food, CreateFood, AddFood, AddExercise, Exercise} from './pages';
+import {NavBar} from './components';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -42,36 +35,39 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './global.css';
+import MainTabRoot from './pages/MainTabRoot';
 
 setupIonicReact();
 
 const App: React.FC = () => (
+
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/" 
-               component={Main}/>
-        <Route path="/login" 
-               component={Login}/>
-        <Route path="/signup" 
-               component={Register}/>
-        <Route path="/terms_and_conditions" 
-               component={TermsConditions}/>
-        <Route path="/menu" 
-               component={Menu}/>
-        <Route path="/add_food" 
-               component={AddFood}/>
-        <Route path="/add_exercise" 
-               component={AddExercise}/>
-        <Route path="/create_food" 
-               component={CreateFood}/>
-        <Route path="/food" 
-               component={Food}/>
-        <Route path="/exercise" 
-               component={Exercise}/>
-      </IonRouterOutlet>
+        <IonRouterOutlet>
+          <Route exact path="/"
+            component={Main} />
+          <Route path="/login"
+            component={Login} />
+          <Route path="/signup"
+            component={Register} />
+          <Route path="/terms_and_conditions"
+            component={TermsConditions} />
+          <Route path="/tabs"
+            render={() => <MainTabRoot />}/>
+          <Route path="/add_food"
+            component={AddFood} />
+          <Route path="/add_exercise"
+            component={AddExercise} />
+          <Route path="/create_food"
+            component={CreateFood} />
+          <Route path="/food"
+            component={Food} />
+          <Route path="/exercise"
+            component={Exercise} />
+        </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
+
 );
 
 export default App;
