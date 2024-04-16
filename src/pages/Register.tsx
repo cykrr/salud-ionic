@@ -55,9 +55,7 @@ export default function Register() {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Registro</IonTitle>
-                </IonToolbar>
+
             </IonHeader>
             <IonContent>
                 <div className="mt-10 flex  h-full justify-center align-center">

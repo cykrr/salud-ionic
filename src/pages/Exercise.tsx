@@ -44,7 +44,7 @@ export default function Exercise() {
                                 <p className="italic">No has alcanzado el consumo mínimo recomendado.</p>
                                 <div className="h-4"></div>
                                 <center>
-                                    <LinkButton href="/add_exercise">Añadir ejercicio</LinkButton>
+                                    <LinkButton href="/tabs/exercise/add">Añadir ejercicio</LinkButton>
                                 </center>
                             </div>
                     </div>

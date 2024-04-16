@@ -1,5 +1,9 @@
+body {
+    /* set variable --ion-color-primary to #C6F3D2 */
+    --ion-color-primary: rgb(10, 78, 17);
+}
 ion-tab-bar, ion-tab-button {
-    background-color: #97ffb5;
+    background-color: #C6F3D2;
     color: black;
 }
 
@@ -7,7 +11,12 @@ ion-tab-bar:hover, ion-tab-button:hover ion-label {
     color: black;
 }
 
-img {
+.tab-bar-button {
     width: 25px;
     height: 25px;
+}
+
+.selected-tab {
+    background-color: #95E79D;
+    color: black;
 }

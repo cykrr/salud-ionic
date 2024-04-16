@@ -55,7 +55,7 @@ export default function Food() {
                                 <p className="italic">No has alcanzado el consumo mínimo recomendado.</p>
                                 <div className="h-4"></div>
                                 <center>
-                                    <LinkButton href="/add_food">Añadir alimento</LinkButton>
+                                    <LinkButton href="/tabs/food/add">Añadir alimento</LinkButton>
                                 </center>
                             </div>
                     </div>

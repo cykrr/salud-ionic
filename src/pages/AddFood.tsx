@@ -1,7 +1,5 @@
-import CloseButton from "../components/CloseButton"
-import Select from "../components/Select"
-import InputUnit from "../components/InputUnit"
-import Button from "../components/Button"
+import { Button, CloseButton, InputUnit, Select } from '../components'
+import { IonRouterLink } from '@ionic/react'
 
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
@@ -22,14 +20,16 @@ export default function AddFood() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <Select>
-                                <option value={0} selected>Seleccione alimento</option>
+                                <option value={0}>Seleccione alimento</option>
                             </Select>
                             <InputUnit className="" inputType="number" placeholder="Tamaño porción" unit="g/mL." />
                         </div>
                         <Button>Agregar</Button>
                         <div className="flex flex-col gap-1 text-center">
                             <p>¿No encuentras tu alimento en la lista?</p>
-                            <a className="text-pink-500 text-lg font-semibold underline" href="">Añádelo aquí</a>
+                            <IonRouterLink routerLink="/tabs/food/create">
+                                <a className="text-pink-500 text-lg font-semibold underline" href="">Añádelo aquí</a>
+                            </IonRouterLink>
                         </div>
                     </div>
                 </div>

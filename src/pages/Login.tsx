@@ -22,7 +22,7 @@ export default function Login() {
         else if (password.length > 8 && user.length > 0) {
             // Redirect to href="/home" with React Router
             console.log("Redirecting to /menu")
-            history.push("/menu") 
+            history.push("/tabs") 
             
         }
         setWarning(warnings)
@@ -32,11 +32,8 @@ export default function Login() {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Iniciar Sesión</IonTitle>
-                </IonToolbar>
             </IonHeader>
-            <IonContent>
+            <IonContent className="p-5">
                 <div className="flex justify-center items-center h-full flex-col w-30">
                     <div id="login" className="text-center  h-full flex flex-col justify-center items-center">
                         <h1 className="text-xl text-bold">Bienvenido</h1>
@@ -44,17 +41,22 @@ export default function Login() {
                             {warning}
                         </div>
                             <form ref={formRef} id="login" onSubmit={handleLogin}>
-                                <Input id="user" inputType={"text"} placeholder={"Usuario"}/>
-                                <Input id="password" inputType={"password"} placeholder={"Contraseña"} />
-                                <div className="h-6"></div>
-                                <Button btnType="submit">
-                                   Iniciar Sesión
-                                </Button>
+                                <div className="flex flex-col align-center justify-center items-center">
+                                    <Input id="user" inputType={"text"} placeholder={"Usuario"}/>
+                                    <Input id="password" inputType={"password"} placeholder={"Contraseña"} />
+                                    <div className="h-6"></div>
+                                    <div className="flex flex-col gap-2.5 max-w-32">
+                                        <Button btnType="submit">
+                                        Ingresar
+                                        </Button>
+                                        <LinkButton className='w-full'  href="/signup">Registrarse</LinkButton>
+
+                                </div>
+                                </div>
                             </form>
                             <div className="h-2"></div>
                             <div className="flex justify-center">
                                 <div className="w-full flex flex-col mx-20 gap-3">
-                                    <LinkButton href="/signup">Registrarse</LinkButton>
                                 </div>
                             </div>
                     </div>

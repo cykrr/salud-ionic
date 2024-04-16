@@ -8,12 +8,13 @@ import {
     IonTabBar,
     IonTabButton,
     IonTabs,
-    setupIonicReact
+    setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
 import {Main, Login, Register, TermsConditions, Menu, Food, CreateFood, AddFood, AddExercise, Exercise} from './pages';
 import {NavBar} from './components';
+import { Switch } from 'react-router-dom';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -43,7 +44,7 @@ const App: React.FC = () => (
 
   <IonApp>
     <IonReactRouter>
-        <IonRouterOutlet>
+        <Switch>
           <Route exact path="/"
             component={Main} />
           <Route path="/login"
@@ -54,17 +55,8 @@ const App: React.FC = () => (
             component={TermsConditions} />
           <Route path="/tabs"
             render={() => <MainTabRoot />}/>
-          <Route path="/add_food"
-            component={AddFood} />
-          <Route path="/add_exercise"
-            component={AddExercise} />
-          <Route path="/create_food"
-            component={CreateFood} />
-          <Route path="/food"
-            component={Food} />
-          <Route path="/exercise"
-            component={Exercise} />
-        </IonRouterOutlet>
+
+        </Switch>
     </IonReactRouter>
   </IonApp>
 

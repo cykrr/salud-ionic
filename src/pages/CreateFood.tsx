@@ -9,9 +9,7 @@ export default function CreateFood() {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Crear alimento</IonTitle>
-                </IonToolbar>
+
             </IonHeader>
             <IonContent>
                 <div className="flex w-full h-full flex-col">
@@ -26,13 +24,13 @@ export default function CreateFood() {
                             <div className="flex flex-row gap-2">
                                 <Input className="w-full" inputType="number" placeholder="Tamaño porción"></Input>
                                 <Select>
-                                    <option value={0} selected>Unidad</option>
+                                    <option value={0}>Unidad</option>
                                     <option value={1}>g.</option>
                                     <option value={2}>mL.</option>
                                 </Select>
                             </div>
                         </div>
-                        <Button>Agregar</Button>
+                        <Button className = "self-center w-32">Agregar</Button>
                     </div>
                 </div>
             </IonContent>
