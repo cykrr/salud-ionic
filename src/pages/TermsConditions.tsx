@@ -28,7 +28,7 @@ export default function TermsConditions() {
                     </div>
                     <div className="flex w-full flex-row justify-center space-x-5">
                         <LinkButton href="/tabs">Aceptar</LinkButton>
-                        <LinkButton href="/signin">Rechazar</LinkButton>
+                        <LinkButton href="/login">Rechazar</LinkButton>
                     </div>
                 </div>
             </IonContent>
