@@ -3,25 +3,30 @@ import MainTabs from "./MainTabs";
 import { AddFood, AddExercise, CreateFood } from "./";
 
 import { IonContent, IonHeader, IonPage } from '@ionic/react';
-import { IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, IonIcon, IonLabel, IonNav } from '@ionic/react';
+import { IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, IonIcon, IonLabel, IonNav, TabsCustomEvent } from '@ionic/react';
 import { NavLink, Redirect, Route } from 'react-router-dom';
 import { triangle, ellipse, square } from 'ionicons/icons';
 
 import { Menu, Food, Exercise } from '.'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import './MainTabRoot.css'
+import FoodRouter from "./FoodRouter";
 
 export default function MainTabRoot() {
     const [selected, setSelected] = useState('menu');
+    const tabs = useRef<HTMLIonTabsElement>(null);
+
     function handleClick(e: CustomEvent<HTMLIonTabButtonElement>) {
         const selectedTab: string = e['detail']['tab']
         setSelected(selectedTab)
-        // console.log(selectedTab)
+        console.log("gettin")
     }
+    
+         
     return (
-        <IonTabs>
+        <IonTabs onIonTabsDidChange={(e: TabsCustomEvent)}>
             <IonRouterOutlet>
                 <Redirect exact path="/tabs" to="/tabs/menu" />
                 <Route exact path="/tabs">
@@ -31,13 +36,7 @@ export default function MainTabRoot() {
                     <Menu />
                 </Route>
                 <Route exact path="/tabs/food">
-                    <Food />
-                </Route>
-                <Route exact path="/tabs/food/add">
-                    <AddFood/>
-                </Route>
-                <Route exact path="/tabs/food/create">
-                    <CreateFood/>
+                    <FoodRouter/>
                 </Route>
 
                 <Route exact path="/tabs/exercise">
