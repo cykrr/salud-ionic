@@ -7,7 +7,6 @@ export default function AddFood() {
     return (
         <IonPage>
             <IonHeader>
-
             </IonHeader>
             <IonContent>
                 <div className="flex w-full h-full flex-col p-20">
@@ -25,7 +24,7 @@ export default function AddFood() {
                         <Button>Agregar</Button>
                         <div className="flex flex-col gap-1 text-center">
                             <p>¿No encuentras tu alimento en la lista?</p>
-                            <IonRouterLink routerLink="/tabs/food/create" routerDirection='forward' >
+                            <IonRouterLink routerLink="/food_create" routerDirection='forward' >
                                 <a className="text-pink-500 text-lg font-semibold underline" href="">Añádelo aquí</a>
                             </IonRouterLink>
                         </div>

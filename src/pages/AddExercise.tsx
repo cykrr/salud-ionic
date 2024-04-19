@@ -9,9 +9,6 @@ export default function AddExercise() {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Seleccionar ejercicio</IonTitle>
-                </IonToolbar>
             </IonHeader>
             <IonContent>
                 <div className="flex w-full h-full flex-col">

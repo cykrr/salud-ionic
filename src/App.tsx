@@ -10,7 +10,10 @@ import {
   Main,
   Login,
   Register, 
-  TermsConditions, 
+  TermsConditions,
+  AddExercise,
+  AddFood,
+  CreateFood, 
   } from './pages';
 
 
@@ -52,6 +55,16 @@ const App: React.FC = () => (
             component={TermsConditions} />
           <Route path="/tabs"
             render={() => <MainTabRoot />}/>
+
+          <Route path="/exercise_add">
+            <AddExercise/>
+          </Route>
+          <Route path="/food_add">
+            <AddFood/>
+          </Route>
+          <Route path="/food_create">
+            <CreateFood/>
+          </Route>
         </Switch>
     </IonReactRouter>
   </IonApp>

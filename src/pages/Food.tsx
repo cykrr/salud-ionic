@@ -56,7 +56,7 @@ export default function Food() {
                                 <p>Consumo recomendado 1200 cal.</p>
                                 <p className="italic">No has alcanzado el consumo mínimo recomendado.</p>
                                 <center>
-                                    <LinkButton href="/tabs/food/add">Añadir alimento</LinkButton>
+                                    <LinkButton href="/food_add">Añadir alimento</LinkButton>
                                 </center>
                             </div>
                     </div>
