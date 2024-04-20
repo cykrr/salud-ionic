@@ -1,4 +1,4 @@
-import { IonPage, IonToolbar, IonTitle, IonHeader, IonContent, IonRouterLink } from '@ionic/react';
+import { IonPage, IonToolbar, IonTitle, IonHeader, IonContent, IonRouterLink, useIonRouter } from '@ionic/react';
 import Input from '../components/Input';
 import Select from '../components/Select';
 import Button from '../components/Button';
@@ -6,6 +6,7 @@ import CloseButton from '../components/CloseButton';
 
 
 export default function CreateFood() {
+    const retroceder = useIonRouter();
     return (
         <IonPage>
             <IonHeader>
@@ -30,7 +31,7 @@ export default function CreateFood() {
                                 </Select>
                             </div>
                         </div>
-                        <Button className = "self-center">Agregar</Button>
+                        <Button className = "self-center" onClick={()=>retroceder.goBack()}>Agregar</Button>
                     </div>
                 </div>
             </IonContent>

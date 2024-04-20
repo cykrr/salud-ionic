@@ -1,9 +1,10 @@
 import { Button, CloseButton, InputUnit, Select } from '../components'
-import { IonRouterLink } from '@ionic/react'
+import { IonRouterLink, useIonRouter } from '@ionic/react'
 
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
 export default function AddFood() {
+    const retroceder = useIonRouter();
     return (
         <IonPage>
             <IonHeader>
@@ -21,7 +22,7 @@ export default function AddFood() {
                             </Select>
                             <InputUnit className="" inputType="number" placeholder="Tamaño porción" unit="g/mL." />
                         </div>
-                        <Button className="self-center">Agregar</Button>
+                        <Button className="self-center" onClick={()=>retroceder.goBack()}>Agregar</Button>
                         <div className="flex flex-col gap-1 text-center">
                             <p>¿No encuentras tu alimento en la lista?</p>
                             <IonRouterLink routerLink="/food_create" routerDirection='forward' >

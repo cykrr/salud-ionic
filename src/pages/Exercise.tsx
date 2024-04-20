@@ -32,12 +32,16 @@ export default function Exercise() {
                                     <td className="border p-2">30 cal.</td>
                                 </tr>
                                 <tr>
-                                    <td className="p-2"></td>
                                     <td className="p-2">Total: </td>
-                                    <td className="p-2 text-green-500">569 cal.</td>
+                                    <td className="p-2 text-green-500">45 min.</td>
+                                    <td className="p-2 text-green-500">135 cal.</td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div className="flex flex-col gap-3">
+                            <p>Actividad fisica recomendada: 60 min.</p>
+                            <p className="italic">¡Te faltan <span className="text-green-500">15 min.</span> para completar la meta!</p>
+                        </div>
                         <LinkButton className="self-center" href="/exercise_add">Añadir ejercicio</LinkButton>
                     </div>
                 </div>
