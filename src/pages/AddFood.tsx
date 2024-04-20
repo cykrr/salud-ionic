@@ -9,8 +9,8 @@ export default function AddFood() {
             <IonHeader>
             </IonHeader>
             <IonContent>
-                <div className="flex w-full h-full flex-col p-20">
-                    <div className="flex h-full flex-col gap-8">
+                <div className="flex w-full h-full flex-col p-20 items-center">
+                    <div className="flex h-full flex-col gap-8 w-96">
                         <div className="flex justify-between items-center">
                             <h1>Selecionar alimento</h1>
                             <CloseButton />
@@ -21,7 +21,7 @@ export default function AddFood() {
                             </Select>
                             <InputUnit className="" inputType="number" placeholder="Tamaño porción" unit="g/mL." />
                         </div>
-                        <Button>Agregar</Button>
+                        <Button className="self-center">Agregar</Button>
                         <div className="flex flex-col gap-1 text-center">
                             <p>¿No encuentras tu alimento en la lista?</p>
                             <IonRouterLink routerLink="/food_create" routerDirection='forward' >

@@ -12,8 +12,8 @@ export default function CreateFood() {
 
             </IonHeader>
             <IonContent>
-                <div className="flex w-full h-full flex-col">
-                    <div className="flex h-full flex-col p-20 gap-8">
+                <div className="flex w-full h-full flex-col p-20 items-center">
+                    <div className="flex h-full flex-col gap-8 w-96">
                         <div className="flex justify-between items-center">
                             <h1>Nuevo alimento</h1>
                             <CloseButton/>
@@ -30,7 +30,7 @@ export default function CreateFood() {
                                 </Select>
                             </div>
                         </div>
-                        <Button className = "self-center w-32">Agregar</Button>
+                        <Button className = "self-center">Agregar</Button>
                     </div>
                 </div>
             </IonContent>

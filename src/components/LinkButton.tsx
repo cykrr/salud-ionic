@@ -7,8 +7,8 @@ type LinkButtonArgs = {
 }
 export default function LinkButton(args: LinkButtonArgs) {
     return (
-        <IonRouterLink routerLink={args.href}>
-            <Button className={args.className}>{args.children}</Button>
+        <IonRouterLink className={args.className} routerLink={args.href}>
+            <Button className="w-full">{args.children}</Button>
         </IonRouterLink>
     )
 }

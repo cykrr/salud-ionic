@@ -31,34 +31,27 @@ export default function Login() {
 
     return (
         <IonPage>
-            <IonHeader>
-            </IonHeader>
-            <IonContent className="p-5">
-                <div className="flex justify-center items-center h-full flex-col w-30">
-                    <div id="login" className="text-center  h-full flex flex-col justify-center items-center">
+            <IonContent>
+                <div className="flex items-center h-full flex-col">
+                    <div id="login" className="h-full flex flex-col justify-center items-center w-96">
                         <h1 className="text-xl text-bold">Bienvenido</h1>
                         <div className="p-10">
                             {warning}
                         </div>
-                            <form ref={formRef} id="login" onSubmit={handleLogin}>
-                                <div className="flex flex-col align-center justify-center items-center">
+                        <form ref={formRef} id="login" onSubmit={handleLogin}>
+                            <div className="flex flex-col gap-10 items-center">
+                                <div className="flex flex-col">
                                     <Input id="user" inputType={"text"} placeholder={"Usuario"}/>
                                     <Input id="password" inputType={"password"} placeholder={"Contraseña"} />
-                                    <div className="h-6"></div>
-                                    <div className="flex flex-col gap-2.5 max-w-32">
-                                        <Button btnType="submit">
+                                </div>
+                                <div className="flex flex-col gap-2.5 max-w-40">
+                                    <Button btnType="submit">
                                         Ingresar
-                                        </Button>
-                                        <LinkButton className='w-full'  href="/signup">Registrarse</LinkButton>
-
-                                </div>
-                                </div>
-                            </form>
-                            <div className="h-2"></div>
-                            <div className="flex justify-center">
-                                <div className="w-full flex flex-col mx-20 gap-3">
+                                    </Button>
+                                    <LinkButton href="/signup">Registrarse</LinkButton>
                                 </div>
                             </div>
+                        </form>
                     </div>
                 </div>
             </IonContent>

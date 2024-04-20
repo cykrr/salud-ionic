@@ -21,11 +21,11 @@ export default function Main() {
                 <IonButton routerLink="/signup">Signup</IonButton>
                 <IonButton routerLink="/terms_and_conditions">Terms and Conditions</IonButton>
                 <IonButton routerLink="/tabs">Menu</IonButton>
-                <IonButton routerLink="/food">Food</IonButton>
-                <IonButton routerLink="/exercise">Exercise</IonButton>
-                <IonButton routerLink="/add_food">Add Food</IonButton>
-                <IonButton routerLink="/add_exercise">Add Exercise</IonButton>
-                <IonButton routerLink="/create_food">Create Food</IonButton>
+                <IonButton routerLink="/tabs/food">Food</IonButton>
+                <IonButton routerLink="/tabs/exercise">Exercise</IonButton>
+                <IonButton routerLink="/food_add">Add Food</IonButton>
+                <IonButton routerLink="/exercise_add">Add Exercise</IonButton>
+                <IonButton routerLink="/food_create">Create Food</IonButton>
             </IonContent>
         </IonPage>
     );

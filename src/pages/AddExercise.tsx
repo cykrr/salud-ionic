@@ -11,8 +11,8 @@ export default function AddExercise() {
             <IonHeader>
             </IonHeader>
             <IonContent>
-                <div className="flex w-full h-full flex-col">
-                    <div className="flex h-full flex-col p-20 gap-8">
+                <div className="flex w-full h-full flex-col p-20 items-center">
+                    <div className="flex h-full flex-col gap-8 w-96">
                         <div className="flex justify-between items-center">
                             <h1>Selecionar ejercicio</h1>
                             <CloseButton />
@@ -21,9 +21,9 @@ export default function AddExercise() {
                             <Select>
                                 <option value={0}>Seleccione ejercicio</option>
                             </Select>
-                            <InputUnit className="" inputType="number" placeholder="Tiempo/Repeticiones" unit="min/rep." />
+                            <InputUnit className="" inputType="number" placeholder="Tiempo" unit="min." />
                         </div>
-                        <Button>Agregar</Button>
+                        <Button className="self-center">Agregar</Button>
                     </div>
                 </div>
             </IonContent>

@@ -6,11 +6,6 @@ import LinkButton from '../components/LinkButton';
 export default function TermsConditions() {
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Términos y Condiciones</IonTitle>
-                </IonToolbar>
-            </IonHeader>
             <IonContent>
                 <div className="flex w-full h-full flex-col p-20 space-y-10">
                     <h1>Términos y Condiciones</h1>

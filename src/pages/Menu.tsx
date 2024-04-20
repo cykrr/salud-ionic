@@ -22,7 +22,7 @@ export default function Menu() {
                                 </div>
                             </div>
                         </div>
-                        <div className="max-w-5xl w-full self-center">
+                        <div className="max-w-xl w-full self-center">
                             <GraphMenu/>
                         </div>
                     </div>
