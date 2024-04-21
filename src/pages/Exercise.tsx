@@ -4,8 +4,8 @@ export default function Exercise() {
     return (
         <IonPage>
             <IonContent>
-                <div className="flex flex-col w-full h-full p-20">
-                    <div className="flex flex-col gap-5 overflow-y-auto">
+                <div className="flex flex-col w-full h-full">
+                    <div className="flex flex-col gap-5 p-20">
                         <h1>Tus ejercicios diarios</h1>
                         <table className="w-full">
                             <thead>

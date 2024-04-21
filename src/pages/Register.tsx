@@ -55,8 +55,8 @@ export default function Register() {
     return (
         <IonPage>
             <IonContent>
-                <div className="flex w-full h-full items-center justify-center p-10">
-                    <div className='flex flex-col items-center gap-6'>
+                <div className="flex w-full h-full">
+                    <div className='flex flex-col items-center gap-6 p-10 m-auto'>
                         <p className="text-xl font-bold">Registro</p>
                         <form id = "input" ref={formRef} onSubmit={handleSubmit}>
                             <div className="flex flex-col gap-6">

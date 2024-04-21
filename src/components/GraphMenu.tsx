@@ -12,7 +12,7 @@ export default function MenuBar() {
             <div className="w-full">
                 <div 
                     onClick={() => setSelectedItem(id)}
-                    className={`w-full p-4 text-center bg-gray-100 ${selectedItem === id ? 'selected' : ''} text-lg cursor-pointer`}
+                    className={`w-full p-3.5 text-center bg-gray-100 ${selectedItem === id ? 'selected' : ''} text-lg cursor-pointer`}
                 >
                     {barTitle}
                 </div>

@@ -13,8 +13,8 @@ export default function CreateFood() {
 
             </IonHeader>
             <IonContent>
-                <div className="flex w-full h-full flex-col p-20 items-center">
-                    <div className="flex h-full flex-col gap-8 w-96">
+                <div className="flex w-full h-full flex-col">
+                    <div className="flex flex-col gap-8 mx-auto p-20">
                         <div className="flex justify-between items-center">
                             <h1>Nuevo alimento</h1>
                             <CloseButton/>

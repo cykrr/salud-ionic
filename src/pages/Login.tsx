@@ -32,8 +32,8 @@ export default function Login() {
     return (
         <IonPage>
             <IonContent>
-                <div className="flex items-center h-full flex-col">
-                    <div id="login" className="h-full flex flex-col justify-center items-center w-96">
+                <div className="flex w-full h-full flex-col">
+                    <div id="login" className="flex flex-col justify-center items-center p-20 m-auto">
                         <h1 className="text-xl text-bold">Bienvenido</h1>
                         <div className="p-10">
                             {warning}
