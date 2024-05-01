@@ -21,9 +21,12 @@ def create_db(connection: MySQLConnection):
         for query in queries:
             if query.strip():  # Ignorar líneas en blanco
                 cursor.execute(query)
+                connection.commit()
         print("Base de datos creada correctamente.")
     except mysql.connector.Error as error:
         print("Error al crear la base de datos:", error)
+    except Exception as e:
+        print(e)
 
 def query(db: MySQLConnection, query: str):
     cursor = db.cursor()

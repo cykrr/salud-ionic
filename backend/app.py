@@ -68,3 +68,5 @@ def get_product():
     cursor.execute("USE app_saludable")
     cursor.execute("INSERT INTO alimentos (nombre, calorias) VALUES ('Abdominales', 50)")
     db.commit()
+
+get_db()
