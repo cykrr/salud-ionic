@@ -1,4 +1,5 @@
 import mysql.connector
+from mysql.connector import MySQLConnection
 
 def create_connection():
     connection = mysql.connector.connect(
@@ -8,7 +9,7 @@ def create_connection():
     )
     return connection
 
-def create_db(connection):
+def create_db(connection: MySQLConnection):
     with open('bd.sql', 'r') as file:
         script = file.read()
 
@@ -23,3 +24,8 @@ def create_db(connection):
         print("Base de datos creada correctamente.")
     except mysql.connector.Error as error:
         print("Error al crear la base de datos:", error)
+
+def query(db: MySQLConnection, query: str):
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()

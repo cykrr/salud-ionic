@@ -1,9 +1,9 @@
-CREATE DATABASE app_saludable;
+CREATE DATABASE IF NOT EXISTS app_saludable;
 
 USE app_saludable;
 
 
-CREATE TABLE usuarios (
+CREATE TABLE IF NOT EXISTS usuarios (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     rut VARCHAR(10) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE usuarios (
     clave VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE alimentos (
+CREATE TABLE IF NOT EXISTS alimentos (
     idAlimento INT AUTO_INCREMENT PRIMARY KEY,
     idUsuario INT,
     nombre VARCHAR(50) NOT NULL,
@@ -22,13 +22,13 @@ CREATE TABLE alimentos (
     unidad INT NOT NULL
 );
 
-CREATE TABLE ejercicios (
+CREATE TABLE IF NOT EXISTS ejercicios (
     idEjercicio INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     calorias INT NOT NULL    
 );
 
-CREATE TABLE alimentosUsuario (
+CREATE TABLE IF NOT EXISTS alimentosUsuario (
     idAlimento INT,
     idUsuario INT,
     cantidad INT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE alimentosUsuario (
     FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
 );
 
-CREATE TABLE ejerciciosUsuario (
+CREATE TABLE IF NOT EXISTS ejerciciosUsuario (
     idEjercicio INT,
     idUsuario INT,
     minutos INT NOT NULL,
