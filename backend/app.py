@@ -51,7 +51,7 @@ def add_food():
         return date_format_error('fecha')
     
     try:
-        query(get_db(), f"INSERT INTO alimentosUsuario (idAlimento, idUsuario, cantidad, fecha) VALUES ({idAlimento}, {idUsuario}, {cantidad}, {fecha})")
+        query(get_db(), f"INSERT INTO alimentosUsuario (idAlimento, idUsuario, cantidad, fecha) VALUES ({idAlimento}, {idUsuario}, {cantidad}, '{fecha}')")
     except Exception as e:
         print(e)
         return bd_error()
