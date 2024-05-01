@@ -1,4 +1,3 @@
-import flask
 import mysql.connector
 
 def create_connection():
@@ -10,7 +9,7 @@ def create_connection():
     return connection
 
 def create_db(connection):
-    with open('backend/bd.sql', 'r') as file:
+    with open('bd.sql', 'r') as file:
         script = file.read()
 
     # Dividir el script en consultas individuales
@@ -24,9 +23,3 @@ def create_db(connection):
         print("Base de datos creada correctamente.")
     except mysql.connector.Error as error:
         print("Error al crear la base de datos:", error)
-
-
-
-connection = create_connection()
-create_db(connection)
-connection.close()

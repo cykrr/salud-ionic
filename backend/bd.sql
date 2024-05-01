@@ -17,12 +17,14 @@ CREATE TABLE usuarios (
 CREATE TABLE alimentos (
     idAlimento INT AUTO_INCREMENT PRIMARY KEY,
     idUsuario INT,
+    nombre VARCHAR(50) NOT NULL,
     calorias INT NOT NULL,
     unidad INT NOT NULL
 );
 
 CREATE TABLE ejercicios (
     idEjercicio INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
     calorias INT NOT NULL    
 );
 
