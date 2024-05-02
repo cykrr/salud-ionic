@@ -10,7 +10,7 @@ def create_connection():
     return connection
 
 def create_db(connection: MySQLConnection):
-    with open('bd.sql', 'r') as file:
+    with open('db.sql', 'r') as file:
         script = file.read()
 
     # Dividir el script en consultas individuales
@@ -28,7 +28,7 @@ def create_db(connection: MySQLConnection):
     except Exception as e:
         print(e)
 
-def query(db: MySQLConnection, query: str):
+def do_query(db: MySQLConnection, query: str):
     cursor = db.cursor()
     cursor.execute(query)
     db.commit()
