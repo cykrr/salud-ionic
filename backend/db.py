@@ -29,6 +29,13 @@ def create_db(connection: MySQLConnection):
         print(e)
 
 def do_query(db: MySQLConnection, query: str):
-    cursor = db.cursor()
+    cursor = db.cursor(dictionary=True)
     cursor.execute(query)
+
+    # Select query
+    if cursor.description:
+        return cursor.fetchall()
+    
+    # Other queries
     db.commit()
+    return None
