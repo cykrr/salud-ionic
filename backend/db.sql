@@ -1,4 +1,4 @@
-DROP DATABASE app_saludable;
+DROP DATABASE IF EXISTS app_saludable;
 
 CREATE DATABASE IF NOT EXISTS app_saludable;
 
