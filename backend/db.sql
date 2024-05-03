@@ -85,6 +85,9 @@ VALUES
     (29, 'Agua mineral', 0, 1),
     (30, 'Lentejas', 116, 0);
 
+INSERT INTO alimentos (idUsuario, nombre, calorias, unidad)
+VALUES (1, "mansana de pepito", 100, 0);
+
 INSERT IGNORE INTO ejercicios
     (idEjercicio, nombre, calorias)
 VALUES
@@ -133,7 +136,8 @@ VALUES
     (2, 28, 1, 200, '2024-05-01'),
     (3, 18, 1, 150, '2024-05-02'),
     (4, 12, 2, 200, '2024-05-01'),
-    (5, 13, 2, 100, '2024-05-01');
+    (5, 13, 2, 100, '2024-05-01'),
+    (6, 31, 1, 200, '2024-05-03');
 
 INSERT IGNORE INTO ejerciciosUsuario
     (id, idEjercicio, idUsuario, minutos, fecha)
