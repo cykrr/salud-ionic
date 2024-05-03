@@ -28,3 +28,7 @@ yarn-error.log*
 # Optional eslint cache
 .eslintcache
 src/output.css
+**/__pycache__/**
+**/*.pyc
+**/*.pyo
+**/*.pyd

@@ -11,7 +11,7 @@ import { useRef } from 'react';
 export default function Register() {
     const formRef = useRef<HTMLFormElement>(null)
     const history = useHistory()
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const user = formRef.current?.elements['user'].value
         const rut = formRef.current?.elements['rut'].value
@@ -22,15 +22,6 @@ export default function Register() {
         const confirm_password = formRef.current?.elements['confirm_password'].value
         const region = formRef.current?.elements['region'].value
         const comuna = formRef.current?.elements['comuna'].value
-        console.log("Region: " + region)
-        console.log("Comuna: " + comuna)
-        console.log("Edad: " + edad)
-        console.log("Genero: " + genero)
-        console.log("Correo: " + correo)
-        console.log("Contraseña: " +   password)
-        console.log("Confirmar contraseña: " + confirm_password)
-        console.log("Usuario: " + user)
-        console.log("RUT: " + rut)
         if (user.length < 5) {
             alert("El usuario debe tener a lo menos 5 caracteres")
         } else if (password !== confirm_password) {
@@ -48,8 +39,33 @@ export default function Register() {
         } else if (correo.indexOf('@') === -1 || correo.indexOf('.') === -1) {
             alert("El correo no es válido")
         } else {
-            alert("Registro exitoso")
-            history.push("/terms_and_conditions")
+            let response = await fetch('http://localhost:5000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    user: user,
+                    rut: rut,
+                    edad: edad,
+                    genero: genero,
+                    correo: correo,
+                    password: password,
+                    confirm_password: confirm_password,
+                    region: region,
+                    comuna: comuna
+                })
+            
+            })
+            if (response.status !== 200) {
+                let json = await response.json()
+                alert(json.error)
+            } else {
+                alert("Usuario registrado exitosamente")
+                history.push('/terms_and_conditions')
+            }
+                
+
         }
     }
     return (
@@ -68,9 +84,9 @@ export default function Register() {
                                     <SelectRegionComuna></SelectRegionComuna>
                                     <Input id="edad" className="w-full" inputType="number" placeholder="Edad"></Input>
                                     <Select id="genero" className="w-full">
-                                        <option value="male">Masculino</option>
-                                        <option value="female">Femenino</option>
-                                        <option value="other">Otro</option>
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                        <option value="O">Otro</option>
                                     </Select>
                                     <Input id="correo" placeholder="Correo" className="w-full"></Input>
                                     <Input id="password" inputType="password" placeholder="Contraseña" className="w-full"></Input>
