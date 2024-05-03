@@ -27,10 +27,10 @@ function get_regions(data: RegionData) {
 function get_comunas(data: RegionData|null, region: number) {
     if (data == null ) 
         return (<option>Cargando</option>)
-    else if (region == null) return (<option>Comuna</option>)
+    else if (region == null) return (<option value={0}>Comuna</option>)
 
     else if (region != 0) return data.regiones[region-1].comunas.sort().map((comuna: string, index: number) => {
-        return <option key={index} value={index}>{comuna}</option>
+        return <option key={index+1} value={index+1}>{comuna}</option>
     })
 
 }

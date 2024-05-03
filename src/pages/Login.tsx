@@ -5,39 +5,44 @@ import LinkButton from '../components/LinkButton';
 import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router';
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRouterLink } from '@ionic/react';
+import { IonContent, IonPage, IonAlert } from '@ionic/react';
+
+
 export default function Login() {
     const formRef = useRef<HTMLFormElement>(null)
-    const [warning, setWarning] = useState<React.ReactNode>(null)
     const history = useHistory()
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
 
     function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const user: string = formRef.current?.elements["user"].value
         const password: string = formRef.current?.elements["password"].value
-        let warnings = []
-        if (user === "") warnings.push(<p key="user_empty" className="text-red-500">Por favor ingrese su Usuario</p>)
-        if (password === "") warnings.push(<p key="pass_empty" className="text-red-500">Por favor ingrese su Contraseña</p>)
-        if (password.length < 8 && password !== "") warnings.push(<p key="pass_empty" className="text-red-500">Su contraseña debe tener al menos 8 caracteres.</p>)
-        else if (password.length > 8 && user.length > 0) {
+
+        if (user.trim() === "") {
+            setAlertMessage("Por favor, ingrese su usuario")
+        }  
+        else if (password.trim() === "") {
+            setAlertMessage("Por favor, ingrese su contraseña")
+        }
+        else if (password.length < 8) {
+            setAlertMessage("Su contraseña debe tener al menos 8 caracteres.")
+        }
+        else {
             // Redirect to href="/home" with React Router
             console.log("Redirecting to /menu")
             history.push("/tabs") 
-            
         }
-        setWarning(warnings)
 
+        setShowAlert(true);
     }
 
     return (
         <IonPage>
             <IonContent>
                 <div className="flex w-full h-full flex-col">
-                    <div id="login" className="flex flex-col justify-center items-center p-20 m-auto">
+                    <div id="login" className="flex flex-col justify-center items-center p-20 m-auto gap-10">
                         <h1 className="text-xl text-bold">Bienvenido</h1>
-                        <div className="p-10">
-                            {warning}
-                        </div>
                         <form ref={formRef} id="login" onSubmit={handleLogin}>
                             <div className="flex flex-col gap-10 items-center">
                                 <div className="flex flex-col">
@@ -48,6 +53,13 @@ export default function Login() {
                                     <Button btnType="submit">
                                         Ingresar
                                     </Button>
+                                    <IonAlert
+                                        isOpen={showAlert}
+                                        onDidDismiss={() => setShowAlert(false)}
+                                        header={'Error'}
+                                        message={alertMessage}
+                                        buttons={['OK']}
+                                    />
                                     <LinkButton href="/signup">Registrarse</LinkButton>
                                 </div>
                             </div>
