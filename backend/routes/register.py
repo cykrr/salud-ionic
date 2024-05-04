@@ -1,6 +1,7 @@
 
 from flask import Blueprint, request, jsonify
 from app import query, get_region_data, get_db
+from responses import *
 
 PASSWORD_LENGTH = 5
 
@@ -19,49 +20,52 @@ def register():
     region = request.form.get('region')
     comuna = request.form.get('comuna')
     if not user:
-        return jsonify({'error': 'usuario es requerido'}), 400
+        return not_found_error("Usuario es requerido")
     if not rut:
-        return jsonify({'error': 'rut es requerido'}), 400
+        return not_found_error("rut es requerido")
     if not edad:
-        return jsonify({'error': 'edad es requerida'}), 400
+        return not_found_error("edad es requerida")
     if not genero:
-        return jsonify({'error': 'género es requerido'}), 400
+        return not_found_error("género es requerido")
     if not correo:
-        return jsonify({'error': 'correo es requerido'}), 400
+        return not_found_error("correo es requerido")
     if not password:
-        return jsonify({'error': 'contraseña es requerida'}), 400
+        return not_found_error("contraseña es requerida")
     if not confirm_password:
-        return jsonify({'error': 'confirmar contraseña es requerido'}), 400
+        return not_found_error("confirmar contraseña es requerido")
     if not region:
-        return jsonify({'error': 'región es requerida'}), 400
+        return not_found_error("región es requerida")
     if not comuna:
-        return jsonify({'error': 'comuna es requerida'}), 400
+        return not_found_error("comuna es requerida")
+
     if not validate_email(correo):
-        return jsonify({'error': 'Correo inválido'}), 400
+        return error('Correo inválido')
     if not validate_password(password, confirm_password):
-        return jsonify({'error': 'Contraseña inválida'}), 400
+        return error('Contraseña inválida')
     if not validate_name(user):
-        return jsonify({'error': 'Nombre inválido'}), 400
+        return error('Nombre inválido')
     if not validate_age(edad):
-        return jsonify({'error': 'Edad inválida'}), 400
+        return error('Edad inválida')
     if not validate_rut(rut):
-        return jsonify({'error': 'RUT inválido'}), 400
+        return error('RUT inválido')
     if not validate_region(region):
-        return jsonify({'error': 'Región inválida'}), 400
+        return error('Región inválida')
     if not validate_comuna(region, comuna):
-        return jsonify({'error': 'Comuna inválida'}), 400
+        return error('Comuna inválida')
     if user_exists(user):
-        return jsonify({'error': 'Usuario ya existe'}), 400
+        return error('Usuario ya existe')
     if email_exists(correo):
-        return jsonify({'error': 'Correo ya existe'}), 400
+        return error('Correo ya existe')
     rut = rut.replace('.', '')
     try:
-        query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, correo, clave) VALUES \
+        ret = query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, correo, clave) VALUES \
                                       ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{correo}', '{password}')")
+        ret = query(f"SELECT idUsuario FROM usuarios WHERE correo='{correo}'")
+        
     except Exception as e:
         print(e)
-        return jsonify({'error': 'Database error'}), 500
-    return jsonify({'success': 'Registrado correctamente'}), 200
+        return jsonify({'error': 'Database error'}), 500 
+    return jsonify({'success': True, 'message': "Registrado correctamente", 'idUsuario': ret[0]['idUsuario']}), 200
 
     print (user, rut, edad, genero, correo, password, confirm_password, region, comuna)
 
@@ -93,6 +97,13 @@ def validate_age(age: str):
     except ValueError:
         return False
     return age >= 0 and age <= 150
+
+def validate_genre(genre: str):
+    try:
+        genre = int(genre)
+    except ValueError:
+        return False
+    return genre in [1, 2, 3]
 
 def dgv(rut: str):
     reversed_digits = rut[::-1]
@@ -139,14 +150,15 @@ def validate_comuna(region: str, comuna: str):
     print(region, comuna)
     try:
         r = int(region)-1
-        c = int(comuna)+1
+        c = int(comuna)-1
     except:
         return False
     regiones: list[dict] = get_region_data()['regiones']
     region = regiones[r]
-    comunas_region = region['comunas']
+    comunas_region = sorted(region['comunas'])
     len_comunas = len(comunas_region)
-    print(f"len_comunas[{region['comunas'][r]}]", len_comunas)
+    print(comunas_region[c])
+    # print(f"len_comunas[{region['comunas'][c]}]", len_comunas)
     if c < 0 or c >= len_comunas:
         return False
     return True

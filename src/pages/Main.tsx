@@ -8,24 +8,24 @@ import {
   IonTitle,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import React, { useEffect } from 'react';
+import MainTabRoot from './MainTabRoot';
+import Login from './Login';
+
+import { UserContext } from '../App';
+
 export default function Main() {
+    const { userData, setUserData } = React.useContext(UserContext);
+    const [component, setComponent] = React.useState(<Login />);
+    useEffect(() => {
+        setComponent(userData.idUsuario ? <MainTabRoot /> : <Login />);
+    }, [userData]);
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Main</IonTitle>
-                </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonButton routerLink="/login">Login</IonButton>
-                <IonButton routerLink="/signup">Signup</IonButton>
-                <IonButton routerLink="/terms_and_conditions">Terms and Conditions</IonButton>
-                <IonButton routerLink="/tabs">Menu</IonButton>
-                <IonButton routerLink="/tabs/food">Food</IonButton>
-                <IonButton routerLink="/tabs/exercise">Exercise</IonButton>
-                <IonButton routerLink="/food_add">Add Food</IonButton>
-                <IonButton routerLink="/exercise_add">Add Exercise</IonButton>
-                <IonButton routerLink="/food_create">Create Food</IonButton>
+                {userData.idUsuario ? <Redirect to ="/tabs" /> : <Redirect to="/login" />}
             </IonContent>
         </IonPage>
     );

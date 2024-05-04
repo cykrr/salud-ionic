@@ -5,9 +5,11 @@ import Select from '../components/Select';
 import SelectRegionComuna from '../components/SelectRegionComuna';
 import RutInput from '../components/RutInput';
 
-import { useHistory } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
+
+import { UserContext } from '../App';
 
 
 export default function Register() {
@@ -15,6 +17,8 @@ export default function Register() {
     const history = useHistory()
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
+    const {userData, setUserData} = useContext(UserContext);
+
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -72,10 +76,13 @@ export default function Register() {
             })
             if (response.status !== 200) {
                 let json = await response.json()
-                alert(json.error)
+                setAlertMessage(json.error)
+                setShowAlert(true)
             } else {
-                alert("Usuario registrado exitosamente")
-                history.push('/terms_and_conditions')
+                let json = await response.json()
+                setUserData({idUsuario: json.idUsuario})
+                setAlertMessage("Usuario registrado exitosamente")
+                setShowAlert(true)
             }
                 
             return;
@@ -87,6 +94,7 @@ export default function Register() {
     return (
         <IonPage>
             <IonContent>
+                { userData.idUsuario && !showAlert ? <Redirect to="/terms_and_conditions" /> : null}
                 <div className="flex w-full h-full">
                     <div className='flex flex-col items-center gap-6 p-20 m-auto'>
                         <p className="text-xl font-bold">Registro</p>
@@ -115,7 +123,7 @@ export default function Register() {
                                 <IonAlert
                                     isOpen={showAlert}
                                     onDidDismiss={() => setShowAlert(false)}
-                                    header={'Error'}
+                                    header={userData.idUsuario ? 'Éxito' : 'Error'}
                                     message={alertMessage}
                                     buttons={['OK']}
                                 />
