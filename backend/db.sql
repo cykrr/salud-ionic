@@ -129,9 +129,9 @@ VALUES
 INSERT IGNORE INTO alimentosUsuario
     (id, idAlimento, idUsuario, cantidad, fecha)
 VALUES
-    (1, 5, 1, 150, '2024-05-01'),
-    (2, 28, 1, 200, '2024-05-01'),
-    (3, 18, 1, 150, '2024-05-02'),
+    (1, 5, 1, 150, CURDATE()),
+    (2, 28, 1, 200, CURDATE()),
+    (3, 18, 1, 150, CURDATE()),
     (4, 12, 2, 200, '2024-05-01'),
     (5, 13, 2, 100, '2024-05-01');
 
