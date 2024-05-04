@@ -28,14 +28,12 @@ def get_region_data():
 from flask import Flask
 from flask_cors import CORS
 
-import routes.food_add
-import routes.exercise_add
-import routes.user_food
-import routes.register
+from routes import *
 
 app = Flask(__name__)
+app.register_blueprint(food_add.bp)
+app.register_blueprint(exercise_add.bp)
+app.register_blueprint(user_food.bp)
+app.register_blueprint(register.bp)
+app.register_blueprint(login.bp)
 CORS(app)
-app.register_blueprint(routes.food_add.bp)
-app.register_blueprint(routes.exercise_add.bp)
-app.register_blueprint(routes.user_food.bp)
-app.register_blueprint(routes.register.bp)
