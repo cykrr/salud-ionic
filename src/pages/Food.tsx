@@ -1,9 +1,47 @@
-import { IonHeader, IonPage, IonContent, IonRouterOutlet } from "@ionic/react";
+import { IonHeader, IonPage, IonContent, IonRouterOutlet, IonAlert } from "@ionic/react";
 import {NavBar, LinkButton, Button} from "../components";
 import AddFood from "./AddFood";
 import { Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Food() {
+    const URL = "http://localhost:5000/user/food/consumption?id=1"
+    const [data, setData] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(URL);
+                const jsonData = await response.json();
+
+                if (!response.ok || (jsonData.hasOwnProperty('success') && !jsonData.success)) {
+                    if (jsonData.hasOwnProperty('success') && !jsonData.success) {
+                        console.log(jsonData['message']);
+                    }
+                    throw Error();
+                }
+
+                setData(jsonData)
+            } catch(e) {
+                setData([]);
+                setShowAlert(true);
+                setAlertMessage("¡No pudimos cargar tus datos! Por favor inténtalo más tarde.")
+            }
+        };
+    
+        fetchData();
+    }, []);
+
+    function calcularTotal(data: any[]) {
+        var suma = 0
+        data.map((item: any) => {
+            suma += item['calorias']
+        })
+        return suma;
+    }
+    
     return (
         <IonPage>
             <IonContent>
@@ -19,38 +57,31 @@ export default function Food() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="border p-2">Arroz</td>
-                                    <td className="border p-2">200 g.</td>
-                                    <td className="border p-2">200 cal.</td>
-                                </tr>
-                                <tr>
-                                    <td className="border p-2">Jugo</td>
-                                    <td className="border p-2">250 ml.</td>
-                                    <td className="border p-2">170 cal.</td>
-                                </tr>
-                                <tr>
-                                    <td className="border p-2">Pan integral</td>
-                                    <td className="border p-2">60 g.</td>
-                                    <td className="border p-2">140 cal.</td>
-                                </tr>
-                                <tr>
-                                    <td className="border p-2">Lechuga</td>
-                                    <td className="border p-2">150 g.</td>
-                                    <td className="border p-2">22 cal.</td>
-                                </tr>
-                                <tr>
-                                    <td className="border p-2">Manzana</td>
-                                    <td className="border p-2">200 g.</td>
-                                    <td className="border p-2">60 cal.</td>
-                                </tr>
-                                <tr>
-                                    <td className="p-2"></td>
-                                    <td className="p-2">Total: </td>
-                                    <td className="p-2 text-red-500">592 cal.</td>
-                                </tr>
+                                {data && (
+                                    <>
+                                        {data.map((item, index) => (
+                                            <tr key={index}>
+                                                <td className="border p-2">{item['nombre']}</td>
+                                                <td className="border p-2">{item['cantidad'] + " " + item['unidad']}</td>
+                                                <td className="border p-2">{item['calorias']} cal.</td>
+                                            </tr>
+                                        ))}
+                                        <tr>
+                                            <td className="p-2"></td>
+                                            <td className="p-2">Total: </td>
+                                            <td className="p-2 text-red-500">{calcularTotal(data) + " cal."}</td>
+                                        </tr>
+                                    </>
+                                )}
                             </tbody>
                         </table>
+                        <IonAlert
+                            isOpen={showAlert}
+                            onDidDismiss={() => setShowAlert(false)}
+                            header={'Error'}
+                            message={alertMessage}
+                            buttons={['OK']}
+                        />
                         <div className="flex flex-col gap-3">
                             <p>Consumo recomendado: 1200 cal.</p>
                             <p className="italic">No has alcanzado el consumo mínimo recomendado.</p>
@@ -59,7 +90,6 @@ export default function Food() {
                     </div>
                 </div>
             </IonContent>
-
         </IonPage>
     )
 }
