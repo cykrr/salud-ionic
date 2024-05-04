@@ -1,6 +1,7 @@
 import {
-    IonApp,
-    setupIonicReact, } from '@ionic/react';
+  IonApp,
+  setupIonicReact,
+} from '@ionic/react';
 
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
@@ -9,12 +10,12 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import {
   Main,
   Login,
-  Register, 
+  Register,
   TermsConditions,
   AddExercise,
   AddFood,
-  CreateFood, 
-  } from './pages';
+  CreateFood,
+} from './pages';
 
 
 
@@ -37,36 +38,45 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './global.css';
+import React from 'react';
 import MainTabRoot from './pages/MainTabRoot';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-        <Switch>
-          <Route exact path="/"
-            component={Main} />
-          <Route path="/login"
-            component={Login} />
-          <Route path="/signup"
-            component={Register} />
-          <Route path="/terms_and_conditions"
-            component={TermsConditions} />
-          <Route path="/tabs"
-            render={() => <MainTabRoot />}/>
+export const UserContext = React.createContext({});
 
-          <Route path="/exercise_add">
-            <AddExercise/>
-          </Route>
-          <Route path="/food_add">
-            <AddFood/>
-          </Route>
-          <Route path="/food_create">
-            <CreateFood/>
-          </Route>
-        </Switch>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  const [userData, setUserData] = React.useState({ idUsuario: 0 });
+
+  return (
+    <IonApp>
+      <UserContext.Provider value={{ userData, setUserData }}>
+        <IonReactRouter>
+          <Switch>
+            <Route exact path="/"
+              component={Main} />
+            <Route path="/login"
+              component={Login} />
+            <Route path="/signup"
+              component={Register} />
+            <Route path="/terms_and_conditions"
+              component={TermsConditions} />
+            <Route path="/tabs"
+              render={() => <MainTabRoot />} />
+
+            <Route path="/exercise_add">
+              <AddExercise />
+            </Route>
+            <Route path="/food_add">
+              <AddFood />
+            </Route>
+            <Route path="/food_create">
+              <CreateFood />
+            </Route>
+          </Switch>
+        </IonReactRouter>
+      </UserContext.Provider>
+    </IonApp>
+  );
+}
 export default App;

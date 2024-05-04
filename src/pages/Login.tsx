@@ -2,10 +2,12 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import LinkButton from '../components/LinkButton';
 
-import React, { useState, useRef } from 'react';
-import { useHistory } from 'react-router';
+import React, { useState, useRef, useContext } from 'react';
+import { Redirect, useHistory } from 'react-router';
 
 import { IonContent, IonPage, IonAlert } from '@ionic/react';
+
+import { UserContext } from '../App';
 
 
 export default function Login() {
@@ -13,6 +15,8 @@ export default function Login() {
     const history = useHistory()
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
+    const {userData, setUserData} = useContext(UserContext);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -30,16 +34,39 @@ export default function Login() {
         }
         else {
             // Redirect to href="/home" with React Router
-            console.log("Redirecting to /menu")
-            history.push("/tabs") 
+            const res = fetch('http://localhost:5000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'user': user,
+                    'password': password
+                })
+            }). then(response => response.json()).then(data => {
+                console.log(data.success)
+                if (data.success == true) {
+                    setAlertMessage("Inicio de sesión exitoso")
+                    console.log("success")
+                    setShowAlert(true)
+                    setIsLoggedIn(true)
+                    setUserData({idUsuario: data.user})
+
+                } else {
+                    setAlertMessage("Usuario o contraseña incorrectos")
+                }
+
+            }) 
         }
 
         setShowAlert(true);
+        // history.push("/")
     }
 
     return (
         <IonPage>
             <IonContent>
+                {(isLoggedIn  && !showAlert) ? <Redirect to="/" /> : null}
                 <div className="flex w-full h-full flex-col">
                     <div id="login" className="flex flex-col justify-center items-center p-20 m-auto gap-10">
                         <h1 className="text-xl text-bold">Bienvenido</h1>
@@ -56,10 +83,12 @@ export default function Login() {
                                     <IonAlert
                                         isOpen={showAlert}
                                         onDidDismiss={() => setShowAlert(false)}
-                                        header={'Error'}
+                                        header={isLoggedIn? "Éxito" : 'Error'}
                                         message={alertMessage}
                                         buttons={['OK']}
-                                    />
+                                    >
+
+                                    </IonAlert>
                                     <LinkButton href="/signup">Registrarse</LinkButton>
                                 </div>
                             </div>
