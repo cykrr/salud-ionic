@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from app import query
 from responses import *
 from constants import FOOD_UNITS
+from flask_cors import cross_origin
 
 bp = Blueprint('user_food', __name__)
 
@@ -35,7 +36,9 @@ def get_food():
     return jsonify(response)
 
 
+
 @bp.route('/user/food/consumption', methods=['GET'])
+@cross_origin()
 def add_food():
     id = request.args.get('id')
     
@@ -57,7 +60,7 @@ def add_food():
     for food in data:
         response.append({
             "nombre": food['nombre'],
-            "calorias": food['calorias'] * food['cantidad'] / 100,
+            "calorias": int(food['calorias'] * food['cantidad'] / 100),
             "cantidad": food['cantidad'],
             "unidad": FOOD_UNITS[food['unidad']]
         })
