@@ -33,6 +33,7 @@ from routes import *
 app = Flask(__name__)
 app.register_blueprint(food_add.bp)
 app.register_blueprint(exercise_add.bp)
+app.register_blueprint(user_exercise.bp)
 app.register_blueprint(user_food.bp)
 app.register_blueprint(register.bp)
 app.register_blueprint(login.bp)
