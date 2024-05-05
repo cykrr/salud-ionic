@@ -86,9 +86,7 @@ export default function Login() {
                                         header={isLoggedIn? "Éxito" : 'Error'}
                                         message={alertMessage}
                                         buttons={['OK']}
-                                    >
-
-                                    </IonAlert>
+                                    />
                                     <LinkButton href="/signup">Registrarse</LinkButton>
                                 </div>
                             </div>

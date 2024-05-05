@@ -9,19 +9,21 @@ bp = Blueprint('user_food', __name__)
 @bp.route('/user/food/', methods=['GET'])
 def get_food():
     id = request.args.get('id')
-    print("ID:",id)
+
     if not id:
         return not_found_error('id')
+    
     try: 
         id = int(id)
     except ValueError:
         return not_int_error('id')
+    
     try:
         data = query(f"SELECT idAlimento, nombre, unidad FROM alimentos WHERE idUsuario={id} OR idUsuario IS NULL")
-        print(data)
     except Exception as e:
         print(e)
         return bd_error()
+    
     response = []
     for food in data:
         try: 
@@ -32,7 +34,7 @@ def get_food():
             })
         except:
             print("Error en el for")
-    print(response)
+
     return jsonify(response)
 
 
