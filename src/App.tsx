@@ -4,7 +4,7 @@ import {
 } from '@ionic/react';
 
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 
 import {
@@ -41,9 +41,15 @@ import './global.css';
 import React from 'react';
 import MainTabRoot from './pages/MainTabRoot';
 
+
 setupIonicReact();
 
-export const UserContext = React.createContext({});
+interface ContextValue {
+  userData: {idUsuario: number};
+  setUserData: React.Dispatch<React.SetStateAction<{idUsuario: number}>>;
+}
+
+export const UserContext = React.createContext<ContextValue | undefined>(undefined);
 
 const App: React.FC = () => {
   const [userData, setUserData] = React.useState({ idUsuario: 0 });

@@ -3,7 +3,7 @@ import Button from '../components/Button';
 import LinkButton from '../components/LinkButton';
 
 import React, { useState, useRef, useContext } from 'react';
-import { Redirect, useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 
 import { IonContent, IonPage, IonAlert } from '@ionic/react';
 
@@ -12,16 +12,15 @@ import { UserContext } from '../App';
 
 export default function Login() {
     const formRef = useRef<HTMLFormElement>(null)
-    const history = useHistory()
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
-    const {userData, setUserData} = useContext(UserContext);
+    const {userData, setUserData} = useContext(UserContext)!;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    
     function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        const user: string = formRef.current?.elements["user"].value
-        const password: string = formRef.current?.elements["password"].value
+        const user = formRef.current?.querySelector<HTMLInputElement>("#user")!.value!
+        const password = formRef.current?.querySelector<HTMLInputElement>("#password")!.value!
 
         if (user.trim() === "") {
             setAlertMessage("Por favor, ingrese su usuario")
@@ -33,8 +32,7 @@ export default function Login() {
             setAlertMessage("Su contraseña debe tener al menos 8 caracteres.")
         }
         else {
-            // Redirect to href="/home" with React Router
-            const res = fetch('http://localhost:5000/login', {
+            fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -44,29 +42,28 @@ export default function Login() {
                     'password': password
                 })
             }). then(response => response.json()).then(data => {
-                console.log(data.success)
+                setShowAlert(true)
+                
                 if (data.success == true) {
                     setAlertMessage("Inicio de sesión exitoso")
-                    console.log("success")
-                    setShowAlert(true)
                     setIsLoggedIn(true)
                     setUserData({idUsuario: data.user})
 
                 } else {
                     setAlertMessage("Usuario o contraseña incorrectos")
                 }
+            })
 
-            }) 
+            return;
         }
 
         setShowAlert(true);
-        // history.push("/")
     }
 
     return (
         <IonPage>
             <IonContent>
-                {(isLoggedIn  && !showAlert) ? <Redirect to="/" /> : null}
+                {(isLoggedIn && !showAlert) ? <Redirect to="/" /> : null}
                 <div className="flex w-full h-full flex-col">
                     <div id="login" className="flex flex-col justify-center items-center p-20 m-auto gap-10">
                         <h1 className="text-xl text-bold">Bienvenido</h1>
