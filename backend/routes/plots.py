@@ -1,7 +1,10 @@
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 from flask import Blueprint, Response, request, jsonify
 from app import query
 from responses import *
-import matplotlib.pyplot as plt
 from datetime import date, timedelta
 from io import BytesIO
 
@@ -31,13 +34,14 @@ def create_plot(data):
     plt.xticks(rotation=45)
 
     img = BytesIO()
-    plt.savefig(img, format='png')
+    plt.savefig(img, format='png', bbox_inches='tight')
+    plt.clf()
     img.seek(0)
 
     return img
 
 
-@bp.route('/plots/food/get', methods=['GET'])
+@bp.route('/plot/food', methods=['GET'])
 def get_food_plot():
     idUsuario = request.args.get('id')
 
@@ -55,12 +59,12 @@ def get_food_plot():
         print(e)
         return bd_error()
     
-    img_food = create_plot(data)
+    img = create_plot(data)
 
-    return Response(img_food, mimetype='image/png')
+    return Response(img, mimetype='image/png')
 
 
-@bp.route('/plots/exercises/get', methods=['GET'])
+@bp.route('/plot/exercises', methods=['GET'])
 def get_exercise_plot():
     idUsuario = request.args.get('id')
 
@@ -78,6 +82,6 @@ def get_exercise_plot():
         print(e)
         return bd_error()
     
-    img_food = create_plot(data)
+    img = create_plot(data)
 
-    return Response(img_food, mimetype='image/png')
+    return Response(img, mimetype='image/png')

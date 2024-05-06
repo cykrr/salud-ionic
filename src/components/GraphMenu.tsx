@@ -1,11 +1,25 @@
-import { useState } from 'react';
-import graphFood from '../assets/grafico_alimentacion.png'
-import graphExercises from '../assets/grafico_ejercicios.png'
+import { useEffect, useState } from 'react';
 
 export default function MenuBar() {
     const IdBarFood = "barAlimentacion";
     const IdBarExercises = "barEjercicios";
     const [selectedItem, setSelectedItem] = useState<string>(IdBarFood);
+    const [graphFood, setGraphFood] = useState('');
+    const [graphExercises, setGraphExercises] = useState('');
+
+    async function loadGraph(url: string, callback: React.Dispatch<React.SetStateAction<string>>) {
+        const response = await fetch(url)   
+        if (response.ok) {
+            const blob = await response.blob();
+            callback(URL.createObjectURL(blob));
+        }
+    }
+
+    useEffect(() => {
+        loadGraph("http://localhost:5000/plot/food?id=1", setGraphFood)
+        loadGraph("http://localhost:5000/plot/exercises?id=1", setGraphExercises)
+    }, [])
+
 
     function BarItem({ id, barTitle } : { id: string, barTitle: string }) {
         return (
