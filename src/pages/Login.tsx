@@ -17,7 +17,7 @@ export default function Login() {
     const {userData, setUserData} = useContext(UserContext)!;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     
-    function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const user = formRef.current?.querySelector<HTMLInputElement>("#user")!.value!
         const password = formRef.current?.querySelector<HTMLInputElement>("#password")!.value!
@@ -32,7 +32,7 @@ export default function Login() {
             setAlertMessage("Su contraseña debe tener al menos 8 caracteres.")
         }
         else {
-            fetch('http://localhost:5000/login', {
+            await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -41,9 +41,7 @@ export default function Login() {
                     'user': user,
                     'password': password
                 })
-            }). then(response => response.json()).then(data => {
-                setShowAlert(true)
-                
+            }).then(response => response.json()).then(data => { 
                 if (data.success == true) {
                     setAlertMessage("Inicio de sesión exitoso")
                     setIsLoggedIn(true)
@@ -52,6 +50,10 @@ export default function Login() {
                 } else {
                     setAlertMessage("Usuario o contraseña incorrectos")
                 }
+            }).catch((e) => {
+                setAlertMessage("Ocurrió un error con la base de datos.")
+            }).finally(() => {
+                setShowAlert(true)
             })
 
             return;

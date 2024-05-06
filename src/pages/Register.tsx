@@ -62,7 +62,7 @@ export default function Register() {
         } else if (password.length < 8) {
             setAlertMessage("La contraseña debe tener al menos 8 caracteres")
         } else {
-            let response = await fetch('http://localhost:5000/register', {
+            await fetch('http://localhost:5000/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -79,17 +79,19 @@ export default function Register() {
                     comuna: comunaStr
                 })
             
+            }).then(async response => {
+                let json = await response.json()
+                if(response.status == 200) {
+                    setUserData({idUsuario: json.idUsuario})
+                    setAlertMessage("Usuario registrado exitosamente")
+                } else {
+                    setAlertMessage(json.message)
+                }
+            }).catch((e) => {
+                setAlertMessage("Ocurrió un error con la base de datos.")
+            }).finally(() => {
+                setShowAlert(true)
             })
-            if (response.status != 200) {
-                let json = await response.json()
-                setAlertMessage(json.message)
-                setShowAlert(true)
-            } else {
-                let json = await response.json()
-                setUserData({idUsuario: json.idUsuario})
-                setAlertMessage("Usuario registrado exitosamente")
-                setShowAlert(true)
-            }
                 
             return;
         }

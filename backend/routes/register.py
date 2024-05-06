@@ -147,7 +147,6 @@ def validate_region(region: str):
 def validate_comuna(region: str, comuna: str):
     r = -1
     c = -1
-    print(region, comuna)
     try:
         r = int(region)-1
         c = int(comuna)-1
@@ -157,7 +156,6 @@ def validate_comuna(region: str, comuna: str):
     region = regiones[r]
     comunas_region = sorted(region['comunas'])
     len_comunas = len(comunas_region)
-    print(comunas_region[c])
     # print(f"len_comunas[{region['comunas'][c]}]", len_comunas)
     if c < 0 or c >= len_comunas:
         return False
