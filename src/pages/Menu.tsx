@@ -1,10 +1,23 @@
 import Semicircle from '../components/Semicircle';
-import NavBar from '../components/NavBar';
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRouterLink } from '@ionic/react';
+import { IonContent, IonPage } from '@ionic/react';
 import GraphMenu from '../components/GraphMenu';
+import { useEffect, useState } from 'react';
 
 export default function Menu() {
+    const [score, setScore] = useState(0);
+
+    useEffect(() => {
+        (async () => {
+            const response = await fetch('http://localhost:5000/user/health?id=1')
+            const data = await response.json();
+
+            if (response.ok) {
+                setScore(data.score)
+            }
+        })()
+    }, []);
+
     return (
         <IonPage>
             <IonContent>
@@ -18,7 +31,7 @@ export default function Menu() {
                                     <hr/>
                                 </div>
                                 <div className="flex justify-center">
-                                    <Semicircle value={100}/>
+                                    <Semicircle value={score}/>
                                 </div>
                             </div>
                         </div>

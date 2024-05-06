@@ -102,7 +102,7 @@ def get_health():
         if abs(real_calories - rec_calories) < 200:
             food_score[i] = 1
         else:
-            food_score[i] = max(1 - (abs(real_calories - rec_calories) - 200) / 1000, 0)
+            food_score[i] = max(1 - (abs(real_calories - rec_calories) - 200) / 1500, 0)
 
         real_minutes = exercise_data[i]['totalMinutos']
         if (real_minutes >= rec_minutes):
@@ -113,7 +113,7 @@ def get_health():
     food_score_prom = sum(food_score) / len(food_score)
     exercise_score_prom = sum(exercise_score) / len(exercise_score)
 
-    final_score = 0.7 * food_score_prom + 0.3 * exercise_score_prom
+    final_score = 70 * food_score_prom + 30 * exercise_score_prom
     return jsonify({
-        'score': final_score
+        'score': int(final_score)
     })
