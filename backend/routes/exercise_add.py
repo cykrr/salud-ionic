@@ -5,7 +5,7 @@ from responses import *
 bp = Blueprint('exercise_add', __name__)
 
 
-@bp.route('/exercises/add', methods=['POST'])
+@bp.route('/exercise/add', methods=['POST'])
 def add_food():
     idEjercicio = request.form.get('idEjercicio')
     idUsuario = request.form.get('idUsuario')

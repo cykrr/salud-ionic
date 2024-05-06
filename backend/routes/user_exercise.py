@@ -1,13 +1,14 @@
 from flask import Blueprint, request, jsonify
 from app import query
 from responses import *
+from flask_cors import cross_origin
 
 bp = Blueprint('user_exercise', __name__)
 
-
 @bp.route('/user/exercise', methods=['GET'])
-def user_exercise():
+def get_exercise():
     id = request.args.get('id')
+    
     if not id:
         return not_found_error('id')
     
@@ -23,11 +24,11 @@ def user_exercise():
         return bd_error()
     
     response = []
-    for exercise in data:
+    for food in data:
         response.append({
-            "nombre": exercise['nombre'],
-            "calorias": exercise['calorias'] * exercise['minutos'] / 60,
-            "minutos": exercise['minutos']
+            "nombre": food['nombre'],
+            "calorias": int(food['calorias'] * food['minutos'] / 60),
+            "minutos": food['minutos']
         })
 
     return jsonify(response)

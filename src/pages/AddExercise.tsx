@@ -9,7 +9,7 @@ import { Redirect } from 'react-router';
 import { data } from 'autoprefixer';
 
     interface Exercise {
-        id: number;
+        idEjercicio: number;
         nombre: string;
     }
 
@@ -30,28 +30,27 @@ export default function AddExercise() {
             setExerciseData(data);
         }
         fetchData();
-        console.log(data)
     }, [userData.idUsuario]);
 
     function renderExercise() {
         if (!exerciseData) return null;
         return exerciseData.map((exercise: Exercise) => {
-            return <option key={exercise.id} value={exercise.id}>{exercise.nombre}</option>        
+            return <option key={exercise.idEjercicio} value={exercise.idEjercicio}>{exercise.nombre}</option>        
         })
     }
 
     function submitForm(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        var idEjercicio = parseInt(formRef.current!.querySelector<HTMLSelectElement>("#selectExercise")?.value ?? "0", 10);
-        var minutos = parseInt(formRef.current!.querySelector<HTMLInputElement>("#inputMinutos")?.value ?? "0", 10);
+        var idEjercicio = parseInt(formRef.current!.querySelector<HTMLSelectElement>("#selectExercise")?.value!);
+        var minutos = parseInt(formRef.current!.querySelector<HTMLInputElement>("#inputMinutos")?.value!);
         
         if (idEjercicio == 0) {
             setAlertMessage("Por favor, selecciona un ejercicio")
         } else if (minutos == 0) {
             setAlertMessage("Por favor, ingresa los minutos")
         } else {
-            fetch('http://localhost:5000/exercises/add', {
+            fetch('http://localhost:5000/exercise/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -59,7 +58,7 @@ export default function AddExercise() {
                 body: new URLSearchParams({
                     'idUsuario': userData.idUsuario,
                     'idEjercicio': idEjercicio.toString(),
-                    'Minutos': minutos.toString()
+                    'minutos': minutos.toString()
                 })
             }).then(response => response.json()).then(data => {
                 if (data.success == true) {
@@ -67,6 +66,7 @@ export default function AddExercise() {
                     setShowAlert(true)
                     setFormSubmitted(true)
                 } else {
+                    console.log(data)
                     setAlertMessage("Ocurrió un error al intentar registrar el ejercicio. Inténtalo más tarde")
                 }
             }) 
