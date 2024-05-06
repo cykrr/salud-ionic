@@ -63,13 +63,14 @@ export default function AddExercise() {
             }).then(response => response.json()).then(data => {
                 if (data.success == true) {
                     setAlertMessage("Ejercicio registrado con éxito")
-                    setShowAlert(true)
                     setFormSubmitted(true)
                 } else {
-                    console.log(data)
                     setAlertMessage("Ocurrió un error al intentar registrar el ejercicio. Inténtalo más tarde")
                 }
-            }) 
+            }).finally(()=>{
+                setShowAlert(true)
+            })
+            return 
         }
 
         setShowAlert(true)
@@ -100,7 +101,7 @@ export default function AddExercise() {
                             <IonAlert
                                 isOpen={showAlert}
                                 onDidDismiss={() => setShowAlert(false)}
-                                header="Error"
+                                header={formSubmitted? "Éxito" : 'Error'}
                                 message={alertMessage}
                                 buttons={['OK']}
                             />
