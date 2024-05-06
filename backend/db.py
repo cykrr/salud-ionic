@@ -44,5 +44,5 @@ def do_query(db: MySQLConnectionPool, query: str):
         return result
     
     # Other queries
-    db.commit()
+    connection.commit()
     connection.close()
