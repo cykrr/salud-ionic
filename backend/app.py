@@ -1,4 +1,4 @@
-import requests, json
+import requests
 from db import *
 
 db = None
@@ -42,3 +42,5 @@ app.register_blueprint(login.bp)
 app.register_blueprint(plots.bp)
 app.register_blueprint(health.bp)
 CORS(app)
+
+get_db()

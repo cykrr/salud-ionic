@@ -1,15 +1,18 @@
-import mysql.connector
-from mysql.connector import MySQLConnection
+from mysql.connector.pooling import MySQLConnectionPool
+import mysql.connector.errors
 
 def create_connection():
-    connection = mysql.connector.connect(
+    connection_pool = MySQLConnectionPool(
+        pool_size=5,
+        pool_reset_session=True,
         host="localhost",
         user="root",
         password="",
     )
-    return connection
+    return connection_pool
 
-def create_db(connection: MySQLConnection):
+def create_db(connection_pool: MySQLConnectionPool):
+    connection = connection_pool.get_connection()
     with open('db.sql', 'r') as file:
         script = file.read()
 
@@ -28,14 +31,18 @@ def create_db(connection: MySQLConnection):
     except Exception as e:
         print(e)
 
-def do_query(db: MySQLConnection, query: str):
-    cursor = db.cursor(dictionary=True)
+def do_query(db: MySQLConnectionPool, query: str):
+    connection = db.get_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("USE app_saludable")
     cursor.execute(query)
 
     # Select query
     if cursor.description:
-        return cursor.fetchall()
+        result = cursor.fetchall()
+        connection.close()
+        return result
     
     # Other queries
     db.commit()
-    return None
+    connection.close()
