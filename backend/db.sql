@@ -132,18 +132,35 @@ VALUES
 INSERT IGNORE INTO alimentosUsuario
     (id, idAlimento, idUsuario, cantidad, fecha)
 VALUES
-    (1, 5, 1, 150, CURDATE()),
-    (2, 28, 1, 200, CURDATE()),
-    (3, 18, 1, 150, CURDATE()),
-    (4, 12, 2, 200, '2024-05-01'),
-    (5, 13, 2, 100, '2024-05-01'),
-    (6, 31, 1, 200, '2024-05-03');
+    (1, 5, 1, 350, CURDATE()),
+    (2, 28, 1, 500, CURDATE()),
+    (3, 18, 1, 450, CURDATE()),
+    (4, 19, 1, 550, DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
+    (5, 13, 1, 250, DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
+    (6, 22, 1, 750, DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
+    (7, 21, 1, 350, DATE_SUB(CURDATE(), INTERVAL 4 DAY)),
+    (8, 7, 1, 600, DATE_SUB(CURDATE(), INTERVAL 4 DAY)),
+    (9, 9, 1, 700, DATE_SUB(CURDATE(), INTERVAL 5 DAY)),
+    (10, 10, 1, 350, DATE_SUB(CURDATE(), INTERVAL 6 DAY)),
+    (11, 16, 1, 500, DATE_SUB(CURDATE(), INTERVAL 7 DAY)),
+    (12, 21, 1, 100, DATE_SUB(CURDATE(), INTERVAL 7 DAY)),
+    (13, 12, 2, 200, CURDATE()),
+    (14, 13, 2, 100, CURDATE());
 
 INSERT IGNORE INTO ejerciciosUsuario
     (id, idEjercicio, idUsuario, minutos, fecha)
 VALUES
-    (1, 8, 1, 60, '2024-05-01'),
-    (2, 12, 2, 30, '2024-05-01'),
-    (3, 14, 2, 30, '2024-05-02'),
-    (4, 7, 3, 20, '2024-05-01'),
-    (5, 22, 3, 45, '2024-05-03');
+    (1, 4, 1, 60, CURDATE()),
+    (2, 20, 1, 30, CURDATE()),
+    (3, 13, 1, 20, DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
+    (4, 12, 1, 40, DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
+    (5, 18, 1, 45, DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
+    (6, 20, 1, 30, DATE_SUB(CURDATE(), INTERVAL 4 DAY)),
+    (7, 7, 1, 35, DATE_SUB(CURDATE(), INTERVAL 4 DAY)),
+    (8, 1, 1, 20, DATE_SUB(CURDATE(), INTERVAL 5 DAY)),
+    (9, 23, 1, 15, DATE_SUB(CURDATE(), INTERVAL 6 DAY)),
+    (10, 21, 1, 30, DATE_SUB(CURDATE(), INTERVAL 6 DAY)),
+    (11, 12, 2, 30, CURDATE()),
+    (12, 14, 2, 30, CURDATE()),
+    (13, 7, 3, 20, CURDATE()),
+    (14, 22, 3, 45, CURDATE());
