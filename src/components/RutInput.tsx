@@ -1,32 +1,28 @@
 import Input from '../components/Input'
-import {useState} from 'react'
-import React from 'react'
 import {InputProp} from '../components/Input'
-const formatearRUT = (rut: String)=>{
-    // XX.XXX.XXX-X
-    const newRut = rut.replace(/\./g,'').replace(/\-/g, '').trim().toLowerCase();
-    const lastDigit = newRut.substr(-1, 1);
-    const rutDigit = newRut.substr(0, newRut.length-1)
-    let format = '';
-    for (let i = rutDigit.length; i > 0; i--) {
-        const e = rutDigit.charAt(i-1);
-        format = e.concat(format);
-        if (i % 3 === 0){
-        format = '.'.concat(format);
-        }
-    }
-    return format.concat('-').concat(lastDigit);
-    }
+
+function formatearRUT(rut: string) {
+    rut = rut.replace(/[^\dkK]/g, ''); // Eliminar caracteres no válidos excepto d, k, K
+    if (!rut) return rut;
+
+    rut = rut.toLowerCase(); // Convertir 'K' en 'k' para manejar de manera uniforme
+
+    var dv = rut.slice(-1); // Extraer el dígito verificador
+    rut = rut.slice(0, -1); // Quitar el dígito verificador de la cadena
+
+    // Formatear el RUT con puntos y separador de miles
+    rut = rut.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    return rut + '-' + dv; // Devolver el RUT formateado con el dígito verificador
+}
 
 export default function RutInput(args: InputProp) {
-    const [rut,setRut] = useState("")
-    const [rutValido,setRutValido] = useState(false)
-
     return(
         <Input 
             {...args}
             onChange={(e)=>{e.target.value = formatearRUT(e.target.value)}}
-            placeholder='RUT'>
-        </Input>
+            placeholder='RUT'
+            maxLength={12}
+        />
     )
 }

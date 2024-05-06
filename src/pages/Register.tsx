@@ -5,7 +5,7 @@ import Select from '../components/Select';
 import SelectRegionComuna from '../components/SelectRegionComuna';
 import RutInput from '../components/RutInput';
 
-import { Redirect, useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 
 import { useContext, useRef, useState } from 'react';
 
@@ -14,33 +14,39 @@ import { UserContext } from '../App';
 
 export default function Register() {
     const formRef = useRef<HTMLFormElement>(null)
-    const history = useHistory()
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
-    const {userData, setUserData} = useContext(UserContext);
+    const {userData, setUserData} = useContext(UserContext)!;
 
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        const user = formRef.current?.elements['user'].value
-        const rut = formRef.current?.elements['rut'].value
-        const edad = formRef.current?.elements['edad'].value
-        const genero = formRef.current?.elements['genero'].value
-        const correo = formRef.current?.elements['correo'].value
-        const password = formRef.current?.elements['password'].value
-        const confirm_password = formRef.current?.elements['confirm_password'].value
-        const region = formRef.current?.elements['region'].value
-        const comuna = formRef.current?.elements['comuna'].value
+        const user = formRef.current?.querySelector<HTMLInputElement>("#user")!.value!
+        const rut = formRef.current?.querySelector<HTMLInputElement>("#rut")!.value!
+        const regionStr = formRef.current?.querySelector<HTMLSelectElement>("#region")!.value!
+        const comunaStr = formRef.current?.querySelector<HTMLSelectElement>("#comuna")!.value!
+        const generoStr = formRef.current?.querySelector<HTMLSelectElement>("#genero")!.value!
+        const edadStr = formRef.current?.querySelector<HTMLInputElement>("#edad")!.value!
+        const correo = formRef.current?.querySelector<HTMLInputElement>("#correo")!.value!
+        const password = formRef.current?.querySelector<HTMLInputElement>("#password")!.value!
+        const confirm_password = formRef.current?.querySelector<HTMLInputElement>("#confirm_password")!.value!
+
+        const region = parseInt(regionStr)
+        const comuna = parseInt(comunaStr)
+        const genero = parseInt(generoStr)
+        const edad = parseInt(edadStr)
 
         if (user.length < 5) {
             setAlertMessage("El usuario debe tener a lo menos 5 caracteres")
-        } else if (rut.length < 12) {
+        } else if (!validarRUT(rut)) {
             setAlertMessage("El RUT no es válido")
         } else if (region == 0) {
             setAlertMessage("Por favor, seleccione una región")
         } else if (comuna == 0) {
             setAlertMessage("Por favor, seleccione una comuna")
+        } else if (edadStr === "") {
+            setAlertMessage("Por favor, ingrese una edad")
         } else if (edad < 0) {
             setAlertMessage("La edad no puede ser negativa")
         } else if (edad < 18) {
@@ -64,19 +70,19 @@ export default function Register() {
                 body: new URLSearchParams({
                     user: user,
                     rut: rut,
-                    edad: edad,
-                    genero: genero,
+                    edad: edadStr,
+                    genero: generoStr,
                     correo: correo,
                     password: password,
                     confirm_password: confirm_password,
-                    region: region,
-                    comuna: comuna
+                    region: regionStr,
+                    comuna: comunaStr
                 })
             
             })
-            if (response.status !== 200) {
+            if (response.status != 200) {
                 let json = await response.json()
-                setAlertMessage(json.error)
+                setAlertMessage(json.message)
                 setShowAlert(true)
             } else {
                 let json = await response.json()
@@ -91,6 +97,35 @@ export default function Register() {
         setShowAlert(true);
     }
 
+    function validarRUT(rut: string) {
+        // Eliminar puntos y guión, y convertir 'K' en 'k'
+        rut = rut.replace(/[^\dkK]/g, '').toLowerCase();
+    
+        // Validar el formato del RUT
+        if (!/^\d{1,8}[0-9k]$/i.test(rut)) {
+            return false;
+        }
+    
+        // Extraer el dígito verificador
+        const dv = rut.slice(-1);
+    
+        // Extraer el cuerpo del RUT (sin el dígito verificador)
+        const cuerpo = rut.slice(0, -1);
+    
+        // Calcular el dígito verificador esperado
+        let suma = 0;
+        let multiplicador = 2;
+        for (let i = cuerpo.length - 1; i >= 0; i--) {
+            suma += parseInt(cuerpo.charAt(i)) * multiplicador;
+            multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
+        }
+        const dvEsperado = 11 - (suma % 11);
+        const dvCalculado = dvEsperado === 11 ? '0' : dvEsperado === 10 ? 'k' : dvEsperado.toString();
+    
+        // Comparar el dígito verificador calculado con el dígito verificador proporcionado
+        return dv === dvCalculado;
+    }
+
     return (
         <IonPage>
             <IonContent>
@@ -102,7 +137,7 @@ export default function Register() {
                             <div className="flex flex-col gap-6">
                                 <div className="flex flex-col gap-1">
                                     <div className="flex flex-row gap-1.5">
-                                        <Input id="user" className="w-full" placeholder="Usuario" inputType="text"></Input>
+                                        <Input id="user" className="w-full" placeholder="Usuario" maxLength={30} inputType="text"></Input>
                                         <RutInput id="rut" className="w-full"></RutInput>
                                     </div>
                                     <SelectRegionComuna></SelectRegionComuna>
@@ -113,9 +148,9 @@ export default function Register() {
                                         <option value={2}>Femenino</option>
                                         <option value={3}>Otro</option>
                                     </Select>
-                                    <Input id="correo" placeholder="Correo" className="w-full"></Input>
-                                    <Input id="password" inputType="password" placeholder="Contraseña" className="w-full"></Input>
-                                    <Input id="confirm_password" inputType="password" placeholder="Confirmar contraseña" className="w-full"></Input>
+                                    <Input id="correo" placeholder="Correo" className="w-full" maxLength={50}></Input>
+                                    <Input id="password" inputType="password" placeholder="Contraseña" className="w-full" maxLength={30}></Input>
+                                    <Input id="confirm_password" inputType="password" placeholder="Confirmar contraseña" className="w-full" maxLength={30}></Input>
                                 </div>
                                 <Button className="self-center" btnType='submit'>
                                     Registrarse
