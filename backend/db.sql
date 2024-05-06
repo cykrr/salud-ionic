@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     region INT NOT NULL,
     comuna INT NOT NULL,
     sexo INT NOT NULL,
+    edad INT NOT NULL,
     correo VARCHAR(50) NOT NULL,
     clave VARCHAR(30) NOT NULL
 );
@@ -123,11 +124,11 @@ VALUES
     (30, 'Snowboard', 300);
 
 INSERT IGNORE INTO usuarios
-    (idUsuario, nombre, rut, region, comuna, sexo, correo, clave)
+    (idUsuario, nombre, rut, region, comuna, sexo, edad, correo, clave)
 VALUES
-    (1, 'Pepito', '12345678-9', 5, 10, 0, 'pepito123@mail.pucv.cl', 'clave123'),
-    (2, 'Juanito', '77777777-7', 8, 6, 0, 'juanito456@gmail.com', 'holamundo'),
-    (3, 'Alicia', '10101011-4', 11, 2, 1, 'alicia789@gmail.com', 'password');
+    (1, 'Pepito', '12345678-9', 5, 10, 0, 18, 'pepito123@mail.pucv.cl', 'clave123'),
+    (2, 'Juanito', '77777777-7', 8, 6, 0, 34, 'juanito456@gmail.com', 'holamundo'),
+    (3, 'Alicia', '10101011-4', 11, 2, 1, 65, 'alicia789@gmail.com', 'password');
 
 INSERT IGNORE INTO alimentosUsuario
     (id, idAlimento, idUsuario, cantidad, fecha)

@@ -58,8 +58,8 @@ def register():
         return error('Correo ya existe')
     rut = rut.replace('.', '')
     try:
-        ret = query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, correo, clave) VALUES \
-                                      ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{correo}', '{password}')")
+        ret = query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, edad, correo, clave) VALUES \
+                                      ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{edad}', '{correo}', '{password}')")
         ret = query(f"SELECT idUsuario FROM usuarios WHERE correo='{correo}'")
         
     except Exception as e:
