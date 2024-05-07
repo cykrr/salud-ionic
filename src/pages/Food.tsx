@@ -1,12 +1,24 @@
-import { IonHeader, IonPage, IonContent, IonRouterOutlet, IonAlert } from "@ionic/react";
-import {NavBar, LinkButton, Button} from "../components";
-import AddFood from "./AddFood";
-import { Route } from "react-router-dom";
+import { IonPage, IonContent, IonAlert } from "@ionic/react";
+import { LinkButton } from "../components";
 import { useEffect, useState } from "react";
+
+interface FoodItem {
+    nombre: string;
+    calorias: number;
+    cantidad: number;
+    unidad: string;
+}
+
+interface FoodData {
+    alimentos: FoodItem[];
+    totalCalorias: number;
+    recomendado: number;
+    margen: number;
+}
 
 export default function Food() {
     const URL = "http://localhost:5000/user/food/consumption?id=1"
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<FoodData>();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
 
@@ -25,7 +37,7 @@ export default function Food() {
 
                 setData(jsonData)
             } catch(e) {
-                setData([]);
+                setData(undefined);
                 setShowAlert(true);
                 setAlertMessage("¡No pudimos cargar tus datos! Por favor inténtalo más tarde.")
             }
@@ -33,14 +45,6 @@ export default function Food() {
     
         fetchData();
     }, []);
-
-    function calcularTotal(data: any[]) {
-        var suma = 0
-        data.map((item: any) => {
-            suma += item['calorias']
-        })
-        return suma;
-    }
     
     return (
         <IonPage>
@@ -59,7 +63,7 @@ export default function Food() {
                             <tbody>
                                 {data && (
                                     <>
-                                        {data.map((item, index) => (
+                                        {data['alimentos'].map((item, index) => (
                                             <tr key={index}>
                                                 <td className="border p-2">{item['nombre']}</td>
                                                 <td className="border p-2">{item['cantidad'] + " " + item['unidad']}</td>
@@ -69,7 +73,7 @@ export default function Food() {
                                         <tr>
                                             <td className="p-2"></td>
                                             <td className="p-2">Total: </td>
-                                            <td className="p-2 text-red-500">{calcularTotal(data) + " cal."}</td>
+                                            <td className="p-2 text-red-500">{data['totalCalorias']} cal.</td>
                                         </tr>
                                     </>
                                 )}
@@ -83,8 +87,21 @@ export default function Food() {
                             buttons={['OK']}
                         />
                         <div className="flex flex-col gap-3">
-                            <p>Consumo recomendado: 1200 cal.</p>
-                            <p className="italic">No has alcanzado el consumo mínimo recomendado.</p>
+                            {data && (
+                                <>
+                                    <p>Consumo recomendado: {data.recomendado - data.margen} - {data.recomendado + data.margen} cal.</p>
+                                    {(() => {
+                                        const diff = data.totalCalorias - data.recomendado;
+                                        if (diff > data.margen) {
+                                            return <p className="italic">Has superado el consumo mínimo recomendado en {diff - data.margen} cal.</p>;
+                                        } else if (diff < -data.margen) {
+                                            return <p className="italic">Te faltan {Math.abs(diff) - data.margen} cal. para alcanzar el consumo mínimo recomendado</p>;
+                                        } else {
+                                            return <p className="italic">Has alcanzado el consumo mínimo recomendado.</p>;
+                                        }
+                                    })()}
+                                </>
+                            )}
                         </div>
                         <LinkButton className="self-center" href="/food_add">Añadir alimento</LinkButton>
                     </div>

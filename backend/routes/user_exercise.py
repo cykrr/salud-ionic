@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify
 from app import query
 from responses import *
-from flask_cors import cross_origin
+from routes.health import get_recommended_minutes
+
 
 bp = Blueprint('user_exercise', __name__)
 
@@ -19,16 +20,27 @@ def get_exercise():
     
     try:
         data = query(f"SELECT nombre, calorias, minutos FROM ejerciciosUsuario JOIN ejercicios using(idEjercicio) WHERE ejerciciosUsuario.idUsuario={id} AND DATE(fecha) = CURDATE()")
+        recommended = get_recommended_minutes()
     except Exception as e:
         print(e)
         return bd_error()
     
-    response = []
+    exercise_list = []
+    totalCalorias = 0
+    totalMinutos = 0
     for food in data:
-        response.append({
+        item = {
             "nombre": food['nombre'],
             "calorias": int(food['calorias'] * food['minutos'] / 60),
             "minutos": food['minutos']
-        })
+        }
+        exercise_list.append(item)
+        totalMinutos = totalMinutos + item['minutos']
+        totalCalorias = totalCalorias + item['calorias']
 
-    return jsonify(response)
+    return jsonify({
+        "ejercicios": exercise_list,
+        "totalMinutos": totalMinutos,
+        "totalCalorias": totalCalorias,
+        "minutosRecomendados": recommended
+    })

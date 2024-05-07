@@ -2,9 +2,22 @@ import { NavBar, LinkButton } from '../components';
 import { IonContent, IonPage, IonAlert} from '@ionic/react';
 import { useEffect, useState } from 'react';
 
+interface ExerciseItem {
+    nombre: string;
+    calorias: number;
+    minutos: number;
+}
+
+interface ExerciseData {
+    ejercicios: ExerciseItem[];
+    totalCalorias: number;
+    totalMinutos: number;
+    minutosRecomendados: number;
+}
+
 export default function Exercise() {
     const URL = "http://localhost:5000/user/exercise?id=1"
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<ExerciseData>();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
 
@@ -23,7 +36,7 @@ export default function Exercise() {
 
                 setData(jsonData)
             } catch(e) {
-                setData([]);
+                setData(undefined);
                 setShowAlert(true);
                 setAlertMessage("¡No pudimos cargar tus datos! Por favor inténtalo más tarde.")
             }
@@ -31,14 +44,6 @@ export default function Exercise() {
     
         fetchData();
     }, []);
-
-    function calcularTotal(data: any[]) {
-        var suma = 0
-        data.map((item: any) => {
-            suma += item['calorias']
-        })
-        return suma;
-    }
 
     return (
         <IonPage>
@@ -57,7 +62,7 @@ export default function Exercise() {
                             <tbody>
                                 {data && (
                                     <>
-                                        {data.map((item, index) => (
+                                        {data['ejercicios'].map((item, index) => (
                                             <tr key={index}>
                                                 <td className="border p-2">{item['nombre']}</td>
                                                 <td className="border p-2">{item['minutos']}</td>
@@ -67,7 +72,7 @@ export default function Exercise() {
                                         <tr>
                                             <td className="p-2"></td>
                                             <td className="p-2">Total: </td>
-                                            <td className="p-2 text-red-500">{calcularTotal(data) + " cal."}</td>
+                                            <td className="p-2 text-red-500">{data['totalCalorias']} cal.</td>
                                         </tr>
                                     </>
                                 )}
@@ -81,8 +86,19 @@ export default function Exercise() {
                             buttons={['OK']}
                         />
                         <div className="flex flex-col gap-3">
-                            <p>Actividad fisica recomendada: 60 min.</p>
-                            <p className="italic">¡Te faltan <span className="text-green-500">15 min.</span> para completar la meta!</p>
+                            {data && (
+                                <>
+                                    <p>Actividad física recomendada: {data.minutosRecomendados} min/día.</p>
+                                    {(() => {
+                                        const diff = data.totalMinutos - data.minutosRecomendados;
+                                        if (diff >= 0) {
+                                            return <p className="italic">¡Has cumplido con la actividad física recomendada!</p>;
+                                        } else {
+                                            return <p className="italic">Aún te faltan {Math.abs(diff)} minutos para alcanzar la actividad física recomendada.</p>;
+                                        }
+                                    })()}
+                                </>
+                            )}
                         </div>
                         <LinkButton className="self-center" href="/exercise_add">Añadir ejercicio</LinkButton>
                     </div>

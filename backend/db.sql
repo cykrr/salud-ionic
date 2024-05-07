@@ -151,8 +151,8 @@ VALUES
 INSERT IGNORE INTO ejerciciosUsuario
     (id, idEjercicio, idUsuario, minutos, fecha)
 VALUES
-    (1, 4, 1, 60, CURDATE()),
-    (2, 20, 1, 30, CURDATE()),
+    (1, 4, 1, 30, CURDATE()),
+    (2, 20, 1, 15, CURDATE()),
     (3, 13, 1, 20, DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
     (4, 12, 1, 40, DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
     (5, 18, 1, 45, DATE_SUB(CURDATE(), INTERVAL 2 DAY)),

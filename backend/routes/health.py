@@ -59,18 +59,22 @@ def get_recommended_calories(id):
 
     genero = data[0]['sexo']
     edad = data[0]['edad']
+    rec = 0
+    dev = 200
 
     MALE = 0
     FEMALE = 1
     OTHER = 2
     if genero == MALE:
-        if edad <= 30: return 2700
-        if edad <= 50: return 2500
-        return 2300
+        rec = 2300
+        if edad <= 50: rec = 2500
+        if edad <= 30: rec = 2700
     if genero == FEMALE or genero == OTHER:
-        if edad <= 30: return 2200
+        rec = 1800
         if edad <= 50: return 2000
-        return 1800
+        if edad <= 30: return 2200
+
+    return rec, dev
 
 def get_recommended_minutes():
     return 60
@@ -90,7 +94,7 @@ def get_health():
     try:
         food_data = get_food_data(idUsuario)
         exercise_data = get_exercise_data(idUsuario)
-        rec_calories = get_recommended_calories(idUsuario)
+        rec_calories, dev = get_recommended_calories(idUsuario)
         rec_minutes = get_recommended_minutes()
     except Exception as e:
         return bd_error()
@@ -99,10 +103,10 @@ def get_health():
     exercise_score = [0] * 7
     for i in range(7):
         real_calories = food_data[i]['total']
-        if abs(real_calories - rec_calories) < 200:
+        if abs(real_calories - rec_calories) < dev:
             food_score[i] = 1
         else:
-            food_score[i] = max(1 - (abs(real_calories - rec_calories) - 200) / 1500, 0)
+            food_score[i] = max(1 - (abs(real_calories - rec_calories) - dev) / 1500, 0)
 
         real_minutes = exercise_data[i]['totalMinutos']
         if (real_minutes >= rec_minutes):
