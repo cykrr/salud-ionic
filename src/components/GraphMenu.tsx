@@ -7,19 +7,23 @@ export default function MenuBar() {
     const [graphFood, setGraphFood] = useState('');
     const [graphExercises, setGraphExercises] = useState('');
 
-    async function loadGraph(url: string, callback: React.Dispatch<React.SetStateAction<string>>) {
-        const response = await fetch(url)   
+    async function loadGraph(url: string) {
+        const response = await fetch(url);
         if (response.ok) {
-            const blob = await response.blob();
-            callback(URL.createObjectURL(blob));
+            return response.blob(); 
         }
     }
-
+    
     useEffect(() => {
-        loadGraph("http://localhost:5000/plot/food?id=1", setGraphFood)
-        loadGraph("http://localhost:5000/plot/exercises?id=1", setGraphExercises)
-    }, [])
-
+        async function fetchData() {
+            const foodBlob = await loadGraph("http://localhost:5000/plot/food?id=1");
+            const exercisesBlob = await loadGraph("http://localhost:5000/plot/exercises?id=1");
+            setGraphFood(URL.createObjectURL(foodBlob!));
+            setGraphExercises(URL.createObjectURL(exercisesBlob!));
+        }
+    
+        fetchData();
+    }, []);
 
     function BarItem({ id, barTitle } : { id: string, barTitle: string }) {
         return (
