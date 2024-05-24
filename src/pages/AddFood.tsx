@@ -3,7 +3,7 @@ import { IonAlert, IonRouterLink } from '@ionic/react'
 
 import { IonContent, IonHeader, IonPage } from '@ionic/react';
 
-import { UserContext } from '../App';
+import { API_URL, UserContext } from '../App';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 
@@ -24,7 +24,7 @@ export default function AddFood() {
     useEffect(() => {
         if (foodData) return;
         const fetchData = async () => {
-            const response = await fetch('http://localhost:5000/food/get?id=' + userData.idUsuario, {
+            const response = await fetch(`${API_URL}/food/get?id=` + userData.idUsuario, {
                 method: 'GET'
             });
             const data = await response.json();
@@ -51,7 +51,7 @@ export default function AddFood() {
         } else if (porcion == 0) {
             setAlertMessage("Por favor, ingresa una porción")
         } else {
-            fetch('http://localhost:5000/food/add', {
+            fetch(`${API_URL}/food/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

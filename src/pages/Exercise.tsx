@@ -1,7 +1,7 @@
 import { LinkButton } from '../components';
 import { IonContent, IonPage, IonAlert} from '@ionic/react';
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../App';
+import { API_URL, UserContext } from '../App';
 
 interface ExerciseItem {
     nombre: string;
@@ -22,7 +22,7 @@ export default function Exercise() {
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
 
-    const URL = "http://localhost:5000/user/exercise?id=" + userData.idUsuario 
+    const URL = `${API_URL}/user/exercise?id=` + userData.idUsuario 
 
     useEffect(() => {
         const fetchData = async () => {

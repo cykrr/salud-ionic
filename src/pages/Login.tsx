@@ -7,7 +7,7 @@ import { Redirect } from 'react-router';
 
 import { IonContent, IonPage, IonAlert } from '@ionic/react';
 
-import { UserContext } from '../App';
+import { API_URL, UserContext } from '../App';
 
 
 export default function Login() {
@@ -32,7 +32,7 @@ export default function Login() {
             setAlertMessage("Su contraseña debe tener al menos 8 caracteres.")
         }
         else {
-            await fetch('http://localhost:5000/login', {
+            await fetch(`${API_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

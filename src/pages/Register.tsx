@@ -9,7 +9,7 @@ import { Redirect } from 'react-router';
 
 import { useContext, useRef, useState } from 'react';
 
-import { UserContext } from '../App';
+import { API_URL, UserContext } from '../App';
 
 
 export default function Register() {
@@ -62,7 +62,7 @@ export default function Register() {
         } else if (password.length < 8) {
             setAlertMessage("La contraseña debe tener al menos 8 caracteres")
         } else {
-            await fetch('http://localhost:5000/register', {
+            await fetch(`${API_URL}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

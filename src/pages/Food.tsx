@@ -1,7 +1,7 @@
 import { IonPage, IonContent, IonAlert } from "@ionic/react";
 import { LinkButton } from "../components";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../App";
+import { API_URL, UserContext } from "../App";
 
 interface FoodItem {
     nombre: string;
@@ -23,7 +23,7 @@ export default function Food() {
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
 
-    const URL = "http://localhost:5000/user/food?id=" + userData.idUsuario
+    const URL = `${API_URL}/user/food?id=` + userData.idUsuario
 
     useEffect(() => {
         const fetchData = async () => {

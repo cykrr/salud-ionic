@@ -3,7 +3,7 @@ import Semicircle from '../components/Semicircle';
 import { IonContent, IonPage } from '@ionic/react';
 import GraphMenu from '../components/GraphMenu';
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../App';
+import { API_URL, UserContext } from '../App';
 
 export default function Menu() {
     const {userData, setUserData} = useContext(UserContext)!;
@@ -11,7 +11,7 @@ export default function Menu() {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch('http://localhost:5000/user/health?id=' + userData.idUsuario)
+            const response = await fetch(`${API_URL}/user/health?id=` + userData.idUsuario)
             const data = await response.json();
 
             if (response.ok) {

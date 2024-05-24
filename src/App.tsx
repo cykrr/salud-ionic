@@ -50,6 +50,7 @@ interface ContextValue {
 }
 
 export const UserContext = React.createContext<ContextValue | undefined>(undefined);
+export const API_URL = import.meta.env.VITE_API_URL
 
 const App: React.FC = () => {
   const [userData, setUserData] = React.useState({ idUsuario: 0 });

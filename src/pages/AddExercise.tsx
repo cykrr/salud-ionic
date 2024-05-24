@@ -2,7 +2,7 @@ import { CloseButton, Select, InputUnit, Button } from '../components'
 
 import { IonContent, IonHeader, IonPage, IonAlert } from '@ionic/react';
 
-import { UserContext } from '../App';
+import { API_URL, UserContext } from '../App';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 
@@ -21,7 +21,7 @@ export default function AddExercise() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:5000/exercise/get?id=' + userData.idUsuario, {
+            const response = await fetch(`${API_URL}/exercise/get?id=` + userData.idUsuario, {
                 method: 'GET'
             });
             const data = await response.json();
@@ -48,7 +48,7 @@ export default function AddExercise() {
         } else if (minutos == 0) {
             setAlertMessage("Por favor, ingresa los minutos")
         } else {
-            fetch('http://localhost:5000/exercise/add', {
+            fetch(`${API_URL}/exercise/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
