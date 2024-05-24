@@ -64,7 +64,7 @@ def get_food_plot():
     return Response(img, mimetype='image/png')
 
 
-@bp.route('/plot/exercises', methods=['GET'])
+@bp.route('/plot/exercise', methods=['GET'])
 def get_exercise_plot():
     idUsuario = request.args.get('id')
 

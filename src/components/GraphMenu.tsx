@@ -17,7 +17,7 @@ export default function MenuBar() {
     useEffect(() => {
         async function fetchData() {
             const foodBlob = await loadGraph("http://localhost:5000/plot/food?id=1");
-            const exercisesBlob = await loadGraph("http://localhost:5000/plot/exercises?id=1");
+            const exercisesBlob = await loadGraph("http://localhost:5000/plot/exercise?id=1");
             setGraphFood(URL.createObjectURL(foodBlob!));
             setGraphExercises(URL.createObjectURL(exercisesBlob!));
         }

@@ -1,7 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify
 from app import query
 from responses import *
-from flask_cors import cross_origin
 
 bp = Blueprint('exercise_get', __name__)
 

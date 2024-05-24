@@ -1,13 +1,13 @@
 from flask import Blueprint, request, jsonify
 from app import query
 from responses import *
-from routes.health import get_recommended_minutes
+from routes.user_health import get_recommended_minutes
 
 
 bp = Blueprint('user_exercise', __name__)
 
 @bp.route('/user/exercise', methods=['GET'])
-def get_exercise():
+def get_user_exercise():
     id = request.args.get('id')
     
     if not id:

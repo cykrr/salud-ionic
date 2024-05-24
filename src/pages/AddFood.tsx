@@ -1,17 +1,17 @@
 import { Button, CloseButton, InputUnit, Select } from '../components'
-import { IonAlert, IonRouterLink, useIonRouter } from '@ionic/react'
+import { IonAlert, IonRouterLink } from '@ionic/react'
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage } from '@ionic/react';
 
 import { UserContext } from '../App';
 import React, { useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 
-    interface Food {
-        id: number;
-        nombre: string;
-        unidad: string;
-    }
+interface Food {
+    id: number;
+    nombre: string;
+    unidad: string;
+}
 
 export default function AddFood() {
     const {userData, setUserData} = React.useContext(UserContext);
@@ -24,7 +24,7 @@ export default function AddFood() {
     useEffect(() => {
         if (foodData) return;
         const fetchData = async () => {
-            const response = await fetch('http://localhost:5000/user/food/?id=' + userData.idUsuario, {
+            const response = await fetch('http://localhost:5000/food/get?id=' + userData.idUsuario, {
                 method: 'GET'
             });
             const data = await response.json();

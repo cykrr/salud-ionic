@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from app import query
 from responses import *
 
-bp = Blueprint('health', __name__)
+bp = Blueprint('user_health', __name__)
 
 def get_date_array():
     today = date.today()

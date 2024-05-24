@@ -1,1 +1,1 @@
-from routes import exercise_add, food_add, user_food, register, login, food_create, exercise_get, user_exercise, health, plots
+from routes import exercise_add, exercise_get, food_add, food_create, food_get, user_exercise, user_food, user_health, login, register, plots

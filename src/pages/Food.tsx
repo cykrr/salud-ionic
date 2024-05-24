@@ -17,7 +17,7 @@ interface FoodData {
 }
 
 export default function Food() {
-    const URL = "http://localhost:5000/user/food/consumption?id=1"
+    const URL = "http://localhost:5000/user/food?id=1"
     const [data, setData] = useState<FoodData>();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
