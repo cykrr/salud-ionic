@@ -64,12 +64,14 @@ export default function AddFood() {
             }).then(response => response.json()).then(data => {
                 if (data.success == true) {
                     setAlertMessage("Alimento registrado con éxito")
-                    setShowAlert(true)
                     setFormSubmitted(true)
                 } else {
                     setAlertMessage("Ocurrió un error al intentar registrar el alimento. Inténtalo más tarde")
                 }
-            }) 
+            }).finally(()=>{
+                setShowAlert(true)
+            })
+            return 
         }
 
         setShowAlert(true)
@@ -100,7 +102,7 @@ export default function AddFood() {
                             <IonAlert
                                 isOpen={showAlert}
                                 onDidDismiss={() => setShowAlert(false)}
-                                header="Error"
+                                header={formSubmitted? "Éxito" : 'Error'}
                                 message={alertMessage}
                                 buttons={['OK']}
                             />
