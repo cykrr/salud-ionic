@@ -1,21 +1,19 @@
-import {CloseButton, Select, InputUnit, Button} from '../components'
-import { useIonRouter } from "@ionic/react"
+import { CloseButton, Select, InputUnit, Button } from '../components'
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonAlert } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonAlert } from '@ionic/react';
 
 import { UserContext } from '../App';
-import React, { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
-import { data } from 'autoprefixer';
 
-    interface Exercise {
-        idEjercicio: number;
-        nombre: string;
-    }
+interface Exercise {
+    idEjercicio: number;
+    nombre: string;
+}
 
 export default function AddExercise() {
-    const {userData, setUserData} = React.useContext(UserContext);
-    const [exerciseData, setExerciseData] = React.useState(null);
+    const {userData, setUserData} = useContext(UserContext)!;
+    const [exerciseData, setExerciseData] = useState<Exercise[]>();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
     const [formSubmitted, setFormSubmitted] = useState(false);
@@ -23,7 +21,7 @@ export default function AddExercise() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:5000/exercise/get', {
+            const response = await fetch('http://localhost:5000/exercise/get?id=' + userData.idUsuario, {
                 method: 'GET'
             });
             const data = await response.json();
@@ -34,7 +32,7 @@ export default function AddExercise() {
 
     function renderExercise() {
         if (!exerciseData) return null;
-        return exerciseData.map((exercise: Exercise) => {
+        return exerciseData.map((exercise) => {
             return <option key={exercise.idEjercicio} value={exercise.idEjercicio}>{exercise.nombre}</option>        
         })
     }
@@ -56,7 +54,7 @@ export default function AddExercise() {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    'idUsuario': userData.idUsuario,
+                    'idUsuario': userData.idUsuario.toString(),
                     'idEjercicio': idEjercicio.toString(),
                     'minutos': minutos.toString()
                 })

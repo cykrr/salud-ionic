@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../App';
 
 export default function MenuBar() {
     const IdBarFood = "barAlimentacion";
     const IdBarExercises = "barEjercicios";
+    
+    const {userData, setUserData} = useContext(UserContext)!;
     const [selectedItem, setSelectedItem] = useState<string>(IdBarFood);
     const [graphFood, setGraphFood] = useState('');
     const [graphExercises, setGraphExercises] = useState('');
@@ -16,8 +19,8 @@ export default function MenuBar() {
     
     useEffect(() => {
         async function fetchData() {
-            const foodBlob = await loadGraph("http://localhost:5000/plot/food?id=1");
-            const exercisesBlob = await loadGraph("http://localhost:5000/plot/exercise?id=1");
+            const foodBlob = await loadGraph("http://localhost:5000/plot/food?id=" + userData.idUsuario);
+            const exercisesBlob = await loadGraph("http://localhost:5000/plot/exercise?id=" + userData.idUsuario);
             setGraphFood(URL.createObjectURL(foodBlob!));
             setGraphExercises(URL.createObjectURL(exercisesBlob!));
         }

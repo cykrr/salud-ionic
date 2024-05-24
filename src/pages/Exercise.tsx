@@ -1,6 +1,7 @@
-import { NavBar, LinkButton } from '../components';
+import { LinkButton } from '../components';
 import { IonContent, IonPage, IonAlert} from '@ionic/react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../App';
 
 interface ExerciseItem {
     nombre: string;
@@ -16,10 +17,12 @@ interface ExerciseData {
 }
 
 export default function Exercise() {
-    const URL = "http://localhost:5000/user/exercise?id=1"
+    const {userData, setUserData} = useContext(UserContext)!;
     const [data, setData] = useState<ExerciseData>();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
+
+    const URL = "http://localhost:5000/user/exercise?id=" + userData.idUsuario 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +36,7 @@ export default function Exercise() {
                     }
                     throw Error();
                 }
-
+                
                 setData(jsonData)
             } catch(e) {
                 setData(undefined);

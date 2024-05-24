@@ -1,6 +1,7 @@
 import { IonPage, IonContent, IonAlert } from "@ionic/react";
 import { LinkButton } from "../components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../App";
 
 interface FoodItem {
     nombre: string;
@@ -17,10 +18,12 @@ interface FoodData {
 }
 
 export default function Food() {
-    const URL = "http://localhost:5000/user/food?id=1"
+    const {userData, setUserData} = useContext(UserContext)!;
     const [data, setData] = useState<FoodData>();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
+
+    const URL = "http://localhost:5000/user/food?id=" + userData.idUsuario
 
     useEffect(() => {
         const fetchData = async () => {

@@ -4,7 +4,7 @@ import { IonAlert, IonRouterLink } from '@ionic/react'
 import { IonContent, IonHeader, IonPage } from '@ionic/react';
 
 import { UserContext } from '../App';
-import React, { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 
 interface Food {
@@ -14,8 +14,8 @@ interface Food {
 }
 
 export default function AddFood() {
-    const {userData, setUserData} = React.useContext(UserContext);
-    const [foodData, setFoodData] = React.useState(null);
+    const {userData, setUserData} = useContext(UserContext)!;
+    const [foodData, setFoodData] = useState<Food[]>();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
     const [formSubmitted, setFormSubmitted] = useState(false);
@@ -35,7 +35,7 @@ export default function AddFood() {
 
     function renderFood() {
         if (!foodData) return null;
-        return foodData.map((food: Food) => {
+        return foodData.map((food) => {
             return <option key={food.id} value={food.id}>{food.nombre}</option>        
         })
     }
@@ -57,7 +57,7 @@ export default function AddFood() {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    'idUsuario': userData.idUsuario,
+                    'idUsuario': userData.idUsuario.toString(),
                     'idAlimento': idAlimento.toString(),
                     'cantidad': porcion.toString()
                 })
