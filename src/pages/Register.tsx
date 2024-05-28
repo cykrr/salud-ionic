@@ -82,7 +82,7 @@ export default function Register() {
             }).then(async response => {
                 let json = await response.json()
                 if(response.status == 200) {
-                    setUserData({idUsuario: json.idUsuario})
+                    setUserData(json.user)
                     setAlertMessage("Usuario registrado exitosamente")
                 } else {
                     setAlertMessage(json.message)

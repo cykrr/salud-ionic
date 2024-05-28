@@ -45,7 +45,7 @@ export default function Login() {
                 if (data.success == true) {
                     setAlertMessage("Inicio de sesión exitoso")
                     setIsLoggedIn(true)
-                    setUserData({idUsuario: data.user})
+                    setUserData(data.user)
 
                 } else {
                     setAlertMessage("Usuario o contraseña incorrectos")

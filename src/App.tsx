@@ -44,16 +44,21 @@ import MainTabRoot from './pages/MainTabRoot';
 
 setupIonicReact();
 
+interface UserData {
+  idUsuario: number
+  nombre: string
+}
+
 interface ContextValue {
-  userData: {idUsuario: number};
-  setUserData: React.Dispatch<React.SetStateAction<{idUsuario: number}>>;
+  userData: UserData
+  setUserData: React.Dispatch<React.SetStateAction<UserData>>;
 }
 
 export const UserContext = React.createContext<ContextValue | undefined>(undefined);
 export const API_URL = import.meta.env.VITE_API_URL
 
 const App: React.FC = () => {
-  const [userData, setUserData] = React.useState({ idUsuario: 0 });
+  const [userData, setUserData] = React.useState({ idUsuario: 0, nombre: '' });
 
   return (
     <IonApp>

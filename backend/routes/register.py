@@ -56,19 +56,23 @@ def register():
         return error('Usuario ya existe')
     if email_exists(correo):
         return error('Correo ya existe')
+    
     rut = rut.replace('.', '')
+
     try:
         ret = query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, edad, correo, clave) VALUES \
                                       ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{edad}', '{correo}', '{password}')")
-        ret = query(f"SELECT idUsuario FROM usuarios WHERE correo='{correo}'")
-        
+        ret = query(f"SELECT idUsuario, nombre FROM usuarios WHERE correo='{correo}'")    
     except Exception as e:
         print(e)
-        return jsonify({'error': 'Database error'}), 500 
-    return jsonify({'success': True, 'message': "Registrado correctamente", 'idUsuario': ret[0]['idUsuario']}), 200
-
-    print (user, rut, edad, genero, correo, password, confirm_password, region, comuna)
-
+        return bd_error()
+    
+    return jsonify({"success": True,
+                    "message": "Registrado correctamente",
+                    "user": {
+                        "idUsuario": ret[0]['idUsuario'],
+                        "nombre": ret[0]['nombre']
+                    }}), 200
 
 
 def validate_email(email):

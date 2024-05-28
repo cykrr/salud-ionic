@@ -26,7 +26,7 @@ export default function Menu() {
                 <div className="flex w-full h-full flex-col">
                     <div className="flex h-full flex-col p-10 gap-12 overflow-y-auto">
                         <div className="flex flex-col gap-5">
-                            <h1>¡Bienvenido Usuario!</h1>
+                            <h1>¡Bienvenido {userData.nombre}!</h1>
                             <div className="flex w-full flex-col gap-5">
                                 <div>
                                     <h2>Tu salud</h2>

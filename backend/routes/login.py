@@ -16,13 +16,17 @@ def login():
         return not_found_error('password')
 
     try:
-        data = query(f"SELECT idUsuario FROM usuarios WHERE correo='{email}' AND clave='{password}'")
-        return jsonify({"success": True, "message": "Inicio de sesión exitoso", "user": data[0]['idUsuario']}), 200
+        data = query(f"SELECT idUsuario, nombre FROM usuarios WHERE correo='{email}' AND clave='{password}'")
     except Exception as e:
         print(e)
         return bd_error()
 
     if not data:
-        return not_found_error('Usuario no encontrado')
+        return error('Usuario o contraseña incorrectos')
 
-    return success("Inicio de sesión exitoso")
+    return jsonify({"success": True,
+                    "message": "Inicio de sesión exitoso",
+                    "user": {
+                        "idUsuario": data[0]['idUsuario'],
+                        "nombre": data[0]['nombre']
+                    }}), 200
