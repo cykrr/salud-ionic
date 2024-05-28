@@ -86,9 +86,6 @@ VALUES
     (29, 'Agua mineral', 0, 1),
     (30, 'Lentejas', 116, 0);
 
-INSERT INTO alimentos (idUsuario, nombre, calorias, unidad)
-VALUES (1, "mansana de pepito", 100, 0);
-
 INSERT IGNORE INTO ejercicios
     (idEjercicio, nombre, calorias)
 VALUES

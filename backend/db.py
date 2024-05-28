@@ -13,7 +13,7 @@ def create_connection():
 
 def create_db(connection_pool: MySQLConnectionPool):
     connection = connection_pool.get_connection()
-    with open('db.sql', 'r') as file:
+    with open('db.sql', 'r', encoding='utf-8') as file:
         script = file.read()
 
     # Dividir el script en consultas individuales
