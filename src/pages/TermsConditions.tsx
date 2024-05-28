@@ -7,7 +7,7 @@ export default function TermsConditions() {
     return (
         <IonPage>
             <IonContent>
-                <div className="flex w-full h-full flex-col p-20 space-y-10">
+                <div className="flex w-full h-full flex-col p-10 space-y-10">
                     <h1>Términos y Condiciones</h1>
                     <div className="flex w-full flex-col space-y-5 overflow-y-auto pr-5">
                         <h2>Aceptación de términos y condiciones</h2>

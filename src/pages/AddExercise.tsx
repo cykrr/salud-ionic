@@ -82,7 +82,7 @@ export default function AddExercise() {
                 { userData.idUsuario ? null : <Redirect to="/login" /> }
                 { (formSubmitted && !showAlert) ? <Redirect to="/tabs/exercise" /> : null}
                 <div className="flex w-full h-full flex-col">
-                    <div className="flex flex-col gap-8 p-20 mx-auto">
+                    <div className="flex flex-col gap-8 p-10 mx-auto">
                         <div className="flex justify-between items-center">
                             <h1>Selecionar ejercicio</h1>
                             <CloseButton />

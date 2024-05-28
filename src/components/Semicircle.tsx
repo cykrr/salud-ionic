@@ -34,8 +34,8 @@ export default function Semicircle({ value } : { value: number }) {
             <style>{`
                 .semicircle {
                     position: relative;
-                    width: 200px;
-                    height: 100px;
+                    width: 160px;
+                    height: 80px;
                     border-top-left-radius: 100px;
                     border-top-right-radius: 100px;
                     background-image: radial-gradient(circle at 0 100%, ${mapearColor(value, 0.65)}, ${mapearColor(value, 1)});
@@ -58,7 +58,7 @@ export default function Semicircle({ value } : { value: number }) {
                     display: flex;
                     width: 100%;
                     height: 100%;
-                    font-size: 30px;
+                    font-size: 26px;
                     justify-content: center;
                     align-items: flex-end;
                 }

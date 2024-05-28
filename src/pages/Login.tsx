@@ -67,15 +67,15 @@ export default function Login() {
             <IonContent>
                 {(isLoggedIn && !showAlert) ? <Redirect to="/" /> : null}
                 <div className="flex w-full h-full flex-col">
-                    <div id="login" className="flex flex-col justify-center items-center p-20 m-auto gap-10">
+                    <div id="login" className="flex flex-col justify-center items-center p-16 m-auto gap-10">
                         <h1 className="text-xl text-bold">Bienvenido</h1>
                         <form ref={formRef} id="login" onSubmit={handleLogin}>
                             <div className="flex flex-col gap-10 items-center">
                                 <div className="flex flex-col">
-                                    <Input id="user" inputType={"text"} placeholder={"Usuario"}/>
-                                    <Input id="password" inputType={"password"} placeholder={"Contraseña"} />
+                                    <Input id="user" inputType={"text"} placeholder={"Usuario"} className="w-full"/>
+                                    <Input id="password" inputType={"password"} placeholder={"Contraseña"} className="w-full" />
                                 </div>
-                                <div className="flex flex-col gap-2.5 max-w-40">
+                                <div className="flex flex-col gap-2.5">
                                     <Button btnType="submit">
                                         Ingresar
                                     </Button>

@@ -133,7 +133,7 @@ export default function Register() {
             <IonContent>
                 { userData.idUsuario && !showAlert ? <Redirect to="/terms_and_conditions" /> : null}
                 <div className="flex w-full h-full">
-                    <div className='flex flex-col items-center gap-6 p-20 m-auto'>
+                    <div className='flex flex-col items-center gap-6 p-10 m-auto'>
                         <p className="text-xl font-bold">Registro</p>
                         <form id = "input" ref={formRef} onSubmit={handleSubmit}>
                             <div className="flex flex-col gap-6">

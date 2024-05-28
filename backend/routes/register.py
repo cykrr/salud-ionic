@@ -161,20 +161,10 @@ def validate_comuna(region: str, comuna: str):
         return False
     return True
 
-
-    
-
 def user_exists(user: str):
-    # do_query
-    db = get_db()
-    do_query = db.cursor()
-    do_query.execute(f"SELECT * FROM usuarios WHERE nombre = '{user}'")
-    ret = do_query.fetchall()
-    return len(ret) > 0
+    result = query(f"SELECT * FROM usuarios WHERE nombre = '{user}'")
+    return len(result) > 0
 
 def email_exists(email: str):
-    db = get_db()
-    do_query = db.cursor()
-    do_query.execute(f"SELECT * FROM usuarios WHERE correo = '{email}'")
-    ret = do_query.fetchall()
-    return len(ret) > 0
+    result = query(f"SELECT * FROM usuarios WHERE correo = '{email}'")
+    return len(result) > 0

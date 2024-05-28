@@ -52,7 +52,7 @@ export default function Exercise() {
         <IonPage>
             <IonContent>
                 <div className="flex flex-col w-full h-full">
-                    <div className="flex flex-col gap-5 p-20">
+                    <div className="flex flex-col gap-5 p-10">
                         <h1>Tus ejercicios diarios</h1>
                         <table className="w-full">
                             <thead>
