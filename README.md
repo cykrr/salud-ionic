@@ -11,11 +11,18 @@ Para esta primera entrega, se implementó la maquetación responsiva de las vist
 
 ## Pasos para ejecutar el proyecto
 
-1. Instalar NodeJS
+1. Instalar NodeJS y Python 3.x
 2. Instalar Ionic
-3. Abrir una terminal de Windows
-4. Clonar el repositorio con el comando `git clone https://github.com/cykrr/salud-ionic.git`
-5. Moverse a la carpeta del proyecto con `cd salud-ionic`
-6. Instalar dependencias con `npm install`
-7. Ejecutar el proyecto con `ionic serve`
-8. Listo!
+
+```
+npm install -g @ionic/cli
+```
+(Cerrar e iniciar sesión para refrescar el PATH)
+4. Abrir una terminal de Windows
+5. Clonar el repositorio con el comando `git clone https://github.com/cykrr/salud-ionic.git`
+6. Moverse a la carpeta del proyecto con `cd salud-ionic`
+7. Instalar las dependencias del frontend con `npm install`
+8. Instalar las dependencias del backend con `pip install -r requirements.txt`
+9. Ejecutar el backend Flask con `.\run_api_dev.cmd`
+10. Ejecutar el frontend con `ionic serve`
+11. Listo!
