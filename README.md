@@ -35,4 +35,6 @@ npm install -g @ionic/cli
 
 10. Ejecutar el frontend con `ionic serve`
 
-11. Listo!
+11. En caso de no poder establecer la comunicación con la base de datos corregir la URL del backend en el archivo `.env.development`.
+
+12. Listo!
