@@ -19,6 +19,8 @@ npm install -g @ionic/cli
 ```
 (Cerrar e iniciar sesión para refrescar el PATH)
 
+3. Instalar XAMPP y ejecutar MySQL
+
 4. Abrir una terminal de Windows
 
 5. Clonar el repositorio con el comando `git clone https://github.com/cykrr/salud-ionic.git`
