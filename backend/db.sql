@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     sexo INT NOT NULL,
     edad INT NOT NULL,
     correo VARCHAR(50) NOT NULL,
-    clave VARCHAR(30) NOT NULL
+    clave VARCHAR(64) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS alimentos (
@@ -123,9 +123,9 @@ VALUES
 INSERT IGNORE INTO usuarios
     (idUsuario, nombre, rut, region, comuna, sexo, edad, correo, clave)
 VALUES
-    (1, 'Pepito', '12345678-9', 5, 10, 0, 18, 'pepito123@mail.pucv.cl', 'clave123'),
-    (2, 'Juanito', '77777777-7', 8, 6, 0, 34, 'juanito456@gmail.com', 'holamundo'),
-    (3, 'Alicia', '10101011-4', 11, 2, 1, 65, 'alicia789@gmail.com', 'password');
+    (1, 'Pepito', '12345678-9', 5, 10, 0, 18, 'pepito123@mail.pucv.cl', SHA2('clave123', 256)),
+    (2, 'Juanito', '77777777-7', 8, 6, 0, 34, 'juanito456@gmail.com', SHA2('holamundo', 256)),
+    (3, 'Alicia', '10101011-4', 11, 2, 1, 65, 'alicia789@gmail.com', SHA2('password', 256));
 
 INSERT IGNORE INTO alimentosUsuario
     (id, idAlimento, idUsuario, cantidad, fecha)

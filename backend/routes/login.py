@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app import query
 from responses import *
-from constants import FOOD_UNITS
+from constants import HASH_LENGTH
 
 bp = Blueprint('login', __name__)
 
@@ -16,7 +16,7 @@ def login():
         return not_found_error('password')
 
     try:
-        data = query(f"SELECT idUsuario, nombre FROM usuarios WHERE correo='{email}' AND clave='{password}'")
+        data = query(f"SELECT idUsuario, nombre FROM usuarios WHERE correo='{email}' AND clave=SHA2('{password}', {HASH_LENGTH})")
     except Exception as e:
         print(e)
         return bd_error()

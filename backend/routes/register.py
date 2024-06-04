@@ -2,8 +2,7 @@
 from flask import Blueprint, request, jsonify
 from app import query, get_region_data, get_db
 from responses import *
-
-PASSWORD_LENGTH = 5
+from constants import HASH_LENGTH
 
 bp = Blueprint('register', __name__)
 
@@ -61,7 +60,7 @@ def register():
 
     try:
         ret = query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, edad, correo, clave) VALUES \
-                                      ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{edad}', '{correo}', '{password}')")
+                                      ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{edad}', '{correo}', SHA2('{password}', {HASH_LENGTH}))")
         ret = query(f"SELECT idUsuario, nombre FROM usuarios WHERE correo='{correo}'")    
     except Exception as e:
         print(e)
