@@ -71,6 +71,7 @@ def get_food_plot():
 
 
 @bp.route('/plot/exercise', methods=['GET'])
+@jwt_required()
 def get_exercise_plot():
     idUsuario = request.args.get('id')
 
@@ -81,6 +82,10 @@ def get_exercise_plot():
         idUsuario = int(idUsuario)
     except ValueError:
         return not_int_error('id')
+    
+    jwt_id = get_jwt_identity()
+    if idUsuario != jwt_id:
+        return unauthorized_error()
 
     try:
         data = query(f"SELECT SUM(minutos * calorias / 60) as total, fecha FROM ejerciciosUsuario JOIN ejercicios USING(idEjercicio) WHERE ejerciciosUsuario.idUsuario = {idUsuario} AND fecha >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 DAY) GROUP BY fecha")
