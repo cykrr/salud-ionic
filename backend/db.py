@@ -1,13 +1,16 @@
 from mysql.connector.pooling import MySQLConnectionPool
 import mysql.connector.errors
+from dotenv import dotenv_values
 
 def create_connection():
+    env_vars = dotenv_values("../.env.development")
+
     connection_pool = MySQLConnectionPool(
         pool_size=5,
         pool_reset_session=True,
         host="localhost",
-        user="root",
-        password="",
+        user=env_vars["DB_USER"],
+        password=env_vars["DB_PASSWORD"],
     )
     return connection_pool
 
