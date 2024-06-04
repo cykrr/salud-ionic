@@ -11,7 +11,7 @@ import { Menu, Food, Exercise } from '.'
 
 import { useState } from 'react'
 
-import './MainTabRoot.css'
+import './Tabs.css'
 
 export default function MainTabRoot() {
     const [selected, setSelected] = useState('menu');
@@ -42,24 +42,24 @@ export default function MainTabRoot() {
 
 
             </IonRouterOutlet>
-            <IonTabBar slot="bottom">
+            <IonTabBar slot="bottom" className="tab-bar-green">
                 <IonTabButton
                     tab="menu"
-                    className={tabMatch("menu") ? "selected-tab" : ""}
+                    className={tabMatch("menu") ? "selected-tab-green" : "tab-bar-green"}
                     href="/tabs/menu">
                     <img className="tab-bar-button" src="src/assets/menu.png" />
                     <IonLabel>Menú</IonLabel>
                 </IonTabButton>
                 <IonTabButton
                     tab="food"
-                    className={tabMatch("food") ? "selected-tab" : ""}
+                    className={tabMatch("food") ? "selected-tab-green" : "tab-bar-green"}
                     href="/tabs/food">
                     <img className="tab-bar-button" src='src/assets/alimentacion.png' />
                     <IonLabel>Alimento</IonLabel>
                 </IonTabButton>
                 <IonTabButton 
                     tab="exercise" 
-                    className={tabMatch("exercise") ? "selected-tab" : ""}
+                    className={tabMatch("exercise") ? "selected-tab-green" : "tab-bar-green"}
                     href="/tabs/exercise">
                     <img className="tab-bar-button" src='src/assets/ejercicios.png' />
                     <IonLabel>Ejercicio</IonLabel>

@@ -45,7 +45,6 @@ export default function Login() {
                 if (data.success == true) {
                     setAlertMessage("Inicio de sesión exitoso")
                     setIsLoggedIn(true)
-                    console.log(data.user)
                     setUserData(data.user)
 
                 } else {
@@ -66,7 +65,13 @@ export default function Login() {
     return (
         <IonPage>
             <IonContent>
-                {(isLoggedIn && !showAlert) ? <Redirect to="/" /> : null}
+                {(isLoggedIn && !showAlert) ? (
+                    userData.rol === "usuario" ? (
+                        <Redirect to="/" />
+                    ) : (
+                        userData.rol === "administrador" && <Redirect to="/admin" />
+                    )
+                ) : null}
                 <div className="flex w-full h-full flex-col">
                     <div id="login" className="flex flex-col justify-center items-center p-16 m-auto gap-10">
                         <h1 className="text-xl text-bold">Bienvenido</h1>

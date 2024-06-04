@@ -40,6 +40,7 @@ import './theme/variables.css';
 import './global.css';
 import React from 'react';
 import MainTabRoot from './pages/MainTabRoot';
+import AdminTabRoot from './pages/AdminTabRoot';
 
 
 setupIonicReact();
@@ -77,6 +78,8 @@ const App: React.FC = () => {
               component={TermsConditions} />
             <Route path="/tabs"
               render={() => <MainTabRoot />} />
+            <Route path="/admin"
+              render={() => <AdminTabRoot />} />
 
             <Route path="/exercise_add">
               <AddExercise />

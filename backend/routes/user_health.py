@@ -84,7 +84,6 @@ def get_recommended_minutes():
 @jwt_required()
 def get_health():
     idUsuario = request.args.get('id')
-    jwt_id = get_jwt_identity()
 
     if not idUsuario:
         return not_found_error('id')
@@ -94,6 +93,7 @@ def get_health():
     except ValueError:
         return not_int_error('id')
     
+    jwt_id = get_jwt_identity()
     if idUsuario != jwt_id:
         return unauthorized_error()
     

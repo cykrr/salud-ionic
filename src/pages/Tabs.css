@@ -3,7 +3,6 @@ body {
     --ion-color-primary: rgb(10, 78, 17);
 }
 ion-tab-bar, ion-tab-button {
-    background-color: #C6F3D2;
     color: black;
 }
 
@@ -16,7 +15,20 @@ ion-tab-bar:hover, ion-tab-button:hover ion-label {
     height: 25px;
 }
 
-.selected-tab {
+.tab-bar-green {
+    background-color: #C6F3D2 !important;
+}
+
+.selected-tab-green {
     background-color: #95E79D;
+    color: black;
+}
+
+.tab-bar-blue {
+    background-color: #C6F0F3 !important;
+}
+
+.selected-tab-blue {
+    background-color: #95D8E7;
     color: black;
 }
