@@ -7,7 +7,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 
 interface Exercise {
-    idEjercicio: number;
+    id: number;
     nombre: string;
 }
 
@@ -36,7 +36,7 @@ export default function AddExercise() {
     function renderExercise() {
         if (!exerciseData) return null;
         return exerciseData.map((exercise) => {
-            return <option key={exercise.idEjercicio} value={exercise.idEjercicio}>{exercise.nombre}</option>        
+            return <option key={exercise.id} value={exercise.id}>{exercise.nombre}</option>        
         })
     }
 

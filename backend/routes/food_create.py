@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from flask_jwt_extended import get_jwt_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
 from app import query
 from responses import *
 
@@ -53,7 +53,11 @@ def create_food():
     calorias = int(calorias * 100 / porcion)
 
     try:
-        query(f"INSERT INTO alimentos (idUsuario, nombre, calorias, unidad) VALUES ({idUsuario}, '{nombre}', {calorias}, {unidad})")
+        user_data = get_jwt()
+        if user_data["rol"] == "administrador":
+            query(f"INSERT INTO alimentos (idUsuario, nombre, calorias, unidad) VALUES (NULL, '{nombre}', {calorias}, {unidad})")
+        else:
+            query(f"INSERT INTO alimentos (idUsuario, nombre, calorias, unidad) VALUES ({idUsuario}, '{nombre}', {calorias}, {unidad})")
     except Exception as e:
         print(e)
         return bd_error()

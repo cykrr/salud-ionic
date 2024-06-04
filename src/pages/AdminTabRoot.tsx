@@ -4,13 +4,16 @@ import { Redirect, Route, useLocation } from 'react-router-dom';
 
 import { useState } from 'react'
 import AdminFood from './AdminFood';
+import AdminExercise from './AdminExercise';
 
 import './Tabs.css'
-import AdminExercise from './AdminExercise';
 import { add } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
 
 export default function MainTabRoot() {
     const [selected, setSelected] = useState('menu');
+    const history = useHistory()
+
     function handleClick(e: TabsCustomEvent) {
         const selectedTab: string = e['detail']['tab']
         setSelected(selectedTab)
@@ -18,6 +21,14 @@ export default function MainTabRoot() {
 
     function tabMatch(tabName: string) {
         return useLocation().pathname.includes(tabName)
+    }
+
+    function addFood() {
+        history.push('/food_create')
+    }
+
+    function addExercise() {
+        history.push('/exercise_create')
     }
 
     return (
@@ -52,7 +63,8 @@ export default function MainTabRoot() {
                 </IonTabBar>
             </IonTabs>
 
-            <IonFab vertical="bottom" horizontal="center" className="center-fab">
+            <IonFab vertical="bottom" horizontal="center" className="center-fab"
+                onClick={tabMatch("food") ? addFood : addExercise}>
                 <IonFabButton>
                     <IonIcon icon={add} />
                 </IonFabButton>

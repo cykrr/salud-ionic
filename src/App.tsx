@@ -41,6 +41,7 @@ import './global.css';
 import React from 'react';
 import MainTabRoot from './pages/MainTabRoot';
 import AdminTabRoot from './pages/AdminTabRoot';
+import CreateExercise from './pages/CreateExercise';
 
 
 setupIonicReact();
@@ -83,6 +84,9 @@ const App: React.FC = () => {
 
             <Route path="/exercise_add">
               <AddExercise />
+            </Route>
+            <Route path="/exercise_create">
+              <CreateExercise />
             </Route>
             <Route path="/food_add">
               <AddFood />

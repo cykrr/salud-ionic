@@ -18,7 +18,7 @@ def user_exercise():
     response = []
     for exercise in data:
         response.append({
-            "idEjercicio": exercise['idEjercicio'],
+            "id": exercise['idEjercicio'],
             "nombre": exercise['nombre'],
         })
 
