@@ -1,7 +1,7 @@
 body {
-    /* set variable --ion-color-primary to #C6F3D2 */
-    --ion-color-primary: rgb(10, 78, 17);
+    --ion-color-primary: rgb(24, 117, 194);
 }
+
 ion-tab-bar, ion-tab-button {
     color: black;
 }
