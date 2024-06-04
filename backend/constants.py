@@ -1,5 +1,5 @@
 FOOD_UNITS = {
-    0: 'g.',
-    1: 'ml.'
+    1: 'g.',
+    2: 'ml.'
 }
 HASH_LENGTH = 256
