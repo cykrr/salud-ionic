@@ -16,17 +16,16 @@ def login():
         return not_found_error('password')
 
     try:
-        data = query(f"SELECT idUsuario, nombre FROM usuarios WHERE correo='{email}' AND clave=SHA2('{password}', {HASH_LENGTH})")
+        data = query(f"SELECT idUsuario, usuarios.nombre, roles.nombre as rol FROM usuarios JOIN roles USING(idRol) WHERE correo='{email}' AND clave=SHA2('{password}', {HASH_LENGTH})")
     except Exception as e:
         print(e)
         return bd_error()
-
+    
     if not data:
         return error('Usuario o contraseña incorrectos')
 
     return jsonify({"success": True,
                     "message": "Inicio de sesión exitoso",
                     "user": {
-                        "idUsuario": data[0]['idUsuario'],
-                        "nombre": data[0]['nombre']
+                        data[0]
                     }}), 200

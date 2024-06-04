@@ -59,8 +59,8 @@ def register():
     rut = rut.replace('.', '')
 
     try:
-        ret = query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, edad, correo, clave) VALUES \
-                                      ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{edad}', '{correo}', SHA2('{password}', {HASH_LENGTH}))")
+        ret = query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, edad, correo, clave, idRol) VALUES \
+                                      ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{edad}', '{correo}', SHA2('{password}', {HASH_LENGTH}), 1)")
         ret = query(f"SELECT idUsuario, nombre FROM usuarios WHERE correo='{correo}'")    
     except Exception as e:
         print(e)

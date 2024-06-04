@@ -4,6 +4,10 @@ CREATE DATABASE IF NOT EXISTS app_saludable;
 
 USE app_saludable;
 
+CREATE TABLE roles (
+    idRol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS usuarios (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -14,7 +18,9 @@ CREATE TABLE IF NOT EXISTS usuarios (
     sexo INT NOT NULL,
     edad INT NOT NULL,
     correo VARCHAR(50) NOT NULL,
-    clave VARCHAR(64) NOT NULL
+    clave VARCHAR(64) NOT NULL,
+    idRol INT NOT NULL,
+    FOREIGN KEY (idRol) REFERENCES roles(idRol)
 );
 
 CREATE TABLE IF NOT EXISTS alimentos (
@@ -120,12 +126,19 @@ VALUES
     (29, 'Esquí', 250),
     (30, 'Snowboard', 300);
 
+INSERT IGNORE INTO roles
+    (idRol, nombre)
+VALUES 
+    (1, 'usuario'),
+    (2, 'administrador');
+
 INSERT IGNORE INTO usuarios
-    (idUsuario, nombre, rut, region, comuna, sexo, edad, correo, clave)
+    (idUsuario, nombre, rut, region, comuna, sexo, edad, correo, clave, idRol)
 VALUES
-    (1, 'Pepito', '12345678-9', 5, 10, 0, 18, 'pepito123@mail.pucv.cl', SHA2('clave123', 256)),
-    (2, 'Juanito', '77777777-7', 8, 6, 0, 34, 'juanito456@gmail.com', SHA2('holamundo', 256)),
-    (3, 'Alicia', '10101011-4', 11, 2, 1, 65, 'alicia789@gmail.com', SHA2('password', 256));
+    (1, 'Pepito', '12345678-9', 5, 10, 0, 18, 'pepito123@mail.pucv.cl', SHA2('clave123', 256), 1),
+    (2, 'Juanito', '77777777-7', 8, 6, 0, 34, 'juanito456@gmail.com', SHA2('holamundo', 256), 1),
+    (3, 'Alicia', '10101011-4', 11, 2, 1, 65, 'alicia789@gmail.com', SHA2('password', 256), 1),
+    (4, 'Pepe', '22222222-2', 2, 2, 1, 21, 'pepe123@mail.pucv.cl', SHA2('clave123', 256), 2);
 
 INSERT IGNORE INTO alimentosUsuario
     (id, idAlimento, idUsuario, cantidad, fecha)
