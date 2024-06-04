@@ -45,6 +45,7 @@ export default function Login() {
                 if (data.success == true) {
                     setAlertMessage("Inicio de sesión exitoso")
                     setIsLoggedIn(true)
+                    console.log(data.user)
                     setUserData(data.user)
 
                 } else {

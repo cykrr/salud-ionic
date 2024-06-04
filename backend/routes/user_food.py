@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from app import query
 from responses import *
 from constants import FOOD_UNITS
@@ -8,6 +9,7 @@ from routes.user_health import get_recommended_calories
 bp = Blueprint('user_food', __name__)
 
 @bp.route('/user/food', methods=['GET'])
+@jwt_required()
 def get_user_food():
     id = request.args.get('id')
     
@@ -18,6 +20,10 @@ def get_user_food():
         id = int(id)
     except ValueError:
         return not_int_error('id')
+    
+    jwt_id = get_jwt_identity()
+    if id != jwt_id:
+        return unauthorized_error()
     
     try:
         data = query(f"SELECT nombre, calorias, cantidad, unidad FROM alimentosUsuario JOIN alimentos using(idAlimento) WHERE alimentosUsuario.idUsuario={id} AND DATE(fecha) = CURDATE()")

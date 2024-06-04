@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import create_access_token
 from app import query
 from responses import *
 from constants import HASH_LENGTH
@@ -23,9 +24,15 @@ def login():
     
     if not data:
         return error('Usuario o contraseña incorrectos')
+    
+    data = data[0]
+    access_token = create_access_token(identity=int(data['idUsuario']), additional_claims={"rol": data['rol']})
 
     return jsonify({"success": True,
                     "message": "Inicio de sesión exitoso",
                     "user": {
-                        data[0]
+                        "idUsuario": data['idUsuario'],
+                        "nombre": data['nombre'],
+                        "rol": data['rol'],
+                        "token": access_token
                     }}), 200

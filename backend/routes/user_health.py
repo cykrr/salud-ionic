@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from datetime import date, timedelta
 from app import query
 from responses import *
@@ -80,8 +81,10 @@ def get_recommended_minutes():
     return 60
 
 @bp.route('/user/health', methods=['GET'])
+@jwt_required()
 def get_health():
     idUsuario = request.args.get('id')
+    jwt_id = get_jwt_identity()
 
     if not idUsuario:
         return not_found_error('id')
@@ -90,6 +93,9 @@ def get_health():
         idUsuario = int(idUsuario)
     except ValueError:
         return not_int_error('id')
+    
+    if idUsuario != jwt_id:
+        return unauthorized_error()
     
     try:
         food_data = get_food_data(idUsuario)

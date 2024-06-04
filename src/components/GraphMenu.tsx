@@ -11,7 +11,11 @@ export default function MenuBar() {
     const [graphExercises, setGraphExercises] = useState('');
 
     async function loadGraph(url: string) {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `Bearer ${userData.token}`
+            }
+        });
         if (response.ok) {
             return response.blob(); 
         }

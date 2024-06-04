@@ -25,7 +25,10 @@ export default function AddFood() {
         if (foodData) return;
         const fetchData = async () => {
             const response = await fetch(`${API_URL}/food/get?id=` + userData.idUsuario, {
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${userData.token}`
+                }
             });
             const data = await response.json();
             setFoodData(data);
@@ -55,6 +58,7 @@ export default function AddFood() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${userData.token}`
                 },
                 body: new URLSearchParams({
                     'idUsuario': userData.idUsuario.toString(),

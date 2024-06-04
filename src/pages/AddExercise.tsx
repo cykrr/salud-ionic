@@ -22,7 +22,10 @@ export default function AddExercise() {
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(`${API_URL}/exercise/get?id=` + userData.idUsuario, {
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${userData.token}`
+                }
             });
             const data = await response.json();
             setExerciseData(data);
@@ -52,6 +55,7 @@ export default function AddExercise() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${userData.token}`
                 },
                 body: new URLSearchParams({
                     'idUsuario': userData.idUsuario.toString(),

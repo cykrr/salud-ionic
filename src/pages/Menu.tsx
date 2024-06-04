@@ -11,7 +11,11 @@ export default function Menu() {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(`${API_URL}/user/health?id=` + userData.idUsuario)
+            const response = await fetch(`${API_URL}/user/health?id=` + userData.idUsuario, {
+                headers: {
+                    'Authorization': `Bearer ${userData.token}`
+                }
+            })
             const data = await response.json();
 
             if (response.ok) {

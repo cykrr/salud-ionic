@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from app import query
 from responses import *
 
@@ -6,6 +7,7 @@ bp = Blueprint('food_add', __name__)
 
 
 @bp.route('/food/add', methods=['POST'])
+@jwt_required()
 def add_food():
     idAlimento = request.form.get('idAlimento')
     idUsuario = request.form.get('idUsuario')
@@ -32,6 +34,10 @@ def add_food():
         cantidad = int(cantidad)
     except ValueError:
         return not_int_error('cantidad')
+    
+    jwt_id = get_jwt_identity()
+    if idUsuario != jwt_id:
+        return unauthorized_error()
     
     try:
         query(f"INSERT INTO alimentosUsuario (idAlimento, idUsuario, cantidad, fecha) VALUES ({idAlimento}, {idUsuario}, {cantidad}, CURDATE())")

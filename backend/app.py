@@ -27,8 +27,10 @@ def get_region_data():
 
 from flask import Flask
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 
 from routes import *
+from dotenv import dotenv_values
 
 app = Flask(__name__)
 app.register_blueprint(food_add.bp)
@@ -45,3 +47,7 @@ app.register_blueprint(plots.bp)
 CORS(app)
 
 get_db()
+
+env_vars = dotenv_values("../.env.development")
+app.config['JWT_SECRET_KEY'] = env_vars['JWT_SECRET_KEY']
+JWTManager(app)

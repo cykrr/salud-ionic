@@ -47,6 +47,8 @@ setupIonicReact();
 interface UserData {
   idUsuario: number
   nombre: string
+  rol: string
+  token: string
 }
 
 interface ContextValue {
@@ -58,7 +60,7 @@ export const UserContext = React.createContext<ContextValue | undefined>(undefin
 export const API_URL = import.meta.env.VITE_API_URL
 
 const App: React.FC = () => {
-  const [userData, setUserData] = React.useState({ idUsuario: 0, nombre: '' });
+  const [userData, setUserData] = React.useState({ idUsuario: 0, nombre: '', rol: '', token: '' });
 
   return (
     <IonApp>

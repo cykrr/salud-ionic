@@ -27,7 +27,11 @@ export default function Exercise() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(URL);
+                const response = await fetch(URL, {
+                    headers: {
+                        'Authorization': `Bearer ${userData.token}`
+                    }
+                });
                 const jsonData = await response.json();
 
                 if (!response.ok || (jsonData.hasOwnProperty('success') && !jsonData.success)) {

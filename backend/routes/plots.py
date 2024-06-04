@@ -2,7 +2,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from flask import Blueprint, Response, request, jsonify
+from flask import Blueprint, Response, request
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from app import query
 from responses import *
 from datetime import date, timedelta
@@ -42,6 +43,7 @@ def create_plot(data):
 
 
 @bp.route('/plot/food', methods=['GET'])
+@jwt_required()
 def get_food_plot():
     idUsuario = request.args.get('id')
 
@@ -52,6 +54,10 @@ def get_food_plot():
         idUsuario = int(idUsuario)
     except ValueError:
         return not_int_error('id')
+    
+    jwt_id = get_jwt_identity()
+    if idUsuario != jwt_id:
+        return unauthorized_error()
 
     try:
         data = query(f"SELECT SUM(cantidad * calorias / 100) as total, fecha FROM alimentosUsuario JOIN alimentos USING(idAlimento) WHERE alimentosUsuario.idUsuario = {idUsuario} AND fecha >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 DAY) GROUP BY fecha")
