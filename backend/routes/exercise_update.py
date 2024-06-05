@@ -3,19 +3,27 @@ from flask_jwt_extended import jwt_required, get_jwt
 from app import query
 from responses import *
 
-bp = Blueprint('exercise_create', __name__)
+bp = Blueprint('exercise_update', __name__)
 
 
-@bp.route('/exercise/create', methods=['POST'])
+@bp.route('/exercise/update', methods=['PUT'])
 @jwt_required()
-def create_exercise():
+def update_exercise():
+    id_ejercicio = request.form.get('idEjercicio')
     nombre = request.form.get('nombre')
     calorias = request.form.get('calorias')
 
+    if not id_ejercicio:
+        return not_found_error('idEjercicio')
     if not nombre:
         return not_found_error('nombre')
     if not calorias:
         return not_found_error('calorias')
+    
+    try:
+        id_ejercicio = int(id_ejercicio)
+    except ValueError:
+        return not_int_error('calorias')
     
     try:
         calorias = int(calorias)
@@ -27,9 +35,9 @@ def create_exercise():
         return unauthorized_error()
 
     try:
-        query(f"INSERT INTO ejercicios (nombre, calorias) VALUES ('{nombre}', {calorias})")
+        query(f"UPDATE ejercicios SET nombre = '{nombre}', calorias = {calorias} WHERE idEjercicio = {id_ejercicio}")
     except Exception as e:
         print(e)
         return bd_error()
     
-    return success("Ejercicio registrado con éxito")
+    return success("Ejercicio actualizado con éxito")

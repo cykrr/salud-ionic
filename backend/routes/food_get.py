@@ -25,7 +25,7 @@ def get_food():
         return unauthorized_error()
     
     try:
-        data = query(f"SELECT idAlimento, nombre, unidad FROM alimentos WHERE (idUsuario={id} OR idUsuario IS NULL) AND habilitado = 1")
+        data = query(f"SELECT idAlimento, nombre, calorias, unidad FROM alimentos WHERE (idUsuario={id} OR idUsuario IS NULL) AND habilitado = 1")
     except Exception as e:
         print(e)
         return bd_error()
@@ -36,7 +36,9 @@ def get_food():
             response.append({
                 "id": food['idAlimento'],
                 "nombre": food['nombre'],
-                "unidad": FOOD_UNITS[food['unidad']]
+                "calorias": food['calorias'],
+                "unidad": FOOD_UNITS[food['unidad']],
+                "unidadId": food['unidad']
             })
         except:
             print("Error en el for")

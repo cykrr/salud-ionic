@@ -1,11 +1,14 @@
 import { IonPage, IonContent, IonAlert } from '@ionic/react';
 import { useContext, useEffect, useState } from 'react';
 import { API_URL, UserContext } from '../App';
+import { useHistory } from 'react-router';
 
-interface Food {
+export interface Food {
     id: number;
     nombre: string;
+    calorias: number;
     unidad: string;
+    unidadId: number;
 }
 
 export default function AdminFood() {
@@ -16,6 +19,7 @@ export default function AdminFood() {
     const [alertMessage, setAlertMessage] = useState("");
     const [currentFood, setCurrentFood] = useState<Food>();
     const [success, setSuccess] = useState(false);
+    const history = useHistory();
     
     useEffect(() => {
         const fetchData = async () => {
@@ -31,7 +35,7 @@ export default function AdminFood() {
     }, [userData.idUsuario]);
 
     async function editFood(food: Food) {
-        console.log("editando " + food.nombre);
+        history.push(`/food_edit?data=${JSON.stringify(food)}`)
     }
 
     async function deleteFood(food: Food) {

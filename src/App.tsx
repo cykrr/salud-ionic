@@ -42,6 +42,8 @@ import React from 'react';
 import MainTabRoot from './pages/MainTabRoot';
 import AdminTabRoot from './pages/AdminTabRoot';
 import CreateExercise from './pages/CreateExercise';
+import EditFood from './pages/EditFood';
+import EditExercise from './pages/EditExercise';
 
 
 setupIonicReact();
@@ -88,11 +90,17 @@ const App: React.FC = () => {
             <Route path="/exercise_create">
               <CreateExercise />
             </Route>
+            <Route path="/exercise_edit">
+              <EditExercise />
+            </Route>
             <Route path="/food_add">
               <AddFood />
             </Route>
             <Route path="/food_create">
               <CreateFood />
+            </Route>
+            <Route path="/food_edit">
+              <EditFood />
             </Route>
           </Switch>
         </IonReactRouter>

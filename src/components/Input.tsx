@@ -12,6 +12,7 @@ export default function Input(args: InputProp) {
             }
             onChange={args.onChange}
             value={args.value}
+            defaultValue={args.defaultValue}
             maxLength={args.maxLength}
         />
     ) 
@@ -25,6 +26,7 @@ export interface InputProp {
     onChange?: React.ChangeEventHandler<HTMLInputElement>
     onSubmit?: React.FormEventHandler<HTMLFormElement>
     value?: string
+    defaultValue?: string
     children?: React.ReactNode
     maxLength?: number
 }

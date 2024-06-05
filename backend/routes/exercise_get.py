@@ -10,7 +10,7 @@ bp = Blueprint('exercise_get', __name__)
 @jwt_required()
 def user_exercise():
     try:
-        data = query(f"SELECT idEjercicio, nombre FROM ejercicios WHERE habilitado = 1")
+        data = query(f"SELECT idEjercicio, nombre, calorias FROM ejercicios WHERE habilitado = 1")
     except Exception as e:
         print(e)
         return bd_error()
@@ -20,6 +20,7 @@ def user_exercise():
         response.append({
             "id": exercise['idEjercicio'],
             "nombre": exercise['nombre'],
+            "calorias": exercise['calorias']
         })
 
     return jsonify(response)

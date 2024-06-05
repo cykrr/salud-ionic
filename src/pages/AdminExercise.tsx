@@ -1,10 +1,12 @@
 import { IonPage, IonContent, IonAlert } from '@ionic/react';
 import { useContext, useEffect, useState } from 'react';
 import { API_URL, UserContext } from '../App';
+import { useHistory } from 'react-router';
 
-interface Exercise {
+export interface Exercise {
     id: number;
     nombre: string;
+    calorias: number;
 }
 
 export default function AdminFood() {
@@ -15,6 +17,7 @@ export default function AdminFood() {
     const [alertMessage, setAlertMessage] = useState("");
     const [currentExercise, setCurrentExercise] = useState<Exercise>();
     const [success, setSuccess] = useState(false);
+    const history = useHistory();
     
     useEffect(() => {
         const fetchData = async () => {
@@ -30,7 +33,7 @@ export default function AdminFood() {
     }, [userData.idUsuario]);
 
     function editExercise(exercise: Exercise) {
-        console.log("editando " + exercise.nombre);
+        history.push(`/exercise_edit?data=${JSON.stringify(exercise)}`)
     }
 
     async function deleteExercise(exercise: Exercise) {
