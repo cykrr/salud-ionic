@@ -25,7 +25,7 @@ def get_food():
         return unauthorized_error()
     
     try:
-        data = query(f"SELECT idAlimento, nombre, unidad FROM alimentos WHERE idUsuario={id} OR idUsuario IS NULL")
+        data = query(f"SELECT idAlimento, nombre, unidad FROM alimentos WHERE (idUsuario={id} OR idUsuario IS NULL) AND habilitado = 1")
     except Exception as e:
         print(e)
         return bd_error()

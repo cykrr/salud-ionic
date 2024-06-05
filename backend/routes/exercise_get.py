@@ -10,7 +10,7 @@ bp = Blueprint('exercise_get', __name__)
 @jwt_required()
 def user_exercise():
     try:
-        data = query(f"SELECT idEjercicio, nombre FROM ejercicios")
+        data = query(f"SELECT idEjercicio, nombre FROM ejercicios WHERE habilitado = 1")
     except Exception as e:
         print(e)
         return bd_error()

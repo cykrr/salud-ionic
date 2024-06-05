@@ -28,13 +28,15 @@ CREATE TABLE IF NOT EXISTS alimentos (
     idUsuario INT,
     nombre VARCHAR(50) NOT NULL,
     calorias INT NOT NULL,
-    unidad INT NOT NULL
+    unidad INT NOT NULL,
+    habilitado BIT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS ejercicios (
     idEjercicio INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
-    calorias INT NOT NULL    
+    calorias INT NOT NULL,
+    habilitado BIT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS alimentosUsuario (
