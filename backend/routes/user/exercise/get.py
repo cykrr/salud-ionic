@@ -2,7 +2,7 @@ from flask import request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from app import app, query
 from responses import *
-from routes.user_health import get_recommended_minutes
+from routes.user.health import get_recommended_minutes
 
 @app.route('/user/exercise', methods=['GET'])
 @jwt_required()

@@ -3,7 +3,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from app import app, query
 from responses import *
 from constants import FOOD_UNITS
-from routes.user_health import get_recommended_calories
+from routes.user.health import get_recommended_calories
 
 @app.route('/user/food', methods=['GET'])
 @jwt_required()

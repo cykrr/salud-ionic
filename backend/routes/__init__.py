@@ -1,1 +1,6 @@
-from routes import exercise_add, exercise_create, exercise_get, exercise_delete, exercise_update, food_add, food_create, food_get, food_delete, food_update, user_exercise, user_food, user_health, login, register, plots
+from routes.exercise import create, delete, get, update
+from routes.food import create, delete, get, update
+from routes.plots import get
+from routes.user import login, register, health
+from routes.user.exercise import add, get
+from routes.user.food import add, get
