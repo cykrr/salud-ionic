@@ -1,12 +1,12 @@
 import { IonPage, IonContent, IonAlert } from '@ionic/react';
-import Input from '../components/Input';
-import Select from '../components/Select';
 import Button from '../components/Button';
 import CloseButton from '../components/CloseButton';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { API_URL, UserContext } from '../App';
 import { useHistory, useLocation } from 'react-router';
 import { Food } from './AdminFood';
+import Input from '../components/Input';
+import Select from '../components/Select';
 
 export default function EditFood() {
     const {userData, setUserData} = useContext(UserContext)!;
@@ -90,12 +90,12 @@ export default function EditFood() {
                             <CloseButton/>
                         </div>
                         <form ref={formRef} onSubmit={submitForm} className="flex flex-col gap-8">
-                            <div className="flex flex-col gap-2">
-                                <Input id="inputNombre" inputType="text" placeholder="Nombre" defaultValue={jsonData.nombre}></Input>
-                                <Input id="inputCalorias" inputType="number" placeholder="Calorías" defaultValue={jsonData.calorias.toString()}></Input>
-                                <div className="flex flex-row gap-2">
-                                    <Input id="inputPorcion" className="w-full" inputType="number" placeholder="Porción" defaultValue={"100"}></Input>
-                                    <Select id="selectUnidad" defaultValue={jsonData.unidadId}>
+                            <div className="flex flex-col gap-3">
+                                <Input id="inputNombre" inputType="text" label="Nombre" defaultValue={jsonData.nombre}></Input>
+                                <Input id="inputCalorias" inputType="number" label="Calorías" defaultValue={jsonData.calorias.toString()}></Input>
+                                <div className="flex flex-row gap-3">
+                                    <Input id="inputPorcion" inputType="number" label="Porción" defaultValue={"100"}></Input>
+                                    <Select id="selectUnidad" defaultValue={jsonData.unidadId} label="Unidad">
                                         <option value={0}>Unidad</option>
                                         <option value={1}>g.</option>
                                         <option value={2}>mL.</option>

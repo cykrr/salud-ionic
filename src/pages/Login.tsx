@@ -1,4 +1,3 @@
-import Input from '../components/Input';
 import Button from '../components/Button';
 import LinkButton from '../components/LinkButton';
 
@@ -8,6 +7,7 @@ import { Redirect } from 'react-router';
 import { IonContent, IonPage, IonAlert } from '@ionic/react';
 
 import { API_URL, UserContext } from '../App';
+import Input from '../components/Input';
 
 
 export default function Login() {
@@ -77,9 +77,9 @@ export default function Login() {
                         <h1 className="text-xl text-bold">Bienvenido</h1>
                         <form ref={formRef} id="login" onSubmit={handleLogin}>
                             <div className="flex flex-col gap-10 items-center">
-                                <div className="flex flex-col">
-                                    <Input id="user" inputType={"text"} placeholder={"Usuario"} className="w-full"/>
-                                    <Input id="password" inputType={"password"} placeholder={"Contraseña"} className="w-full" />
+                                <div className="flex flex-col gap-3.5">
+                                    <Input id="user" inputType={"text"} label={"Usuario"} className="w-full"/>
+                                    <Input id="password" inputType={"password"} label={"Contraseña"} className="w-full" />
                                 </div>
                                 <div className="flex flex-col gap-2.5">
                                     <Button btnType="submit">

@@ -95,12 +95,12 @@ export default function AddFood() {
                             <CloseButton />
                         </div>
                         <form ref={formRef} onSubmit={submitForm} className="flex flex-col items-center gap-8">
-                            <div className="flex flex-col gap-2">
-                                <Select id="selectFood">
+                            <div className="flex flex-col gap-3">
+                                <Select id="selectFood" label="Alimento">
                                     <option value={0}>Seleccione alimento</option>
                                     { userData.idUsuario ? renderFood() : null}
                                 </Select>
-                                <InputUnit id="inputPorcion" className="" inputType="number" placeholder="Tamaño porción" unit="g/mL." />
+                                <InputUnit id="inputPorcion" className="" inputType="number" label="Tamaño porción" unit="g/mL." />
                             </div>
                             <Button btnType="submit" className="self-center">Agregar</Button>
                             <IonAlert

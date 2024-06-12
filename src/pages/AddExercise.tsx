@@ -92,12 +92,12 @@ export default function AddExercise() {
                             <CloseButton />
                         </div>
                         <form ref={formRef} onSubmit={submitForm} className="flex flex-col items-center gap-8">
-                            <div className="flex flex-col gap-2">
-                                <Select id="selectExercise">
+                            <div className="flex flex-col gap-3">
+                                <Select id="selectExercise" label="Ejercicio">
                                     <option value={0}>Seleccione ejercicio</option>
                                     { userData.idUsuario ? renderExercise() : null}
                                 </Select>
-                                <InputUnit id="inputMinutos" className="" inputType="number" placeholder="Tiempo" unit="min." />
+                                <InputUnit id="inputMinutos" className="" inputType="number" label="Tiempo" unit="min." />
                             </div>
                             <Button btnType="submit" className="self-center">Agregar</Button>
                             <IonAlert

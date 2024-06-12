@@ -1,7 +1,5 @@
 import { IonPage, IonContent, IonAlert } from '@ionic/react';
-import Input from '../components/Input';
 import Button from '../components/Button';
-import Select from '../components/Select';
 import SelectRegionComuna from '../components/SelectRegionComuna';
 import RutInput from '../components/RutInput';
 
@@ -10,6 +8,8 @@ import { Redirect } from 'react-router';
 import { useContext, useRef, useState } from 'react';
 
 import { API_URL, UserContext } from '../App';
+import Input from '../components/Input';
+import Select from '../components/Select';
 
 
 export default function Register() {
@@ -137,22 +137,22 @@ export default function Register() {
                         <p className="text-xl font-bold">Registro</p>
                         <form id = "input" ref={formRef} onSubmit={handleSubmit}>
                             <div className="flex flex-col gap-6">
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-col gap-3">
                                     <div className="flex flex-row gap-1.5">
-                                        <Input id="user" className="w-full" placeholder="Usuario" maxLength={30} inputType="text"></Input>
-                                        <RutInput id="rut" className="w-full"></RutInput>
+                                        <Input id="user" className="w-full" label="Usuario" maxLength={30} inputType="text"></Input>
+                                        <RutInput id="rut" className="w-full" label="RUT"></RutInput>
                                     </div>
                                     <SelectRegionComuna></SelectRegionComuna>
-                                    <Input id="edad" className="w-full" inputType="number" placeholder="Edad"></Input>
-                                    <Select id="genero" className="w-full">
+                                    <Input id="edad" className="w-full" inputType="number" label="Edad"></Input>
+                                    <Select id="genero" label="Género" className="w-full">
                                         <option value={0}>Seleccione género</option>
                                         <option value={1}>Masculino</option>
                                         <option value={2}>Femenino</option>
                                         <option value={3}>Otro</option>
                                     </Select>
-                                    <Input id="correo" placeholder="Correo" className="w-full" maxLength={50}></Input>
-                                    <Input id="password" inputType="password" placeholder="Contraseña" className="w-full" maxLength={30}></Input>
-                                    <Input id="confirm_password" inputType="password" placeholder="Confirmar contraseña" className="w-full" maxLength={30}></Input>
+                                    <Input id="correo" label="Correo" className="w-full" maxLength={50}></Input>
+                                    <Input id="password" inputType="password" label="Contraseña" className="w-full" maxLength={30}></Input>
+                                    <Input id="confirm_password" inputType="password" label="Confirmar contraseña" className="w-full" maxLength={30}></Input>
                                 </div>
                                 <Button className="self-center" btnType='submit'>
                                     Registrarse

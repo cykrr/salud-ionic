@@ -1,9 +1,8 @@
-import Select from "../components/Select"
-import * as React from 'react'
 import { useState, useEffect } from 'react'
+import Select from './Select'
 
 type Props = {
-    children?: React.Element<Child>
+    children?: React.ReactNode
     className?: string
 }
 
@@ -51,8 +50,8 @@ export const SelectRegionComuna = () =>{
     useEffect(setSelection, [data])
 
     return(
-        <div className="flex flex-col">
-            <Select id ="region" className="truncate"
+        <div className="flex flex-col gap-3">
+            <Select id ="region" className="truncate" label="Región"
                     onChange={(e) => {
                         setSelection(parseInt(e.target.value))
                     }}> 
@@ -60,7 +59,7 @@ export const SelectRegionComuna = () =>{
                 {get_regions(data)}
             </Select>
 
-            <Select id="comuna" className="truncate">
+            <Select id="comuna" className="truncate" label="Comuna">
                 {get_comunas(data, selection)}
             </Select>
         </div>

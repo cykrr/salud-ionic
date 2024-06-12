@@ -1,11 +1,11 @@
-import { IonPage, IonHeader, IonContent, useIonRouter, IonAlert } from '@ionic/react';
-import Input from '../components/Input';
+import { IonPage, IonHeader, IonContent, IonAlert } from '@ionic/react';
 import Button from '../components/Button';
 import CloseButton from '../components/CloseButton';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { API_URL, UserContext } from '../App';
 import { useHistory, useLocation } from 'react-router';
 import { Exercise } from './AdminExercise';
+import Input from '../components/Input';
 
 export default function CreateExercise() {
     const {userData, setUserData} = useContext(UserContext)!;
@@ -80,9 +80,9 @@ export default function CreateExercise() {
                             <CloseButton/>
                         </div>
                         <form ref={formRef} onSubmit={submitForm} className="flex flex-col gap-8">
-                            <div className="flex flex-col gap-2">
-                                <Input id="inputNombre" inputType="text" placeholder="Nombre" defaultValue={jsonData.nombre}></Input>
-                                <Input id="inputCalorias" inputType="number" placeholder="Calorías por hora" defaultValue={jsonData.calorias.toString()}></Input>
+                            <div className="flex flex-col gap-3">
+                                <Input id="inputNombre" inputType="text" label="Nombre" defaultValue={jsonData.nombre}></Input>
+                                <Input id="inputCalorias" inputType="number" label="Calorías por hora" defaultValue={jsonData.calorias.toString()}></Input>
                             </div>
                             <Button btnType="submit" className="self-center">Guardar</Button>
                             <IonAlert

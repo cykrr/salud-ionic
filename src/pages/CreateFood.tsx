@@ -1,11 +1,11 @@
 import { IonPage, IonContent, IonAlert } from '@ionic/react';
-import Input from '../components/Input';
-import Select from '../components/Select';
 import Button from '../components/Button';
 import CloseButton from '../components/CloseButton';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { API_URL, UserContext } from '../App';
 import { useHistory } from 'react-router';
+import Select from '../components/Select';
+import Input from '../components/Input';
 
 
 export default function CreateFood() {
@@ -83,12 +83,12 @@ export default function CreateFood() {
                             <CloseButton/>
                         </div>
                         <form ref={formRef} onSubmit={submitForm} className="flex flex-col gap-8">
-                            <div className="flex flex-col gap-2">
-                                <Input id="inputNombre" inputType="text" placeholder="Nombre"></Input>
-                                <Input id="inputCalorias" inputType="number" placeholder="Calorías"></Input>
-                                <div className="flex flex-row gap-2">
-                                    <Input id="inputPorcion" className="w-full" inputType="number" placeholder="Porción"></Input>
-                                    <Select id="selectUnidad">
+                            <div className="flex flex-col gap-3">
+                                <Input id="inputNombre" inputType="text" label="Nombre"></Input>
+                                <Input id="inputCalorias" inputType="number" label="Calorías"></Input>
+                                <div className="flex flex-row gap-3">
+                                    <Input id="inputPorcion" className="w-full" inputType="number" label="Porción"></Input>
+                                    <Select id="selectUnidad" label="Unidad">
                                         <option value={0}>Unidad</option>
                                         <option value={1}>g.</option>
                                         <option value={2}>mL.</option>

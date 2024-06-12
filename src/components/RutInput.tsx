@@ -1,5 +1,5 @@
-import Input from '../components/Input'
 import {InputProp} from '../components/Input'
+import Input from './Input';
 
 function formatearRUT(rut: string) {
     rut = rut.replace(/[^\dkK]/g, ''); // Eliminar caracteres no válidos excepto d, k, K
@@ -18,10 +18,9 @@ function formatearRUT(rut: string) {
 
 export default function RutInput(args: InputProp) {
     return(
-        <Input 
+        <Input
             {...args}
             onChange={(e)=>{e.target.value = formatearRUT(e.target.value)}}
-            placeholder='RUT'
             maxLength={12}
         />
     )
