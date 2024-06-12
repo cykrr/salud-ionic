@@ -23,7 +23,8 @@ export default function AdminFood() {
     
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`${API_URL}/food/get?id=` + userData.idUsuario, {
+            const response = await fetch(`${API_URL}/food?id=` + userData.idUsuario, {
+                method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${userData.token}`
                 }
@@ -39,7 +40,7 @@ export default function AdminFood() {
     }
 
     async function deleteFood(food: Food) {
-        await fetch(`${API_URL}/food/delete`, {
+        await fetch(`${API_URL}/food`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${userData.token}`,

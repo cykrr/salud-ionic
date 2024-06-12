@@ -28,7 +28,7 @@ export default function CreateExercise() {
             setAlertMessage("Por favor, ingresa las calorías")
         }
         else {
-            fetch(`${API_URL}/exercise/create`, {
+            fetch(`${API_URL}/exercise`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${userData.token}`

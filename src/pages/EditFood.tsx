@@ -44,7 +44,7 @@ export default function EditFood() {
             setAlertMessage("Por favor, selecciona una unidad")
         }
         else {
-            fetch(`${API_URL}/food/update`, {
+            fetch(`${API_URL}/food`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${userData.token}`

@@ -39,7 +39,7 @@ export default function CreateFood() {
             setAlertMessage("Por favor, selecciona una unidad")
         }
         else {
-            fetch(`${API_URL}/food/create`, {
+            fetch(`${API_URL}/food`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${userData.token}`

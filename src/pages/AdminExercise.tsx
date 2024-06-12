@@ -21,7 +21,8 @@ export default function AdminFood() {
     
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`${API_URL}/exercise/get`, {
+            const response = await fetch(`${API_URL}/exercise`, {
+                method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${userData.token}`
                 }
@@ -37,7 +38,7 @@ export default function AdminFood() {
     }
 
     async function deleteExercise(exercise: Exercise) {
-        await fetch(`${API_URL}/exercise/delete`, {
+        await fetch(`${API_URL}/exercise`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${userData.token}`,

@@ -62,7 +62,7 @@ export default function Register() {
         } else if (password.length < 8) {
             setAlertMessage("La contraseña debe tener al menos 8 caracteres")
         } else {
-            await fetch(`${API_URL}/register`, {
+            await fetch(`${API_URL}/user/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

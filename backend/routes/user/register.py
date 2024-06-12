@@ -4,7 +4,7 @@ from app import app, query, get_region_data
 from responses import *
 from constants import HASH_LENGTH
 
-@app.route('/register', methods=['POST'])
+@app.route('/user/register', methods=['POST'])
 def register():
     user = request.form.get('user')
     rut = request.form.get('rut')

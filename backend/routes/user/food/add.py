@@ -3,7 +3,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from app import app, query
 from responses import *
 
-@app.route('/food/add', methods=['POST'])
+@app.route('/user/food', methods=['POST'])
 @jwt_required()
 def add_food():
     idAlimento = request.form.get('idAlimento')

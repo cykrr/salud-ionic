@@ -24,7 +24,7 @@ export default function AddFood() {
     useEffect(() => {
         if (foodData) return;
         const fetchData = async () => {
-            const response = await fetch(`${API_URL}/food/get?id=` + userData.idUsuario, {
+            const response = await fetch(`${API_URL}/food?id=` + userData.idUsuario, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${userData.token}`
@@ -54,7 +54,7 @@ export default function AddFood() {
         } else if (porcion == 0) {
             setAlertMessage("Por favor, ingresa una porción")
         } else {
-            fetch(`${API_URL}/food/add`, {
+            fetch(`${API_URL}/user/food`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

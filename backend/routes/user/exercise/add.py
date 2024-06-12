@@ -3,7 +3,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from app import app, query
 from responses import *
 
-@app.route('/exercise/add', methods=['POST'])
+@app.route('/user/exercise', methods=['POST'])
 @jwt_required()
 def add_exercise():
     idEjercicio = request.form.get('idEjercicio')

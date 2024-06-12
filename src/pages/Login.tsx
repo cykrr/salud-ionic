@@ -32,7 +32,7 @@ export default function Login() {
             setAlertMessage("Su contraseña debe tener al menos 8 caracteres.")
         }
         else {
-            await fetch(`${API_URL}/login`, {
+            await fetch(`${API_URL}/user/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

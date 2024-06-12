@@ -4,7 +4,7 @@ from app import app, query
 from responses import *
 from constants import FOOD_UNITS
 
-@app.route('/food/get', methods=['GET'])
+@app.route('/food', methods=['GET'])
 @jwt_required()
 def get_food():
     id = request.args.get('id')

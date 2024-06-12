@@ -4,7 +4,7 @@ from app import app, query
 from responses import *
 from constants import HASH_LENGTH
 
-@app.route('/login', methods=['POST'])
+@app.route('/user/login', methods=['POST'])
 def login():
     email = request.form.get('user')
     password = request.form.get('password')

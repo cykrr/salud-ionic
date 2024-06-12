@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt
 from app import app, query
 from responses import *
 
-@app.route('/food/delete', methods=['DELETE'])
+@app.route('/food', methods=['DELETE'])
 @jwt_required()
 def delete_food():
     id_alimento = request.form.get('idAlimento')

@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt
 from app import app, query
 from responses import *
 
-@app.route('/exercise/create', methods=['POST'])
+@app.route('/exercise', methods=['POST'])
 @jwt_required()
 def create_exercise():
     nombre = request.form.get('nombre')

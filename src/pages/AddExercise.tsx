@@ -21,7 +21,7 @@ export default function AddExercise() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`${API_URL}/exercise/get?id=` + userData.idUsuario, {
+            const response = await fetch(`${API_URL}/exercise`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${userData.token}`
@@ -51,7 +51,7 @@ export default function AddExercise() {
         } else if (minutos == 0) {
             setAlertMessage("Por favor, ingresa los minutos")
         } else {
-            fetch(`${API_URL}/exercise/add`, {
+            fetch(`${API_URL}/user/exercise`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

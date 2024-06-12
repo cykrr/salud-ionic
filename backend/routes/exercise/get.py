@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required
 from app import app, query
 from responses import *
 
-@app.route('/exercise/get', methods=['GET'])
+@app.route('/exercise', methods=['GET'])
 @jwt_required()
 def user_exercise():
     try:
