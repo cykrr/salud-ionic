@@ -1,3 +1,7 @@
+from flask import Flask
+from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+from dotenv import dotenv_values
 import requests
 from db import *
 
@@ -24,31 +28,7 @@ def get_region_data():
     return region_data
 
 
-
-from flask import Flask
-from flask_cors import CORS
-from flask_jwt_extended import JWTManager
-
-from routes import *
-from dotenv import dotenv_values
-
 app = Flask(__name__)
-app.register_blueprint(food_add.bp)
-app.register_blueprint(food_create.bp)
-app.register_blueprint(food_get.bp)
-app.register_blueprint(food_delete.bp)
-app.register_blueprint(food_update.bp)
-app.register_blueprint(exercise_add.bp)
-app.register_blueprint(exercise_create.bp)
-app.register_blueprint(exercise_get.bp)
-app.register_blueprint(exercise_delete.bp)
-app.register_blueprint(exercise_update.bp)
-app.register_blueprint(user_exercise.bp)
-app.register_blueprint(user_food.bp)
-app.register_blueprint(user_health.bp)
-app.register_blueprint(register.bp)
-app.register_blueprint(login.bp)
-app.register_blueprint(plots.bp)
 CORS(app)
 
 get_db()
@@ -56,3 +36,5 @@ get_db()
 env_vars = dotenv_values("../.env.development")
 app.config['JWT_SECRET_KEY'] = env_vars['JWT_SECRET_KEY']
 JWTManager(app)
+
+from routes import *

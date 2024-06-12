@@ -2,14 +2,12 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from flask import Blueprint, Response, request
+from flask import Response, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from app import query
+from app import app, query
 from responses import *
 from datetime import date, timedelta
 from io import BytesIO
-
-bp = Blueprint('plots', __name__)
 
 def create_plot(data):
     today = date.today()
@@ -42,7 +40,7 @@ def create_plot(data):
     return img
 
 
-@bp.route('/plot/food', methods=['GET'])
+@app.route('/plot/food', methods=['GET'])
 @jwt_required()
 def get_food_plot():
     idUsuario = request.args.get('id')
@@ -70,7 +68,7 @@ def get_food_plot():
     return Response(img, mimetype='image/png')
 
 
-@bp.route('/plot/exercise', methods=['GET'])
+@app.route('/plot/exercise', methods=['GET'])
 @jwt_required()
 def get_exercise_plot():
     idUsuario = request.args.get('id')

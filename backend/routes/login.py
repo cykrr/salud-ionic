@@ -1,12 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import request, jsonify
 from flask_jwt_extended import create_access_token
-from app import query
+from app import app, query
 from responses import *
 from constants import HASH_LENGTH
 
-bp = Blueprint('login', __name__)
-
-@bp.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     email = request.form.get('user')
     password = request.form.get('password')

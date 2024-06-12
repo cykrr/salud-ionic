@@ -1,12 +1,9 @@
-from flask import Blueprint, request
+from flask import request
 from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
-from app import query
+from app import app, query
 from responses import *
 
-bp = Blueprint('food_create', __name__)
-
-
-@bp.route('/food/create', methods=['POST'])
+@app.route('/food/create', methods=['POST'])
 @jwt_required()
 def create_food():
     idUsuario = request.form.get('idUsuario')

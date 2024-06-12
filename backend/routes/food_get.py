@@ -1,13 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from app import query
+from app import app, query
 from responses import *
 from constants import FOOD_UNITS
 
-
-bp = Blueprint('food_get', __name__)
-
-@bp.route('/food/get', methods=['GET'])
+@app.route('/food/get', methods=['GET'])
 @jwt_required()
 def get_food():
     id = request.args.get('id')

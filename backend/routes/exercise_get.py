@@ -1,12 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import jsonify
 from flask_jwt_extended import jwt_required
-from app import query
+from app import app, query
 from responses import *
 
-bp = Blueprint('exercise_get', __name__)
-
-
-@bp.route('/exercise/get', methods=['GET'])
+@app.route('/exercise/get', methods=['GET'])
 @jwt_required()
 def user_exercise():
     try:

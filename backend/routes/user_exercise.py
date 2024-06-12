@@ -1,13 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from app import query
+from app import app, query
 from responses import *
 from routes.user_health import get_recommended_minutes
 
-
-bp = Blueprint('user_exercise', __name__)
-
-@bp.route('/user/exercise', methods=['GET'])
+@app.route('/user/exercise', methods=['GET'])
 @jwt_required()
 def get_user_exercise():
     id = request.args.get('id')

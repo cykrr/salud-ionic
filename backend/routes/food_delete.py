@@ -1,12 +1,9 @@
-from flask import Blueprint, request
+from flask import request
 from flask_jwt_extended import jwt_required, get_jwt
-from app import query
+from app import app, query
 from responses import *
 
-bp = Blueprint('food_delete', __name__)
-
-
-@bp.route('/food/delete', methods=['DELETE'])
+@app.route('/food/delete', methods=['DELETE'])
 @jwt_required()
 def delete_food():
     id_alimento = request.form.get('idAlimento')

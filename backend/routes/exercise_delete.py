@@ -1,12 +1,9 @@
-from flask import Blueprint, request
+from flask import request
 from flask_jwt_extended import jwt_required, get_jwt
-from app import query
+from app import app, query
 from responses import *
 
-bp = Blueprint('exercise_delete', __name__)
-
-
-@bp.route('/exercise/delete', methods=['DELETE'])
+@app.route('/exercise/delete', methods=['DELETE'])
 @jwt_required()
 def delete_exercise():
     id_ejercicio = request.form.get('idEjercicio')

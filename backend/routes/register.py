@@ -1,13 +1,10 @@
 
-from flask import Blueprint, request, jsonify
-from app import query, get_region_data, get_db
+from flask import request, jsonify
+from app import app, query, get_region_data
 from responses import *
 from constants import HASH_LENGTH
 
-bp = Blueprint('register', __name__)
-
-
-@bp.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def register():
     user = request.form.get('user')
     rut = request.form.get('rut')

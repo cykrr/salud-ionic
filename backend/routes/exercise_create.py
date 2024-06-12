@@ -1,12 +1,9 @@
-from flask import Blueprint, request
+from flask import request
 from flask_jwt_extended import jwt_required, get_jwt
-from app import query
+from app import app, query
 from responses import *
 
-bp = Blueprint('exercise_create', __name__)
-
-
-@bp.route('/exercise/create', methods=['POST'])
+@app.route('/exercise/create', methods=['POST'])
 @jwt_required()
 def create_exercise():
     nombre = request.form.get('nombre')

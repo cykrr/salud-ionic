@@ -1,10 +1,8 @@
-from flask import Blueprint, request, jsonify
+from flask import request, jsonify
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from datetime import date, timedelta
-from app import query
+from app import app, query
 from responses import *
-
-bp = Blueprint('user_health', __name__)
 
 def get_date_array():
     today = date.today()
@@ -80,7 +78,7 @@ def get_recommended_calories(id):
 def get_recommended_minutes():
     return 60
 
-@bp.route('/user/health', methods=['GET'])
+@app.route('/user/health', methods=['GET'])
 @jwt_required()
 def get_health():
     idUsuario = request.args.get('id')
