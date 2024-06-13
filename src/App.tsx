@@ -78,13 +78,18 @@ export function logout(setUserData: React.Dispatch<React.SetStateAction<UserData
 }
 
 const App: React.FC = () => {
-  const [userData, setUserData] = React.useState(defaultUserData);
+  const [userData, setUserData] = useState<UserData>(() => {
+    const savedUserData = localStorage.getItem('userData');
+    return savedUserData ? JSON.parse(savedUserData) : defaultUserData;
+  });
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     if (userData.idUsuario != 0 && userData.token === '') {
       setShowAlert(true);
     }
+    
+    localStorage.setItem('userData', JSON.stringify(userData));
   }, [userData.idUsuario, userData.token]);
 
   return (
