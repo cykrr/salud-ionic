@@ -1,7 +1,8 @@
 import { IonPage, IonContent, IonAlert } from "@ionic/react";
 import { LinkButton } from "../components";
 import { useContext, useEffect, useState } from "react";
-import { API_URL, UserContext } from "../App";
+import { API_URL, UserContext, updateToken } from "../App";
+import { Redirect } from "react-router";
 
 interface FoodItem {
     nombre: string;
@@ -33,12 +34,15 @@ export default function Food() {
                         'Authorization': `Bearer ${userData.token}`
                     }
                 });
-                const jsonData = await response.json();
 
+                if (response.status == 401) {
+                    updateToken(setUserData, '');
+                    return;
+                }
+                updateToken(setUserData, response.headers.get("Token")!)
+
+                const jsonData = await response.json();
                 if (!response.ok || (jsonData.hasOwnProperty('success') && !jsonData.success)) {
-                    if (jsonData.hasOwnProperty('success') && !jsonData.success) {
-                        console.log(jsonData['message']);
-                    }
                     throw Error();
                 }
 
@@ -50,7 +54,7 @@ export default function Food() {
             }
         };
     
-        fetchData();
+        fetchData()
     }, []);
     
     return (

@@ -1,10 +1,11 @@
 import {
+  IonAlert,
   IonApp,
   setupIonicReact,
 } from '@ionic/react';
 
 import { IonReactRouter } from '@ionic/react-router';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 
 import {
@@ -38,7 +39,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './global.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MainTabRoot from './pages/MainTabRoot';
 import AdminTabRoot from './pages/AdminTabRoot';
 import CreateExercise from './pages/CreateExercise';
@@ -63,8 +64,24 @@ interface ContextValue {
 export const UserContext = React.createContext<ContextValue | undefined>(undefined);
 export const API_URL = import.meta.env.VITE_API_URL
 
+export const updateToken = (setUserData: React.Dispatch<React.SetStateAction<UserData>>, newToken: string) => {
+  setUserData(prevState => ({
+    ...prevState,
+    token: newToken
+  }));
+};
+
 const App: React.FC = () => {
-  const [userData, setUserData] = React.useState({ idUsuario: 0, nombre: '', rol: '', token: '' });
+  const defaultUserData = { idUsuario: 0, nombre: '', rol: '', token: '' }
+
+  const [userData, setUserData] = React.useState(defaultUserData);
+  const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    if (userData.idUsuario != 0 && userData.token === '') {
+      setShowAlert(true);
+    }
+  }, [userData.idUsuario, userData.token]);
 
   return (
     <IonApp>
@@ -83,7 +100,6 @@ const App: React.FC = () => {
               render={() => <MainTabRoot />} />
             <Route path="/admin"
               render={() => <AdminTabRoot />} />
-
             <Route path="/exercise_add">
               <AddExercise />
             </Route>
@@ -103,6 +119,20 @@ const App: React.FC = () => {
               <EditFood />
             </Route>
           </Switch>
+
+          {showAlert && (
+            <IonAlert
+              isOpen={showAlert}
+              onDidDismiss={() => {
+                setShowAlert(false)
+                setUserData(defaultUserData)
+              }}
+              header={'Error'}
+              message={"Sesión expirada. Por favor vuelva a ingresar"}
+              buttons={['OK']}
+            />
+          )}
+          {userData.token === '' && userData.idUsuario == 0 && <Redirect to="/login" />}
         </IonReactRouter>
       </UserContext.Provider>
     </IonApp>

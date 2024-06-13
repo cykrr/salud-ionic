@@ -1,6 +1,6 @@
 import { IonPage, IonContent, IonAlert } from '@ionic/react';
 import { useContext, useEffect, useState } from 'react';
-import { API_URL, UserContext } from '../App';
+import { API_URL, UserContext, updateToken } from '../App';
 import { useHistory } from 'react-router';
 
 export interface Exercise {
@@ -27,6 +27,13 @@ export default function AdminFood() {
                     'Authorization': `Bearer ${userData.token}`
                 }
             });
+
+            if (response.status == 401) {
+                updateToken(setUserData, '');
+                return;
+            }
+            updateToken(setUserData, response.headers.get("Token")!)
+            
             const data = await response.json();
             setExerciseData(data);
         }
@@ -46,10 +53,18 @@ export default function AdminFood() {
             body: new URLSearchParams({
                 'idEjercicio': exercise.id.toString(),
             })
-        }).then(response => response.json()).then(data => {
+        }).then(async response => {
+            if (response.status == 401) {
+                updateToken(setUserData, '');
+                return;
+            }
+            updateToken(setUserData, response.headers.get("Token")!)
+
+            const data : any = await response.json();
             if (data.success == true) {
                 setAlertMessage(`Ejercicio ${exercise.nombre} eliminado con éxito`)
                 setSuccess(true)
+                setShowAlert(true)
 
                 if(exerciseData) {
                     const index = exerciseData.indexOf(exercise, 0);
@@ -63,7 +78,6 @@ export default function AdminFood() {
         }).catch(() => {
             setAlertMessage("Ocurrió un error al eliminar el ejercicio")
             setSuccess(false)
-        }).finally(()=>{
             setShowAlert(true)
         })
     }

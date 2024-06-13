@@ -31,7 +31,6 @@ export default function Input(args: InputProp) {
         if (args.defaultValue) {
             setInputValue(args.defaultValue);
         }
-        console.log(args.defaultValue)
     }, [args.defaultValue]);
 
     return (

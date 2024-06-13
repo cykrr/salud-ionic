@@ -3,7 +3,7 @@ import Semicircle from '../components/Semicircle';
 import { IonContent, IonPage } from '@ionic/react';
 import GraphMenu from '../components/GraphMenu';
 import { useContext, useEffect, useState } from 'react';
-import { API_URL, UserContext } from '../App';
+import { API_URL, UserContext, updateToken } from '../App';
 
 export default function Menu() {
     const {userData, setUserData} = useContext(UserContext)!;
@@ -16,6 +16,13 @@ export default function Menu() {
                     'Authorization': `Bearer ${userData.token}`
                 }
             })
+
+            if (response.status == 401) {
+                updateToken(setUserData, '');
+                return;
+            }
+            updateToken(setUserData, response.headers.get("Token")!)
+        
             const data = await response.json();
 
             if (response.ok) {

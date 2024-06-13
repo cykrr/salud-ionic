@@ -2,7 +2,7 @@ import { IonPage, IonContent, IonAlert } from '@ionic/react';
 import Button from '../components/Button';
 import CloseButton from '../components/CloseButton';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { API_URL, UserContext } from '../App';
+import { API_URL, UserContext, updateToken } from '../App';
 import { useHistory, useLocation } from 'react-router';
 import { Food } from './AdminFood';
 import Input from '../components/Input';
@@ -56,16 +56,23 @@ export default function EditFood() {
                     'unidad': unidadStr,
                     'porcion': porcionStr
                 })
-            }).then(response => response.json()).then(data => {
+            }).then(async response => {
+                if (response.status == 401) {
+                    updateToken(setUserData, '');
+                    return;
+                }
+                updateToken(setUserData, response.headers.get("Token")!)
+
+                const data : any = await response.json()
                 if (data.success == true) {
                     setAlertMessage("Alimento actualizado con éxito")
                     setFormSubmitted(true)
+                    setShowAlert(true)
                 } else {
                     throw new Error()
                 }
             }).catch(() => {
                 setAlertMessage("Ocurrió un error al guardar el alimento")
-            }).finally(()=>{
                 setShowAlert(true)
             })
             return 

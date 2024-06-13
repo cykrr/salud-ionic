@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager, create_access_token, get_jwt, get_jwt_identity
 from dotenv import dotenv_values
+from datetime import timedelta
 import requests
 from db import *
 
@@ -29,12 +30,24 @@ def get_region_data():
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, expose_headers=['Token'])
 
 get_db()
 
 env_vars = dotenv_values("../.env.development")
 app.config['JWT_SECRET_KEY'] = env_vars['JWT_SECRET_KEY']
-JWTManager(app)
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=1)
+
+jwt = JWTManager(app)
+
+@app.after_request
+def refresh_expiring_jwt(response):
+    try:
+        access_token = create_access_token(identity=get_jwt_identity(), additional_claims={"rol": get_jwt()["rol"]})
+        response.headers['Token'] = access_token
+        return response
+    except (RuntimeError, KeyError):
+        return response
+    
 
 from routes import *

@@ -2,7 +2,7 @@ import { IonPage, IonHeader, IonContent, IonAlert } from '@ionic/react';
 import Button from '../components/Button';
 import CloseButton from '../components/CloseButton';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { API_URL, UserContext } from '../App';
+import { API_URL, UserContext, updateToken } from '../App';
 import { useHistory } from 'react-router';
 import Input from '../components/Input';
 
@@ -37,19 +37,26 @@ export default function CreateExercise() {
                     'nombre': nombre,
                     'calorias': calorias,
                 })
-            }).then(response => response.json()).then(data => {
+            }).then(async response => {
+                if (response.status == 401) {
+                    updateToken(setUserData, '');
+                    return;
+                }
+                updateToken(setUserData, response.headers.get("Token")!)
+
+                const data : any = await response.json()
                 if (data.success == true) {
                     setAlertMessage("Ejercicio creado con éxito")
                     setFormSubmitted(true)
+                    setShowAlert(true)
                 } else {
                     throw new Error()
                 }
             }).catch(() => {
                 setAlertMessage("Ocurrió un error al crear el ejercicio")
-            }).finally(()=>{
                 setShowAlert(true)
             })
-            return 
+            return
         }
 
         setShowAlert(true)
@@ -63,9 +70,6 @@ export default function CreateExercise() {
     
     return (
         <IonPage>
-            <IonHeader>
-
-            </IonHeader>
             <IonContent>
                 <div className="flex w-full h-full flex-col items-center">
                     <div className="flex flex-col gap-8 p-10 w-full max-w-md">

@@ -23,7 +23,6 @@ export default function InputUnit(args: InputUnitProps) {
         if (args.defaultValue) {
             setInputValue(args.defaultValue);
         }
-        console.log(args.defaultValue)
     }, [args.defaultValue]);
     
     return (

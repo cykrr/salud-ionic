@@ -2,7 +2,7 @@ import { IonPage, IonContent, IonAlert } from '@ionic/react';
 import Button from '../components/Button';
 import CloseButton from '../components/CloseButton';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { API_URL, UserContext } from '../App';
+import { API_URL, UserContext, updateToken } from '../App';
 import { useHistory } from 'react-router';
 import Select from '../components/Select';
 import Input from '../components/Input';
@@ -51,14 +51,20 @@ export default function CreateFood() {
                     'unidad': unidadStr,
                     'porcion': porcionStr
                 })
-            }).then(response => response.json()).then(data => {
+            }).then(async response => {
+                if (response.status == 401) {
+                    updateToken(setUserData, '');
+                    return;
+                }
+                updateToken(setUserData, response.headers.get("Token")!)
+                
+                const data : any = await response.json()
                 if (data.success == true) {
                     setAlertMessage("Alimento creado con éxito")
                     setFormSubmitted(true)
                 } else {
                     setAlertMessage("Ocurrió un error al crear el alimento")
                 }
-            }).finally(()=>{
                 setShowAlert(true)
             })
             return 

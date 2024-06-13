@@ -1,7 +1,7 @@
 import { LinkButton } from '../components';
 import { IonContent, IonPage, IonAlert} from '@ionic/react';
 import { useContext, useEffect, useState } from 'react';
-import { API_URL, UserContext } from '../App';
+import { API_URL, UserContext, updateToken } from '../App';
 
 interface ExerciseItem {
     nombre: string;
@@ -32,12 +32,15 @@ export default function Exercise() {
                         'Authorization': `Bearer ${userData.token}`
                     }
                 });
-                const jsonData = await response.json();
 
+                if (response.status == 401) {
+                    updateToken(setUserData, '');
+                    return;
+                }
+                updateToken(setUserData, response.headers.get("Token")!)
+
+                const jsonData = await response.json();
                 if (!response.ok || (jsonData.hasOwnProperty('success') && !jsonData.success)) {
-                    if (jsonData.hasOwnProperty('success') && !jsonData.success) {
-                        console.log(jsonData['message']);
-                    }
                     throw Error();
                 }
                 

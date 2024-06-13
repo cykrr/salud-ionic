@@ -2,7 +2,7 @@ import { CloseButton, Select, InputUnit, Button } from '../components'
 
 import { IonContent, IonHeader, IonPage, IonAlert } from '@ionic/react';
 
-import { API_URL, UserContext } from '../App';
+import { API_URL, UserContext, updateToken } from '../App';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 
@@ -27,6 +27,13 @@ export default function AddExercise() {
                     'Authorization': `Bearer ${userData.token}`
                 }
             });
+
+            if (response.status == 401) {
+                updateToken(setUserData, '');
+                return;
+            }
+            updateToken(setUserData, response.headers.get("Token")!)
+            
             const data = await response.json();
             setExerciseData(data);
         }
@@ -62,14 +69,20 @@ export default function AddExercise() {
                     'idEjercicio': idEjercicio.toString(),
                     'minutos': minutos.toString()
                 })
-            }).then(response => response.json()).then(data => {
+            }).then(async response => {
+                if (response.status == 401) {
+                    updateToken(setUserData, '');
+                    return;
+                }
+                updateToken(setUserData, response.headers.get("Token")!)
+
+                const data : any = await response.json();
                 if (data.success == true) {
                     setAlertMessage("Ejercicio registrado con éxito")
                     setFormSubmitted(true)
                 } else {
                     setAlertMessage("Ocurrió un error al intentar registrar el ejercicio. Inténtalo más tarde")
                 }
-            }).finally(()=>{
                 setShowAlert(true)
             })
             return 
@@ -80,10 +93,7 @@ export default function AddExercise() {
 
     return (
         <IonPage>
-            <IonHeader>
-            </IonHeader>
             <IonContent>
-                { userData.idUsuario ? null : <Redirect to="/login" /> }
                 { (formSubmitted && !showAlert) ? <Redirect to="/tabs/exercise" /> : null}
                 <div className="flex w-full h-full flex-col">
                     <div className="flex flex-col gap-8 p-10 mx-auto">

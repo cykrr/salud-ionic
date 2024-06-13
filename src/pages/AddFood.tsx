@@ -3,7 +3,7 @@ import { IonAlert, IonRouterLink } from '@ionic/react'
 
 import { IonContent, IonHeader, IonPage } from '@ionic/react';
 
-import { API_URL, UserContext } from '../App';
+import { API_URL, UserContext, updateToken } from '../App';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 
@@ -30,6 +30,13 @@ export default function AddFood() {
                     'Authorization': `Bearer ${userData.token}`
                 }
             });
+
+            if (response.status == 401) {
+                updateToken(setUserData, '');
+                return;
+            }
+            updateToken(setUserData, response.headers.get("Token")!)
+
             const data = await response.json();
             setFoodData(data);
         }
@@ -65,14 +72,20 @@ export default function AddFood() {
                     'idAlimento': idAlimento.toString(),
                     'cantidad': porcion.toString()
                 })
-            }).then(response => response.json()).then(data => {
+            }).then(async response => {
+                if (response.status == 401) {
+                    updateToken(setUserData, '');
+                    return;
+                }
+                updateToken(setUserData, response.headers.get("Token")!)
+
+                const data : any = await response.json()
                 if (data.success == true) {
                     setAlertMessage("Alimento registrado con éxito")
                     setFormSubmitted(true)
                 } else {
                     setAlertMessage("Ocurrió un error al intentar registrar el alimento. Inténtalo más tarde")
                 }
-            }).finally(()=>{
                 setShowAlert(true)
             })
             return 
@@ -83,10 +96,7 @@ export default function AddFood() {
 
     return (
         <IonPage>
-            <IonHeader>
-            </IonHeader>
             <IonContent>
-                { userData.idUsuario ? null : <Redirect to="/login" /> }
                 { (formSubmitted && !showAlert) ? <Redirect to="/tabs/food" /> : null}
                 <div className="flex w-full h-full flex-col">
                     <div className="flex flex-col gap-8 p-10 mx-auto">

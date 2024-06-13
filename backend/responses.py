@@ -1,3 +1,5 @@
+from app import jwt
+
 def not_found_error(param):
     return {"success": False, "message": f"El parámetro {param} es obligatorio"}, 400
 
@@ -11,10 +13,14 @@ def bd_error():
     return {"success": False, "message": "Ocurrió un error con la base de datos"}, 400
 
 def unauthorized_error():
-    return {"success": False, "message": "Sin permisos suficientes"}, 401
+    return {"success": False, "message": "Sin permisos suficientes"}, 403
 
 def error(message):
     return {"success": False, "message": message}, 400
 
 def success(message):
     return {"success": True, "message": message}, 200
+
+@jwt.expired_token_loader
+def expired_token_callback(jwt_header, jwt_payload):
+    return {"success": False, "message": "Token de acceso expirado"}, 401

@@ -8,4 +8,4 @@ import CreateFood from './CreateFood';
 import AddFood from './AddFood';
 import AddExercise from './AddExercise';
 import Exercise from './Exercise';
-export { Main, Login, Register, TermsConditions, Menu, Food, CreateFood, AddFood, AddExercise, Exercise }
+export { Login, Register, TermsConditions, Menu, Food, CreateFood, AddFood, AddExercise, Exercise, Main };
