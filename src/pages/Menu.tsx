@@ -3,7 +3,7 @@ import Semicircle from '../components/Semicircle';
 import { IonContent, IonPage } from '@ionic/react';
 import GraphMenu from '../components/GraphMenu';
 import { useContext, useEffect, useState } from 'react';
-import { API_URL, UserContext, updateToken } from '../App';
+import { API_URL, UserContext, logout, updateToken } from '../App';
 
 export default function Menu() {
     const {userData, setUserData} = useContext(UserContext)!;
@@ -37,7 +37,10 @@ export default function Menu() {
                 <div className="flex w-full h-full flex-col">
                     <div className="flex h-full flex-col p-10 gap-12 overflow-y-auto">
                         <div className="flex flex-col gap-5">
-                            <h1>¡Bienvenido {userData.nombre}!</h1>
+                            <div className="flex w-full flex-row justify-between">
+                                <h1>¡Bienvenido {userData.nombre}!</h1>
+                                <img className="w-8 h-8 cursor-pointer" src='src/assets/cerrar_sesion.png' onClick={() => {logout(setUserData)}} />
+                            </div>
                             <div className="flex w-full flex-col gap-5">
                                 <div>
                                     <h2>Tu salud</h2>

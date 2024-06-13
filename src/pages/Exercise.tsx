@@ -1,7 +1,7 @@
 import { LinkButton } from '../components';
 import { IonContent, IonPage, IonAlert} from '@ionic/react';
 import { useContext, useEffect, useState } from 'react';
-import { API_URL, UserContext, updateToken } from '../App';
+import { API_URL, UserContext, logout, updateToken } from '../App';
 
 interface ExerciseItem {
     nombre: string;
@@ -60,7 +60,10 @@ export default function Exercise() {
             <IonContent>
                 <div className="flex flex-col w-full h-full">
                     <div className="flex flex-col gap-5 p-10">
-                        <h1>Tus ejercicios diarios</h1>
+                        <div className="flex w-full flex-row justify-between">
+                            <h1>Tus ejercicios diarios</h1>
+                            <img className="w-8 h-8 cursor-pointer" src='src/assets/cerrar_sesion.png' onClick={() => {logout(setUserData)}} />
+                        </div>
                         <table className="w-full">
                             <thead>
                                 <tr>

@@ -1,6 +1,6 @@
 import { IonPage, IonContent, IonAlert } from '@ionic/react';
 import { useContext, useEffect, useState } from 'react';
-import { API_URL, UserContext, updateToken } from '../App';
+import { API_URL, UserContext, logout, updateToken } from '../App';
 import { useHistory } from 'react-router';
 
 export interface Food {
@@ -94,7 +94,10 @@ export default function AdminFood() {
             <IonContent>
                 <div className="flex flex-col w-full h-full items-center">
                     <div className="flex flex-col gap-5 p-10 w-full max-w-screen-sm">
-                        <h1>Alimentos registrados</h1>
+                        <div className="flex w-full flex-row justify-between">
+                            <h1>Alimentos registrados</h1>
+                            <img className="h-8 cursor-pointer" src='src/assets/cerrar_sesion.png' onClick={() => {logout(setUserData)}} />
+                        </div>
                         <div className="flex flex-col">
                         {foodData && (
                             <>

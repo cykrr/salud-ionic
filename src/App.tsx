@@ -64,6 +64,8 @@ interface ContextValue {
 export const UserContext = React.createContext<ContextValue | undefined>(undefined);
 export const API_URL = import.meta.env.VITE_API_URL
 
+const defaultUserData = { idUsuario: 0, nombre: '', rol: '', token: '' }
+
 export const updateToken = (setUserData: React.Dispatch<React.SetStateAction<UserData>>, newToken: string) => {
   setUserData(prevState => ({
     ...prevState,
@@ -71,9 +73,11 @@ export const updateToken = (setUserData: React.Dispatch<React.SetStateAction<Use
   }));
 };
 
-const App: React.FC = () => {
-  const defaultUserData = { idUsuario: 0, nombre: '', rol: '', token: '' }
+export function logout(setUserData: React.Dispatch<React.SetStateAction<UserData>>) {
+  setUserData(defaultUserData)
+}
 
+const App: React.FC = () => {
   const [userData, setUserData] = React.useState(defaultUserData);
   const [showAlert, setShowAlert] = useState(false);
 
