@@ -34,7 +34,7 @@ CORS(app, expose_headers=['Token'])
 
 get_db()
 
-env_vars = dotenv_values("../.env.development")
+env_vars = dotenv_values(".env.development")
 app.config['JWT_SECRET_KEY'] = env_vars['JWT_SECRET_KEY']
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=1)
 

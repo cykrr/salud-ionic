@@ -1,5 +1,6 @@
-mysql-connector-python
-python-dotenv
 flask
 flask_cors
-waitress
+flask_jwt_extended
+matplotlib
+mysql-connector-python 
+requests
