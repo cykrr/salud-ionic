@@ -62,7 +62,7 @@ export default function Exercise() {
                     <div className="flex flex-col gap-5 p-10">
                         <div className="flex w-full flex-row justify-between">
                             <h1>Tus ejercicios diarios</h1>
-                            <img className="w-8 h-8 cursor-pointer" src='src/assets/cerrar_sesion.png' onClick={() => {logout(setUserData)}} />
+                            <img className="w-7 h-7 cursor-pointer" src='assets/cerrar_sesion.png' onClick={() => {logout(setUserData)}} />
                         </div>
                         <table className="w-full">
                             <thead>

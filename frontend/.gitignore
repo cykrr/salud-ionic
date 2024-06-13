@@ -32,3 +32,6 @@ src/output.css
 **/*.pyc
 **/*.pyo
 **/*.pyd
+
+# Android
+/android

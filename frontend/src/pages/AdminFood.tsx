@@ -96,7 +96,7 @@ export default function AdminFood() {
                     <div className="flex flex-col gap-5 p-10 w-full max-w-screen-sm">
                         <div className="flex w-full flex-row justify-between">
                             <h1>Alimentos registrados</h1>
-                            <img className="h-8 cursor-pointer" src='src/assets/cerrar_sesion.png' onClick={() => {logout(setUserData)}} />
+                            <img className="w-7 h-7 cursor-pointer" src='assets/cerrar_sesion.png' onClick={() => {logout(setUserData)}} />
                         </div>
                         <div className="flex flex-col">
                         {foodData && (
@@ -105,8 +105,8 @@ export default function AdminFood() {
                                     <div className="flex flex-row py-1.5" key={item.id}>
                                         <div className="w-full justify-center">{item.nombre}</div>
                                         <div className="flex flex-row gap-2">
-                                            <img className="w-5 h-5 cursor-pointer" src='src/assets/editar.png' onClick={() => editFood(item)} alt=""/>
-                                            <img className="w-5 h-5 cursor-pointer" src='src/assets/eliminar.png' onClick={() => confirmDelete(item)} alt=""/>
+                                            <img className="w-5 h-5 cursor-pointer" src='assets/editar.png' onClick={() => editFood(item)} alt=""/>
+                                            <img className="w-5 h-5 cursor-pointer" src='assets/eliminar.png' onClick={() => confirmDelete(item)} alt=""/>
                                         </div>
                                     </div>
                                 ))}

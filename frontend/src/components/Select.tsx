@@ -74,6 +74,7 @@ export default function Select(args: Props) {
                     padding-right: 1.25rem;
                     padding-top: 1.05rem;
                     outline: none;
+                    background-color: white;
                 }
 
                 .floating-select.focused label {

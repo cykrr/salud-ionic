@@ -41,7 +41,7 @@ body, html {
 
 @layer base {
   h1 {
-    @apply text-2xl;
+    font-size: 1.45rem;
     @apply font-semibold;
   }
   h2 {

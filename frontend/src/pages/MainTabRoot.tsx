@@ -47,21 +47,21 @@ export default function MainTabRoot() {
                     tab="menu"
                     className={tabMatch("menu") ? "selected-tab-green" : "tab-bar-green"}
                     href="/tabs/menu">
-                    <img className="tab-bar-button" src="src/assets/menu.png" />
+                    <img className="tab-bar-button" src="assets/menu.png" />
                     <IonLabel>Menú</IonLabel>
                 </IonTabButton>
                 <IonTabButton
                     tab="food"
                     className={tabMatch("food") ? "selected-tab-green" : "tab-bar-green"}
                     href="/tabs/food">
-                    <img className="tab-bar-button" src='src/assets/alimentacion.png' />
+                    <img className="tab-bar-button" src='assets/alimentacion.png' />
                     <IonLabel>Alimento</IonLabel>
                 </IonTabButton>
                 <IonTabButton 
                     tab="exercise" 
                     className={tabMatch("exercise") ? "selected-tab-green" : "tab-bar-green"}
                     href="/tabs/exercise">
-                    <img className="tab-bar-button" src='src/assets/ejercicios.png' />
+                    <img className="tab-bar-button" src='assets/ejercicios.png' />
                     <IonLabel>Ejercicio</IonLabel>
                 </IonTabButton>
             </IonTabBar>
