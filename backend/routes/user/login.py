@@ -6,11 +6,11 @@ from constants import HASH_LENGTH
 
 @app.route('/user/login', methods=['POST'])
 def login():
-    email = request.form.get('user')
+    email = request.form.get('email')
     password = request.form.get('password')
 
     if not email:
-        return not_found_error('user')
+        return not_found_error('email')
     if not password:
         return not_found_error('password')
 

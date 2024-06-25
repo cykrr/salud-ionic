@@ -19,11 +19,11 @@ export default function Login() {
     
     async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        const user = formRef.current?.querySelector<HTMLInputElement>("#user")!.value!
+        const email = formRef.current?.querySelector<HTMLInputElement>("#email")!.value!
         const password = formRef.current?.querySelector<HTMLInputElement>("#password")!.value!
 
-        if (user.trim() === "") {
-            setAlertMessage("Por favor, ingrese su usuario")
+        if (email.trim() === "") {
+            setAlertMessage("Por favor, ingrese su correo")
         }  
         else if (password.trim() === "") {
             setAlertMessage("Por favor, ingrese su contraseña")
@@ -38,7 +38,7 @@ export default function Login() {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    'user': user,
+                    'email': email,
                     'password': password
                 })
             }).then(response => response.json()).then(data => { 
@@ -48,7 +48,7 @@ export default function Login() {
                     setUserData(data.user)
 
                 } else {
-                    setAlertMessage("Usuario o contraseña incorrectos")
+                    setAlertMessage("Correo o contraseña incorrectos")
                 }
             }).catch((e) => {
                 setAlertMessage("Ocurrió un error con la base de datos.")
@@ -78,7 +78,7 @@ export default function Login() {
                         <form ref={formRef} id="login" onSubmit={handleLogin}>
                             <div className="flex flex-col gap-10 items-center">
                                 <div className="flex flex-col gap-3.5">
-                                    <Input id="user" inputType={"text"} label={"Usuario"} className="w-full"/>
+                                    <Input id="email" inputType={"text"} label={"Correo"} className="w-full"/>
                                     <Input id="password" inputType={"password"} label={"Contraseña"} className="w-full" />
                                 </div>
                                 <div className="flex flex-col gap-2.5">
