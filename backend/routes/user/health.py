@@ -70,8 +70,8 @@ def get_recommended_calories(id):
         if edad <= 30: rec = 2700
     if genero == FEMALE or genero == OTHER:
         rec = 1800
-        if edad <= 50: return 2000
-        if edad <= 30: return 2200
+        if edad <= 50: rec = 2000
+        if edad <= 30: rec = 2200
 
     return rec, dev
 

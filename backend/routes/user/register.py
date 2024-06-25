@@ -1,5 +1,6 @@
 
 from flask import request, jsonify
+from flask_jwt_extended import create_access_token
 from app import app, query, get_region_data
 from responses import *
 from constants import HASH_LENGTH
@@ -58,16 +59,20 @@ def register():
     try:
         ret = query(f"INSERT INTO usuarios (nombre, rut, region, comuna, sexo, edad, correo, clave, idRol) VALUES \
                                       ('{user}', '{rut}', '{region}', '{comuna}', '{genero}', '{edad}', '{correo}', SHA2('{password}', {HASH_LENGTH}), 1)")
-        ret = query(f"SELECT idUsuario, nombre FROM usuarios WHERE correo='{correo}'")    
+        ret = query(f"SELECT idUsuario, usuarios.nombre, roles.nombre as rol FROM usuarios JOIN roles USING(idRol) WHERE correo='{correo}'")    
     except Exception as e:
         print(e)
         return bd_error()
     
+    data = ret[0]
+    access_token = create_access_token(identity=int(data['idUsuario']), additional_claims={"rol": data['rol']})
+    
     return jsonify({"success": True,
                     "message": "Registrado correctamente",
                     "user": {
-                        "idUsuario": ret[0]['idUsuario'],
-                        "nombre": ret[0]['nombre']
+                        "idUsuario": data['idUsuario'],
+                        "nombre": data['nombre'],
+                        "token": access_token
                     }}), 200
 
 
